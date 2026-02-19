@@ -2,6 +2,8 @@
 
 **Spring 2026 | Bogazici University | Dr. Eyuphan Koc**
 
+I am Furkan. I am a student in CEM501. This class will help me develop advanced communication skills that are critical for effective leadership and project control in complex construction projects.
+
 ---
 
 ## Course Overview
@@ -105,4 +107,4 @@ See [SUBMISSION_GUIDELINES.md](SUBMISSION_GUIDELINES.md) for homework and projec
 Department of Civil Engineering, Bogazici University
 
 
-I am Furkan. I am a student in CEM501. 
+
