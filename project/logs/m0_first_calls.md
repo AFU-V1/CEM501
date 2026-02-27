@@ -1,7 +1,7 @@
 # M0 — First LLM Calls from CLI
 
 **Student:** Furkan  
-**Date:** 2026-02-28  
+**Date:** 2026-02-27  
 **Tool Used:** Gemini CLI (Antigravity)
 
 ---
@@ -161,4 +161,4 @@ A well-preserved delay claim should include:
 
 ## Reflection
 
-Working with an LLM from the command line was notably more efficient than I expected for generating construction management documents. The RFI output was particularly impressive — it followed a realistic format, included appropriate specification references (like ASTM D3034), and even suggested a resolution, which mirrors best practice in the industry. The CPM schedule request email demonstrated strong professional tone and correctly identified the Primavera P6 format as the industry standard. However, I noticed that the LLM's references to specific AIA contract sections should be verified against the actual contract language, as the model could hallucinate clause numbers or subtly misstate provisions. Overall, the outputs provide excellent first drafts that would save significant time, but a construction professional must always review the technical accuracy and adapt the content to the specific project context.
+Working with an LLM was more efficient than I expected for generating construction management documents. The RFI output was particularly impressive it followed a realistic format, included appropriate specification references (like ASTM D3034), and even suggested a resolution, which mirrors best practice in the industry. The CPM schedule request email demonstrated strong professional tone and correctly identified the Primavera P6 format as the industry standard. However, I noticed that the LLM's references to specific AIA contract sections should be verified against the actual contract language, as the model could hallucinate clause numbers or misstate provisions. And there's a lot of output that I didn't provide information about, but the model made it up. Overall, the outputs provide excellent first drafts that would save significant time, but we must always review the technical accuracy and adapt the content to the specific project context.
