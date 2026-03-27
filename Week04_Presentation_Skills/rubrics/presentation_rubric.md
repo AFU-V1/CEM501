@@ -26,12 +26,14 @@
 
 ## Category 1: Content & Structure (25%)
 
+Assessed against the **Hook-Problem-Solution-Ask (HPSA)** framework taught in Week 4.
+
 | Level | Descriptor |
 |-------|------------|
-| **4 - Excellent** | Clear thesis; logical flow with introduction, body, and conclusion; all claims supported with evidence; technical depth appropriate for audience. |
-| **3 - Good** | Thesis present; generally logical organization; most claims supported; adequate technical depth with minor gaps. |
-| **2 - Developing** | Thesis unclear or weak; some organizational issues; several unsupported claims; technical content is superficial. |
-| **1 - Needs Improvement** | No discernible thesis; disorganized; claims lack evidence; insufficient technical content for the topic. |
+| **4 - Excellent** | Clear Hook that immediately establishes context; Problem stated with facts and contract/project references; Solution is specific (activities, costs, resources); ends with a clear, actionable Ask. Logical flow throughout. |
+| **3 - Good** | HPSA structure present; Hook engages but could be sharper; Problem and Solution are adequately supported; Ask is present but could be more specific. Minor gaps in evidence or flow. |
+| **2 - Developing** | Structure is loosely organized but does not clearly follow HPSA; Hook is generic ("Today I will talk about..."); Problem or Solution lacks supporting data; Ask is vague or missing. |
+| **1 - Needs Improvement** | No discernible structure; jumps between topics without logical progression; no clear Ask; insufficient technical content for the scenario. |
 
 **Score: ____ / 4**
 
@@ -39,12 +41,14 @@
 
 ## Category 2: Delivery & Presence (25%)
 
+For virtual (Zoom) presentations: "eye contact" means looking at the camera lens; "presence" includes framing, lighting, audio quality, and screen share execution.
+
 | Level | Descriptor |
 |-------|------------|
-| **4 - Excellent** | Confident, natural delivery; strong eye contact; effective vocal variety (pace, tone, volume); professional posture and gestures. |
-| **3 - Good** | Generally confident; adequate eye contact; mostly clear voice with some monotone sections; appropriate body language. |
-| **2 - Developing** | Noticeably nervous; limited eye contact (reads from notes/slides); inconsistent volume or pace; distracting mannerisms. |
-| **1 - Needs Improvement** | Reads entirely from notes or slides; minimal audience connection; difficult to hear or understand; unprofessional demeanor. |
+| **4 - Excellent** | Confident, natural delivery; strong eye contact (camera); effective vocal variety (pace, tone, volume); professional framing, lighting, and audio; smooth screen share transitions. |
+| **3 - Good** | Generally confident; adequate eye contact; mostly clear voice with some monotone sections; acceptable virtual setup with minor issues (e.g., slight backlight, brief screen share fumble). |
+| **2 - Developing** | Noticeably nervous; limited eye contact (reads from notes/slides); inconsistent volume or pace; distracting virtual setup issues (poor lighting, background noise, screen share problems). |
+| **1 - Needs Improvement** | Reads entirely from notes or slides; minimal audience connection; difficult to hear or understand; unprofessional virtual presence or major technical issues. |
 
 **Score: ____ / 4**
 
@@ -52,11 +56,13 @@
 
 ## Category 3: Visual Aids (20%)
 
+Assessed against Mayer's multimedia principles: coherence (no extraneous material), signaling (key info highlighted), redundancy (slides ≠ script), spatial contiguity (labels on diagrams), and segmenting (one idea per slide).
+
 | Level | Descriptor |
 |-------|------------|
-| **4 - Excellent** | Slides are clean, professional, and enhance the message; effective use of diagrams, figures, or data visuals; minimal text; consistent design. |
-| **3 - Good** | Slides support the message; reasonable use of visuals; some slides may be text-heavy; mostly consistent formatting. |
-| **2 - Developing** | Slides are cluttered or inconsistent; over-reliance on text; visuals do not clearly support the narrative; formatting issues. |
+| **4 - Excellent** | One idea per slide; clean design with meaningful visuals (photos, diagrams, charts); minimal text; all charts labeled with title, axes, and units; consistent formatting; slides complement rather than duplicate the spoken content. |
+| **3 - Good** | Slides support the message; reasonable use of visuals; some slides may be text-heavy or contain more than one idea; mostly consistent formatting. |
+| **2 - Developing** | Slides are cluttered or inconsistent; over-reliance on text; presenter reads slides verbatim (redundancy effect); visuals do not clearly support the narrative. |
 | **1 - Needs Improvement** | Slides are poorly designed or missing; walls of text; no meaningful visuals; slides distract from rather than support the presentation. |
 
 **Score: ____ / 4**

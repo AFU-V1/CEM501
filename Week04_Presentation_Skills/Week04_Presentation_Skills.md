@@ -4,21 +4,40 @@
 
 ---
 
+### Session Plan (120 min)
+
+Students record and submit their presentations as videos **before** class. During the Saturday session, we watch the videos together and give live peer feedback.
+
+| Block | Time | Duration |
+|-------|------|----------|
+| **Lecture: Parts I–III** (Why it matters, HPSA framework, slide design) | 0:00 – 0:40 | 40 min |
+| **Lecture: Parts IV–V** (Delivery, nerves, virtual presenting, peer feedback) | 0:40 – 1:00 | 20 min |
+| **Watch & feedback** — 6 videos × ~7 min each (3 min video + 4 min discussion) | 1:00 – 1:42 | 42 min |
+| **Group debrief** | 1:42 – 1:55 | 13 min |
+| **Buffer** | 1:55 – 2:00 | 5 min |
+
+> **Instructor note:** After the first video, do a group rubric walk-through on that presentation to calibrate expectations before watching the remaining four. With videos, you can pause and replay specific moments — use this to highlight good examples of hooks, slide design, or asks in real time.
+
+---
+
 ### Learning Objectives
 
 - Understand the career-level stakes of presentation skills for CEM professionals, backed by research data
 - Structure a technical presentation using the Hook-Problem-Solution-Ask framework with CEM-specific examples
 - Apply evidence-based slide design principles drawn from Mayer's multimedia learning theory and cognitive load research
 - Deploy research-backed strategies for managing presentation anxiety beyond "just practice more"
+- Apply virtual presentation best practices: camera, lighting, audio, and screen sharing for professional credibility on video calls
 - Give and receive structured peer feedback using the Strength-Question-Suggestion protocol
-- Deliver a 3-minute lightning talk and reflect on performance
+- Deliver a 3-minute lightning talk on Zoom and reflect on performance
 
 ---
 
 ## Part I: Why Presentation Skills Matter for Engineers
-**(~15 min)**
+**(~12 min, including discussion)**
 
 Engineers are trained to solve problems. But solving a problem and *convincing someone that you solved the right problem in the right way* are two entirely different skills. In CEM, the second skill is often more consequential than the first.
+
+> **[DISCUSS]** Think of a time when a technically correct solution failed to gain traction because of how it was presented -- or when a weaker solution won because someone presented it more effectively. What made the difference?
 
 ---
 
@@ -32,17 +51,17 @@ Public speaking anxiety -- clinically known as glossophobia -- is one of the mos
 - A study by Stein, Walker, and Forde (1996) in a community sample found that **10% of respondents** reported public speaking anxiety causing marked interference with work, social life, or education, or causing them marked distress.
 - Younger adults are disproportionately affected: confidence in public speaking tends to increase with age and experience.
 
-The career consequences are real. A 2014 Prezi/Harris Poll of over 2,000 U.S. adults found that among those who give presentations, **nearly 70% said presentation skills are critical to their success at work**.
+The career consequences are real: as we will see in Section 1.3, survey data consistently links presentation ability to career advancement. And the anxiety data has an encouraging flip side -- because so many professionals avoid or struggle with public speaking, the engineer who can present confidently stands out.
 
 > **Key Insight:** Whether the true prevalence is 29% or 40%, the implication is the same: a significant fraction of professionals struggle with public speaking. The engineer who can present confidently has a genuine competitive advantage -- and the skill is learnable.
 
-*Sources: [Chapman University Survey of American Fears](https://www.chapman.edu/wilkinson/research-centers/babbie-center/survey-american-fears.aspx); Stein, M.B., Walker, J.R., & Forde, D.R. (1996). "Public-speaking fears in a community sample." Archives of General Psychiatry, 53(2), 169-174; [Prezi/Harris Poll (2014)](https://www.insivia.com/quoter/70-say-presentation-skills-are-critical-for-career-success/)*
+*Sources: [Chapman University Survey of American Fears](https://www.chapman.edu/wilkinson/research-centers/babbie-center/survey-american-fears.aspx); Stein, M.B., Walker, J.R., & Forde, D.R. (1996). "Public-speaking fears in a community sample." Archives of General Psychiatry, 53(2), 169-174. Note: Younger adults consistently report higher public speaking anxiety than older adults across surveys, likely reflecting both less experience and developmental factors.*
 
 ---
 
 ### 1.2 The "Brilliant Engineer Who Can't Present" Problem
 
-Every construction firm has one: the project engineer who knows the schedule inside out, who catches errors nobody else sees, who can estimate quantities in their head -- but who freezes in an OAC meeting, overloads slides with data, and ends presentations with "so, yeah, that's pretty much it."
+Most of you have worked with someone like this: the project engineer who knows the schedule inside out, who catches errors nobody else sees, who can estimate quantities in their head -- but who freezes in an OAC meeting, overloads slides with data, and ends presentations with "so, yeah, that's pretty much it." Some of you may recognize yourself in that description.
 
 This is not a personality flaw. It is a training gap. Engineering education historically emphasizes analysis over communication. A 2024 study by Coffelt et al. at Iowa State University examined what communication skills construction engineering graduates actually need on the job. Their findings:
 
@@ -62,8 +81,8 @@ ABET -- the accreditation body for engineering programs -- lists "an ability to 
 
 The link between presentation ability and career advancement is well documented:
 
-- Among professionals who give presentations, **nearly 70%** say that presentation skills are critical to their success at work (Prezi/Harris Poll, 2014).
-- In engineering firms specifically, the pattern is consistent: the engineers who advance fastest to management and leadership roles are almost always far above the engineering norm in public speaking ability. As the Engineering Management Institute notes, the better speaker frequently receives the promotion over the better programmer or analyst.
+- A 2014 Prezi/Harris Poll of over 2,000 U.S. adults found that among professionals who give presentations, **nearly 70%** say that presentation skills are critical to their success at work.
+- In engineering firms specifically, the pattern is consistent: the engineers who advance fastest to management and leadership roles are almost always those who can communicate effectively in meetings and presentations. The Engineering Management Institute has argued that when two equally qualified engineers are considered for a management role, the better speaker typically receives the promotion.
 - ASCE has published that public speaking is a "critical skill civil engineers need to learn," noting that engineers must regularly explain and defend their work to non-technical audiences -- owners, boards, public agencies, and juries.
 
 In CEM, the presentation contexts are constant and high-stakes:
@@ -79,12 +98,14 @@ In CEM, the presentation contexts are constant and high-stakes:
 
 > **Key Insight:** You will never present to "a general audience." In CEM, every presentation has a specific audience with specific decision-making power. Your job is not to inform -- it is to get a decision. Structure your talk accordingly.
 
-*Sources: [ASCE Civil Engineering Magazine (2025)](https://www.asce.org/publications-and-news/civil-engineering-source/civil-engineering-magazine/issues/magazine-issue/article/2025/05/public-speaking-is-a-critical-skill-civil-engineers-need-to-learn); [Engineering Management Institute: Presentation Skills for Engineers](https://engineeringmanagementinstitute.org/aeclp-348-presentation-skills-for-engineers-influence-decision-makers/)*
+> **[DISCUSS]** Look at the table above. Which of these presentation contexts have you been in? Which made you most nervous? What was different about the ones that went well versus the ones that did not?
+
+*Sources: [ASCE Civil Engineering Magazine (2025)](https://www.asce.org/publications-and-news/civil-engineering-source/civil-engineering-magazine/issues/magazine-issue/article/2025/05/public-speaking-is-a-critical-skill-civil-engineers-need-to-learn); [Engineering Management Institute: Presentation Skills for Engineers](https://engineeringmanagementinstitute.org/aeclp-348-presentation-skills-for-engineers-influence-decision-makers/); [Prezi/Harris Poll (2014)](https://www.insivia.com/quoter/70-say-presentation-skills-are-critical-for-career-success/)*
 
 ---
 
 ## Part II: Structuring a Technical Presentation
-**(~15 min)**
+**(~13 min)**
 
 ### 2.1 The Hook-Problem-Solution-Ask Framework
 
@@ -92,7 +113,7 @@ Carmine Gallo analyzed over 500 TED talks and identified three common features o
 
 For CEM professionals, we distill these insights into four beats:
 
-**Hook (10% of your time)**
+**Hook (~15% of your time)**
 Open with something concrete and visual: a site photo, a single striking number, a brief story from the field. Never open with "Today I will talk about..." or a table of contents slide.
 
 Gallo emphasizes that establishing an emotional connection early -- through storytelling, passion, and a compelling opening -- is critical for capturing and maintaining audience attention. In a CEM context, "emotional" does not mean sentimental -- it means *consequential*. Show the audience why they should care.
@@ -100,18 +121,20 @@ Gallo emphasizes that establishing an emotional connection early -- through stor
 Example hook for a schedule recovery presentation:
 > "This photo was taken yesterday at Grid Line 7. The slab-on-grade that should have been poured two weeks ago is still exposed earth. We are 14 days behind on the critical path. Here is how we get back on track."
 
-**Problem (20%)**
+**Problem (~20%)**
 State the issue clearly. Use facts, numbers, and contract references. In CEM, this means: which activities are delayed, by how many days, on which path, and what is the contractual implication.
 
 Do not editorialize. Do not blame. Present the problem as a fact pattern that demands a solution.
 
-**Solution (50%)**
+**Solution (~50%)**
 Present your proposed path forward. Be specific: activities, durations, resources, costs, and risks. Use visuals -- a marked-up Gantt chart excerpt, a site logistics plan, a comparison table of alternatives.
 
 Duarte's research shows that the most persuasive presentations alternate between the problem (current reality) and the solution (proposed future), creating a contrast that pulls the audience toward your recommendation.
 
-**Ask (20%)**
+**Ask (~15%)**
 End with a clear, specific request: approval, funding, a decision, or a next step with a date. Never end with "Any questions?" as your final slide. End with what you need.
+
+*These percentages are guidelines, not rules. In a 3-minute talk, ~15% Hook ≈ 25 seconds, ~20% Problem ≈ 35 seconds, ~50% Solution ≈ 90 seconds, ~15% Ask ≈ 25 seconds. For longer presentations, you may spend proportionally more time on the Hook to build context, or more on the Ask if the decision is complex. The key constraint is that the Solution always dominates.*
 
 Example ask:
 > "We need approval to mobilize a second concrete crew by Friday and authorization for the $45,000 acceleration cost. If approved today, we recover the 14 days by March 15. If deferred, we lose another week."
@@ -135,7 +158,7 @@ Example ask:
 ---
 
 ## Part III: Slide Design for Engineers -- The Evidence
-**(~15 min)**
+**(~15 min, including discussion)**
 
 Most engineers design slides the way they write reports: dense, thorough, and text-heavy. This instinct is understandable -- but it works against how the human brain actually processes information during a presentation. Let us look at what the research says.
 
@@ -249,6 +272,8 @@ ZONE B: 14 DAYS BEHIND → RECOVERY BY MARCH 15
 
 > **Key Insight:** The bad slide has more information. The good slide communicates more. In a 3-minute OAC window, the owner needs to understand the situation and make a decision -- not read a paragraph. Design your slides for the decision, not the documentation.
 
+> **[DISCUSS]** Pull up the last slide deck you used in a real meeting. How many of your slides would pass the "one idea per slide" test? What would you change now?
+
 ---
 
 ### 3.4 Attention Is Not Constant -- Design for It
@@ -268,7 +293,9 @@ For a 3-minute lightning talk, attention span is not your problem. For longer CE
 ---
 
 ## Part IV: Delivery and Managing Nerves
-**(~10 min)**
+**(~12 min)**
+
+We have covered what to say (Part II) and what to show (Part III). Now: how to say it -- and what to do when your body is working against you.
 
 "Just practice more" is the most common advice for managing presentation anxiety. It is also the least helpful -- because anxiety is a physiological response, and addressing it requires physiological and cognitive strategies, not just repetition.
 
@@ -290,14 +317,20 @@ The most counterintuitive finding in presentation anxiety research comes from Al
 
 ### 4.2 Breathe With Intention -- The Physiology
 
-Before you present, take three slow, deliberate breaths: 4 counts in through the nose, 6 counts out through the mouth. This is not a relaxation platitude -- it is a physiological intervention with strong research support:
+Before you present, take three slow, deliberate breaths: 4 counts in through the nose, 6 counts out through the mouth. The underlying mechanism is well established -- the practical application requires an honest caveat.
 
-- Slow diaphragmatic breathing activates the **parasympathetic nervous system** (the body's "rest and digest" mode), counteracting the sympathetic "fight or flight" response that drives presentation anxiety.
-- A 2017 randomized controlled trial in *Frontiers in Psychology* (Ma et al.) found that an 8-week diaphragmatic breathing training program **significantly reduced cortisol levels and improved sustained attention** in healthy adults compared to controls.
-- A systematic review of **58 clinical trials** (Bentley et al., 2023, *Brain Sciences*) found that approximately **75% of breathing interventions** led to significant decreases in psychometric measures of stress and anxiety -- particularly those using slow-paced breathing over sessions of at least 5 minutes.
-- Perciavalle et al. (2017) found that a multi-session deep breathing protocol significantly reduced heart rate and cortisol in participants.
+**What the research supports:**
 
-Do this before you step up to present. Three breaths, four counts in, six counts out. It takes 30 seconds and activates the parasympathetic response.
+- Slow diaphragmatic breathing activates the **parasympathetic nervous system** (the body's "rest and digest" mode), counteracting the sympathetic "fight or flight" response that drives presentation anxiety. This mechanism is not in dispute.
+- A 2017 randomized controlled trial in *Frontiers in Psychology* (Ma et al.) found that an **8-week** diaphragmatic breathing training program significantly reduced cortisol levels and improved sustained attention in healthy adults compared to controls.
+- A systematic review of **58 clinical trials** (Bentley et al., 2023, *Brain Sciences*) found that approximately **75% of breathing interventions** led to significant decreases in psychometric measures of stress and anxiety -- particularly those using slow-paced breathing over **sessions of at least 5 minutes**.
+- Perciavalle et al. (2017) found that a **multi-session** deep breathing protocol significantly reduced heart rate and cortisol in participants.
+
+**The honest caveat:**
+
+These studies examined sustained breathing practices -- multi-week programs or sessions of five minutes or longer. The specific advice to "take three breaths for 30 seconds before presenting" has not been directly validated by controlled trials. What we know is that the physiological mechanism (parasympathetic activation via slow exhalation) engages quickly, and that even brief slow breathing shifts autonomic tone in the right direction. Whether 30 seconds is enough to meaningfully reduce pre-performance anxiety is plausible but not proven. If you want the strongest effect, build a regular breathing practice -- even 5 minutes daily -- rather than relying solely on a pre-talk intervention.
+
+That said: three slow breaths before presenting costs nothing, risks nothing, and gives you a physical action to focus on instead of your nerves. Do it.
 
 *Sources: Ma, X. et al. (2017). "The Effect of Diaphragmatic Breathing on Attention, Negative Affect and Stress in Healthy Adults." [Frontiers in Psychology](https://pmc.ncbi.nlm.nih.gov/articles/PMC5455070/); Bentley, T.G.K. et al. (2023). "Breathing Practices for Stress and Anxiety Reduction." [Brain Sciences, 13(12), 1612](https://pmc.ncbi.nlm.nih.gov/articles/PMC10741869/); Perciavalle, V. et al. (2017). "The role of deep breathing on stress." [Neurological Sciences, 38(3), 451-458](https://pubmed.ncbi.nlm.nih.gov/27995346/)*
 
@@ -316,7 +349,37 @@ Specific preparation strategies:
 
 ---
 
-### 4.4 A Note on "Power Posing"
+### 4.4 Presenting on Video Calls -- The Virtual Stage
+
+This course meets on Zoom, and many of you will present on video calls throughout your careers -- OAC meetings, client presentations, dispute hearings. Virtual presenting is a distinct skill with its own rules. Everything from Parts II and III still applies; what follows are the additional considerations.
+
+**Camera and framing:**
+- Position your camera at eye level. A laptop on a desk angles up at your chin -- stack it on books or use an external webcam. This single adjustment changes how authoritative you appear.
+- Frame yourself from mid-chest up. Too close feels aggressive; too far feels disengaged.
+- **Look at the camera lens when speaking, not at the faces on screen.** This is the virtual equivalent of eye contact. It feels unnatural -- practice it. When you look at the screen, the audience sees you looking slightly down or to the side.
+
+**Lighting and background:**
+- Face a light source (window or desk lamp). If the light is behind you, your face is in shadow and your expressions are invisible.
+- A clean, neutral background is fine. A bookshelf is fine. A construction site hardhat on a shelf behind you signals the industry and is perfectly appropriate. Avoid virtual backgrounds -- they glitch when you move, and they undermine credibility.
+
+**Audio:**
+- Use a headset or external microphone. Laptop microphones pick up room echo and keyboard noise. In a field where credibility matters, bad audio is an unnecessary handicap.
+- Mute when not speaking. Unmute a beat *before* you start -- audiences often miss your first word when there is a mute delay.
+
+**Screen sharing:**
+- Share only the specific window (your slide deck), not your entire screen. The audience does not need to see your email notifications.
+- Test your screen share before the meeting. The number of professionals who fumble the "Share Screen" button in front of clients is remarkable. Do not be one of them.
+- When presenting with slides shared, your video thumbnail shrinks. This means your facial expressions and gestures are less visible -- **your voice becomes your primary delivery tool.** Use vocal variety (pace, pause, emphasis) more deliberately than you would in a room.
+
+**Engagement is harder:**
+- You cannot read the room the same way. Ask direct questions by name: "Ahmed, does this acceleration cost align with your budget projection?" In a Zoom grid of silent faces, you must actively pull engagement rather than passively receive it.
+- Use the chat as a backchannel. Invite questions in chat during longer presentations so you can address them without interrupting your flow.
+
+> **Key Insight:** Virtual presenting strips away the body language, presence, and spatial dynamics that carry much of in-person communication. What remains is your voice, your slides, and your camera framing. Get those three right and you will present more effectively on video than most people in the industry.
+
+---
+
+### 4.5 A Note on "Power Posing"
 
 You may have heard of Amy Cuddy's 2012 TED talk suggesting that adopting "power poses" before a presentation can boost confidence. The scientific picture is mixed: the original claims about hormonal changes (increased testosterone, decreased cortisol) failed to replicate in subsequent studies, and one of the original co-authors publicly abandoned the theory in 2016. However, a later meta-analysis of 128 studies found that expansive postures *do* have a reliable effect on **self-reported feelings of power and confidence**, even if they do not change hormone levels.
 
@@ -327,16 +390,17 @@ The takeaway: standing tall and taking up space before a presentation may help y
 ---
 
 ## Part V: Peer Feedback That Actually Helps
-**(~10 min)**
+**(~8 min)**
 
 ### 5.1 Why Peer Feedback Matters
 
 Giving useful feedback is itself a communication skill -- and one that CEM professionals use constantly in design reviews, constructability sessions, and progress meetings.
 
-Research confirms its value in higher education:
+Research confirms its value in higher education, with two findings worth distinguishing:
 
-- An experimental study found that structured peer feedback had a **strong causal effect on academic self-concept** (effect size d = 0.72), and a separate meta-analysis of 24 studies found that formative peer feedback improved writing performance with an even larger effect (g = 0.91).
-- Structured peer feedback improves both the *giver's* and the *receiver's* learning, because formulating feedback requires analyzing what worked and why.
+- An experimental study found that structured peer feedback had a **strong causal effect on academic self-concept** -- how confident students feel about their abilities -- with an effect size of d = 0.72. This matters because confidence compounds: people who believe they can improve are more likely to seek feedback and act on it.
+- Separately, a meta-analysis of 24 studies found that formative peer feedback improved **writing performance** with an effect size of g = 0.91 -- a large effect. These are different outcomes (self-concept vs. task performance), and both are meaningful.
+- Crucially, structured peer feedback improves both the *giver's* and the *receiver's* learning, because formulating feedback requires analyzing what worked and why.
 - However, research also shows that **peer feedback is a complex skill that requires explicit instruction.** Unstructured feedback ("good job," "I liked it") has minimal learning value. Structured protocols -- with rubrics and training -- produce significantly better outcomes.
 
 > **Key Insight:** The peer feedback protocol we use in this course is not just a classroom exercise. It mirrors how professionals communicate in design reviews and constructability sessions -- identify what works, ask questions, then suggest improvements. Master this protocol and you will be better at every review meeting in your career.
@@ -361,14 +425,15 @@ Rules:
 - **Frame suggestions constructively:** "You could try..." rather than "You should not..."
 - **One suggestion only.** Resist the urge to list five improvements. One actionable item is more useful than five vague ones.
 
+> **[DISCUSS]** Think about feedback you have received in your career -- in design reviews, performance evaluations, or project critiques. What made the difference between feedback that actually changed your behavior and feedback you ignored? How does the Strength-Question-Suggestion protocol address the problems you identified?
+
 ---
 
 ## In-Class Activity: 3-Minute Lightning Talks
-**(60 min, full session)**
 
-### Preparation (before class)
+### Video Submission (before class)
 
-Prepare a 3-minute presentation on one of the following CEM topics:
+Record a 3-minute video presentation on one of the following CEM topics. Use a real scenario from your professional experience or construct a realistic one:
 
 - A **schedule delay** you would report at an OAC meeting (explain the cause, impact, and proposed recovery)
 - A **change order justification** to the owner (present the differing condition, cost, and contract basis)
@@ -379,14 +444,41 @@ Requirements:
 - **Maximum 4 slides.** Use the Hook-Problem-Solution-Ask structure.
 - **No bullet-point walls.** Apply the slide design principles from Part III.
 - **End with a clear Ask.** What decision do you need from the audience?
+- **3 minutes maximum.** If your video runs longer, cut it down. This is the discipline.
 
-### In Class
+**Recording instructions:**
+- Use Zoom (record to local), Loom, QuickTime, or any screen recording tool.
+- Record your screen (slides) with your camera on — the audience should see both your slides and your face, as they would in a real virtual meeting.
+- Apply the virtual presenting principles from Section 4.4: camera at eye level, face a light source, use a headset or external mic.
 
-1. **Talks (35 min)** -- Each student presents for 3 minutes. A timer will be visible on screen. At 3:00, you stop. This is non-negotiable -- in a real OAC meeting, your window is equally strict.
+**Submit by email** to **eyuphan.koc@bogazici.edu.tr** by **Friday at 23:59**. Subject line: `CEM501 – Week 4 – [Your Name]`. Attach the video or share via a file link (Google Drive, OneDrive, etc.).
 
-2. **Peer feedback (20 min)** -- After each talk, one assigned peer gives verbal feedback using the Strength-Question-Suggestion protocol. All other students fill out written feedback cards (also using the protocol).
+### In Class: Watch & Feedback (40 min)
 
-3. **Debrief (5 min)** -- Common patterns observed, top tips, and encouragement. We will discuss: What hooks worked best? Where did presenters lose the audience? Which asks were clearest?
+We will watch all six videos together during class and give live peer feedback. Each round runs ~7 minutes:
+
+| Step | Time |
+|------|------|
+| Watch the video | 3 min |
+| Assigned peer gives verbal feedback (Strength-Question-Suggestion) | ~2 min |
+| Open discussion — others add comments, instructor may pause/replay key moments | ~2 min |
+
+**Peer feedback assignments (round-robin):**
+
+| Presenter | Lead reviewer |
+|-----------|---------------|
+| Peyman Jaferi | Hilal Kurt Irfanoglu |
+| Hilal Kurt Irfanoglu | Ali Furkan Ustundag |
+| Ali Furkan Ustundag | Kaan Vardar |
+| Kaan Vardar | Huseyin Emre Yilmaz |
+| Huseyin Emre Yilmaz | Esila Yagcioglu |
+| Esila Yagcioglu | Peyman Jaferi |
+
+> **Instructor note:** After the first video, pause and walk through the rubric together as a group on that presentation. Do not grade publicly — use it to calibrate what a "4" versus a "2" looks like. This sharpens everyone's feedback for the remaining five videos. The ability to pause and replay is a major advantage over live talks — use it to highlight specific moments (a strong hook, a dense slide, a clear ask).
+
+### Group Debrief (15 min)
+
+Open discussion across all six presentations: What hooks worked best? Where did presenters lose the audience? Which asks were clearest? What did you notice about the difference between reading a slide and presenting with a slide? Did the recording process itself change how you prepared? Everyone should speak.
 
 ### Assessment
 
@@ -395,7 +487,7 @@ Presentations will be evaluated using the rubric at `rubrics/presentation_rubric
 - **Structure** -- Did you follow Hook-Problem-Solution-Ask?
 - **Clarity and conciseness** -- Could the audience follow your argument in 3 minutes?
 - **Slide design** -- One idea per slide, minimal text, meaningful visuals, proper labeling?
-- **Delivery** -- Eye contact, pace, vocal variety, confidence?
+- **Delivery** -- Eye contact (camera), pace, vocal variety, confidence? For virtual delivery: framing, audio quality, screen share execution?
 - **The Ask** -- Did you end with a clear, specific request?
 
 ---
@@ -419,27 +511,30 @@ Grading: Completion and depth of self-analysis. There is no "right answer" -- ho
 
 ---
 
-### Summary: The Five Things to Remember
+### Summary: The Six Things to Remember
 
 | # | Principle | Source |
 |---|-----------|--------|
 | 1 | 29-40% of people report significant public speaking fear -- if you can present well, you have a genuine competitive advantage | Chapman University Survey, Gallup |
-| 2 | Hook-Problem-Solution-Ask: every CEM presentation follows four beats | Duarte, Gallo, adapted for CEM |
+| 2 | Hook-Problem-Solution-Ask: every CEM presentation follows four beats (~15/20/50/15%) | Duarte, Gallo, adapted for CEM |
 | 3 | One idea per slide, never read your slides aloud (redundancy kills comprehension) | Mayer's multimedia learning research |
 | 4 | Say "I am excited" before presenting -- reframing beats suppression | Brooks (2014), Harvard Business School |
-| 5 | Strength-Question-Suggestion: the only peer feedback protocol you need | Educational research on structured feedback |
+| 5 | On video calls: camera at eye level, look at the lens, let your voice carry the presentation | Virtual presentation principles |
+| 6 | Strength-Question-Suggestion: the only peer feedback protocol you need | Educational research on structured feedback |
 
 ---
 
 ### What's Next -- Week 5 Preview
 
-This week we covered **verbal** communication (Strand A): structuring presentations, designing slides, managing anxiety, and delivering lightning talks. Next week we return to **written** communication (Strand B): technical writing and document control.
+This week we covered **verbal** communication (Strand A): structuring presentations, designing slides, managing anxiety, and delivering lightning talks. Next week we return to **written** communication and AI foundations (Strand B): reading and triaging email with AI tools.
 
-- **What we will cover:** Principles of technical writing for construction documents -- clarity, precision, and contractual awareness. How to write daily reports, meeting minutes, and delay notices that can withstand legal scrutiny.
-- **Why it matters:** In disputes and claims, the quality of your contemporaneous written records often determines the outcome. A well-written daily report is worth more than a well-remembered conversation.
-- **Bring to class:** A sample daily report or meeting minutes from a project (real or simulated) -- we will workshop them in class.
+- **What we will cover:** How to process high-volume project email efficiently using AI-assisted triage. We will build the email reader module (M2) for your communication agent -- the first piece of your semester project that reads real email data.
+- **Why it matters:** A typical CEM professional receives dozens of project emails daily. Knowing what to read first, what to delegate, and what to flag is a skill -- and it is one that AI tools can augment significantly.
+- **Bring to class:** Access to an email account you can connect to (or a sample dataset will be provided). Your development environment (Cursor + CLI agent) should be set up and working.
 
-> **Reminder:** Your **self-assessment reflection** on today's lightning talk is due before the Week 5 session. Save as `project/reflections/week04_presentation_reflection.md`, commit, and push.
+> **Deadlines:**
+> - **Video presentation** — email to eyuphan.koc@bogazici.edu.tr by **Friday at 23:59**
+> - **Self-assessment reflection** — due before the Week 5 session. Save as `project/reflections/week04_presentation_reflection.md`, commit, and push.
 
 ---
 
