@@ -4,6 +4,21 @@
 
 ---
 
+### Session Plan (150 min)
+
+| Block | Time | Duration |
+|-------|------|----------|
+| **Lecture: Parts I–II** (Email overload problem, four-bucket triage framework) | 0:00 – 0:35 | 35 min |
+| **Lecture: Part III** (How IMAP works under the hood) | 0:35 – 0:45 | 10 min |
+| **Lecture: Part IV** (AI-assisted workflow, describe-review-test-iterate) | 0:45 – 0:55 | 10 min |
+| **Tool Demo** — live Claude Code session building `reader.py` | 0:55 – 1:10 | 15 min |
+| **Activity 1: Email Triage Drill** — pairs categorize 15 project emails | 1:10 – 1:30 | 20 min |
+| **Activity 2: Build Session** — students build their own `reader.py` | 1:30 – 2:10 | 40 min |
+| **Wrap-up** — summary, M2 milestone review, Week 6 preview | 2:10 – 2:25 | 15 min |
+| **Buffer** | 2:25 – 2:30 | 5 min |
+
+---
+
 ### Learning Objectives
 
 - Quantify the email overload problem in CEM using real industry data
@@ -33,6 +48,7 @@ Here is what the data tells us:
 | Time to refocus after an email interruption | 23 minutes | Gloria Mark, UC Irvine research |
 | Percentage of emails that are spam | ~49% | EmailToolTester (2024) |
 | Email volume growth trend | 73% of professionals say volume increased in last 12 months | Mailbird Survey (2024) |
+| CEM-specific email load | **3 to 3.5 hours per day** on emails alone | CooperLink / RICS (2023) |
 
 Think about the McKinsey number: **28% of your workweek**. That is more than one full day per week — Monday plus Tuesday morning — spent reading, writing, and responding to email. For construction project managers who already work 50-60 hour weeks, this translates to 14-17 hours per week on email alone.
 
@@ -57,6 +73,8 @@ Consider the unique CEM email environment:
 
 *Source: Smith, Currie & Hancock LLP. ["Effective Use of Email for Construction Project Communications and Documentation."](https://www.smithcurrie.com/publications/common-sense-contract-law/effective-use-of-email-for-construction-project-communications-and-documentation/)*
 
+> **[DISCUSS]** Have you encountered — or heard of — a situation where a casual email on a construction project took on contractual or legal significance? What would you do differently knowing that every email becomes part of the project record?
+
 ---
 
 ### 1.3 The Information Overload Spiral
@@ -67,11 +85,11 @@ The sheer volume of project correspondence is staggering. Recall from Week 1:
 - Daily reports, submittals, meeting minutes, change orders, safety briefings, schedule updates, and claims correspondence pile up alongside routine emails.
 - Documents shared via email threads are not searchable across the project team — critical information ends up trapped in individual inboxes.
 
-Research on information overload in the construction industry confirms that excessive information gathering subjects project managers to cognitive overload, which **distracts rather than concentrates their attention**. The problem is not just volume — it is the inability to distinguish signal from noise.
+Research by Tam et al. (2006) on information overload in the construction industry found that excessive information gathering subjects project managers to cognitive overload, which **distracts rather than concentrates their attention**. Their study of construction project teams concluded that the core problem is not too much information per se, but too little *high-value* information — managers drown in noise while critical signals go unnoticed.
 
 > **Key Insight:** The real cost of email overload is not the time spent reading — it is the critical email you *missed* because it was buried between a vendor marketing blast and a 15-reply CC chain. An unanswered RFI stalls the schedule. An unread stop-work notice creates a safety hazard. An overlooked change-order discussion costs real money.
 
-*Sources: Aljassmi, H. & Han, S. (2014). "Analysis of Causes of Construction Defects Using Fault Trees." Construction Management and Economics. See also: ResearchGate. ["Overload of Information or Lack of High Value Information: Lessons Learnt from Construction."](https://www.researchgate.net/publication/48353142_Overload_of_information_or_lack_of_high_value_information_Lessons_learnt_from_construction)*
+*Sources: Aljassmi, H. & Han, S. (2013). "Analysis of Causes of Construction Defects Using Fault Trees and Risk Importance Measures." Journal of Construction Engineering and Management, 139(11). See also: Tam, C.M. et al. (2006). ["Overload of Information or Lack of High Value Information: Lessons Learnt from Construction."](https://www.researchgate.net/publication/48353142_Overload_of_information_or_lack_of_high_value_information_Lessons_learnt_from_construction)*
 
 ---
 
@@ -80,7 +98,7 @@ Research on information overload in the construction industry confirms that exce
 
 ### 2.1 The Eisenhower Principle, Adapted for CEM
 
-The Eisenhower Matrix — originally a decision-making tool attributed to President Eisenhower — divides tasks into four quadrants based on urgency and importance. We adapt this into a **Four-Bucket Framework** specifically designed for construction project email:
+The Eisenhower Matrix — originally a decision-making tool attributed to President Dwight D. Eisenhower, who reportedly said *"What is important is seldom urgent and what is urgent is seldom important"* — divides tasks into four quadrants based on urgency and importance. We adapt this into a **Four-Bucket Framework** specifically designed for construction project email:
 
 | Bucket | Definition | CEM Examples | Target Response Time |
 |--------|-----------|--------------|---------------------|
@@ -112,17 +130,21 @@ Any email containing phrases like "within 7 days," "failure to respond will cons
 
 > **Key Insight:** Triage is not about reading every email thoroughly. It is about spending 3-5 seconds per email to put it in the right bucket, then processing each bucket in priority order. The goal is to make sure nothing URGENT sits unread while you craft a perfect reply to an FYI.
 
+> **[DISCUSS]** Which of the five triage rules above do you find most intuitive? Which is most surprising? Can you think of a sixth rule specific to your own experience or field of interest?
+
 ---
 
 ### 2.3 What the Research Says About Triage
 
-Studies on email management productivity suggest that only about **40% of emails demand same-day action**, while over a third can be ignored entirely. Experts recommend dedicating **15-30 minutes, one to three times daily**, to triage your inbox — rather than checking email continuously throughout the day.
+Research on email management productivity — including data from the McKinsey Global Institute and the Radicati Group reports cited above — suggests that only about **40% of emails demand same-day action**, while over a third can be ignored entirely. Experts recommend dedicating **15-30 minutes, one to three times daily**, to triage your inbox — rather than checking email continuously throughout the day.
 
 The concept of "Inbox Zero" — popularized by productivity consultant Merlin Mann — is often misunderstood. It does not mean having zero emails. It means having **zero unprocessed emails**: every message has been triaged into a bucket and will be handled at the appropriate time.
 
 For CEM professionals, the stakes of getting triage wrong are higher than for most knowledge workers, which is precisely why we want to build a tool that helps automate the initial classification.
 
 ---
+
+We now have a clear picture of the problem (Part I) and a framework for solving it (Part II). To automate that framework, we need to understand just enough about how email actually works under the hood to know what our code will do.
 
 ## Part III: How Email Works Under the Hood
 **(~10 min lecture)**
@@ -138,6 +160,38 @@ You do **not** need to become a networking expert. But to understand what your e
 > For our purposes, IMAP is what we want — we read and categorize emails without removing them from the server.
 
 ### 3.2 The IMAP Conversation in Plain Language
+
+Here is the mental model for what your Python script will do. Study this diagram — it maps directly to the code you will build in Part IV:
+
+```
+┌──────────────────┐                              ┌─────────────────────────┐
+│   Your Python    │                              │      Mail Server        │
+│     Script       │                              │   (imap.gmail.com)      │
+│                  │                              │                         │
+│                  │   1. CONNECT (SSL, port 993) │  ┌───────────────────┐  │
+│                  │  ──────────────────────────►  │  │     INBOX         │  │
+│                  │                              │  │  ┌───┐┌───┐┌───┐ │  │
+│                  │   2. AUTH (email + app pass)  │  │  │ ✉ ││ ✉ ││ ✉ │ │  │
+│                  │  ──────────────────────────►  │  │  └───┘└───┘└───┘ │  │
+│                  │                              │  │    ... N msgs     │  │
+│                  │   3. SELECT "INBOX"          │  └───────────────────┘  │
+│                  │  ──────────────────────────►  │                         │
+│                  │                              │  ┌───────────────────┐  │
+│                  │   4. SEARCH (last 20)        │  │  [Sent]           │  │
+│                  │  ──────────────────────────►  │  │  [Drafts]         │  │
+│                  │                              │  │  [Trash]          │  │
+│  From: ...       │   5. FETCH headers + body    │  └───────────────────┘  │
+│  Subject: ...    │  ◄──────────────────────────  │                         │
+│  Date: ...       │                              │  ┌───────────────────┐  │
+│                  │   6. DISCONNECT              │  │  Messages STAY on │  │
+│                  │  ──────────────────────────►  │  │  the server. IMAP │  │
+│                  │                              │  │  only looks — it  │  │
+│                  │                              │  │  never removes.   │  │
+└──────────────────┘                              │  └───────────────────┘  │
+                                                  └─────────────────────────┘
+```
+
+The same conversation, now as a table — useful for quick reference:
 
 When your Python script connects to a mail server via IMAP, here is what happens step by step:
 
@@ -158,13 +212,15 @@ To connect your script to your email, you need three pieces of information:
 
 | Item | Example | Where to Find It |
 |------|---------|-------------------|
-| IMAP server address | `imap.gmail.com` | Google/Outlook documentation |
+| IMAP server address | `imap.gmail.com` (Gmail) or `outlook.office365.com` (Outlook/Hotmail) | Google/Microsoft documentation |
 | Your email address | `student@gmail.com` | You know this |
-| App password | A 16-character generated code | Gmail Settings > Security > App Passwords |
+| App password | A 16-character generated code | Gmail: Settings > Security > App Passwords; Outlook: Security > Advanced > App Passwords |
 
 > **Key Insight:** An **app password** is not your regular Gmail/Outlook password. It is a special single-purpose password that lets your script access email without exposing your main account credentials. Think of it as a guest key to your apartment — it opens the door, but you can revoke it any time without changing your main lock. We will set this up together in class.
 
 ---
+
+You now understand the six steps your script will take when it talks to the mail server. In Part IV, we focus on how to direct an AI coding assistant to write that script for you — without needing to memorize the `imaplib` API.
 
 ## Part IV: The AI-Assisted Workflow
 **(~10 min lecture)**
@@ -188,9 +244,20 @@ By now you have used this pattern in previous weeks. Let's make it explicit for 
 
 The key principle: **you are the decision-maker; the AI is the typist.** You decide *what* to build and *whether* the output is correct. The AI handles the *how* — the syntax, the library calls, the boilerplate.
 
+> **[DISCUSS]** You have been using the describe-review-test-iterate pattern since Week 2. What has worked well? Where have you gotten stuck? Has your prompting style changed from your first session to now?
+
 ### 4.2 Concrete Prompts for Today's Build
 
 Here are the exact prompts you will give Claude Code (or your preferred AI agent) during the build session. Each prompt builds on the previous one:
+
+**Prompt 0 — Environment check (do this first):**
+```
+Check that Python 3.10+ is installed, that the python-dotenv package is
+available (install it if not), and that there is a .env file in the
+current directory with EMAIL_ADDRESS, EMAIL_PASSWORD, and IMAP_SERVER
+defined. Print the values (mask the password) so I can verify they
+are correct.
+```
 
 **Prompt 1 — Basic email reader:**
 ```
@@ -306,6 +373,8 @@ git push origin main
 
 You will receive a printed list of 15 email subject lines and senders from a fictional **highway bridge rehabilitation project ($12M, 18-month duration)**. Working in pairs, categorize each into URGENT / ACTION / FYI / ARCHIVE.
 
+> **Instructor note:** Give pairs 10 minutes to categorize all 15 emails, then spend 10 minutes on whole-class discussion. Focus discussion on the ambiguous cases (#2, #10, #13, #14) where reasonable people disagree — this reinforces that triage involves judgment, not just rules. Do not reveal "correct" answers; instead, ask pairs to defend their reasoning.
+
 | # | From | Subject |
 |---|------|---------|
 | 1 | OSHA Inspector | Re: Fall protection deficiency at Pier 3 — immediate correction required |
@@ -349,6 +418,15 @@ If you finish early, try extending the triage rules with CEM-specific keywords f
 - If you accidentally commit a password, revoke the app password immediately and generate a new one — the old one is permanently in your Git history
 - Claude Code can help you set up `python-dotenv` for safe credential loading
 
+**Recommended pattern:** Commit a `.env.example` file (with placeholder values) so collaborators know which variables are needed, while keeping the real `.env` gitignored:
+
+```
+# .env.example — commit this file (no real credentials)
+EMAIL_ADDRESS=your.email@gmail.com
+EMAIL_PASSWORD=your-16-char-app-password
+IMAP_SERVER=imap.gmail.com
+```
+
 ---
 
 ## Milestone: M2 — Email Reader Module
@@ -366,12 +444,29 @@ If you finish early, try extending the triage rules with CEM-specific keywords f
 5. Credentials loaded from environment variables via `.env` (no hardcoded secrets)
 6. Connection is properly closed after fetching (use `try/finally` or context manager)
 
+**Stretch goals (optional, for students who finish early):**
+- Add sender-based priority: maintain a configurable whitelist of high-priority senders (e.g., owner, inspector) that automatically elevates emails to at least ACTION
+- Export triage results to a CSV file for archival or further analysis
+- Add a `--since` command-line flag to fetch only emails from the last N days
+
 **Grading:** Pass / Needs Revision (you may resubmit once)
 
 **Evaluation criteria:**
 - Does the script run without errors on the grader's machine (with their own `.env`)?
 - Are all six requirements met?
 - Is the code reasonably readable (meaningful variable names, basic comments)?
+
+---
+
+### Summary: The Five Things to Remember
+
+| # | Principle | Source |
+|---|-----------|--------|
+| 1 | CEM professionals spend 3–3.5 hours/day on email — and every message may carry contractual weight | CooperLink/RICS, Smith Currie & Hancock |
+| 2 | Use the four-bucket framework (URGENT / ACTION / FYI / ARCHIVE) to triage every email in 3–5 seconds | Eisenhower Matrix, adapted for CEM |
+| 3 | IMAP lets your script read email without removing it from the server — like looking through a window at the post office | IMAP protocol fundamentals |
+| 4 | The AI workflow is always the same loop: describe → review → test → iterate. You decide *what*; the AI handles *how* | Describe-Review-Test-Iterate pattern |
+| 5 | Never hardcode credentials — use `.env` + `.gitignore` from day one | Security best practices |
 
 ---
 
@@ -394,6 +489,16 @@ If you finish early, try extending the triage rules with CEM-specific keywords f
 **AI Email Triage:**
 - Microsoft Learn. ["Triage Incoming Emails with Power Automate."](https://learn.microsoft.com/en-us/azure/ai-services/language-service/custom-text-classification/tutorials/triage-email)
 - InfoWorld. ["Using AI-Powered Email Classification to Accelerate Help Desk Responses."](https://www.infoworld.com/article/3824287/using-ai-powered-email-classification-to-accelerate-help-desk-responses.html)
+
+---
+
+### What's Next — Week 6 Preview
+
+This week we tackled **reading** and **triaging** email (Strand B). Next week we move to **reports and summarization**: the daily reports, inspection logs, and progress records that serve as primary evidence in construction claims and disputes.
+
+- **What we will cover:** How to summarize long email threads and project reports using LLMs. We will build a digest generator that takes the email data your `reader.py` fetches and produces concise, actionable summaries — turning a 50-message thread into a one-paragraph brief.
+- **Why it matters:** In construction law, "if it was not documented, it did not happen." Reports are not busywork — they are risk management. Learning to generate and summarize them efficiently is a core professional skill.
+- **Bring to class:** Your working `reader.py` from M2. We will use its output as the data source for the Week 6 build session.
 
 ---
 

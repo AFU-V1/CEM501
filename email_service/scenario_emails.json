@@ -1,0 +1,188 @@
+{
+  "scenario": "Istanbul Kadikoy Metro Station — Deep Excavation Support System",
+  "project_value": "$28M (~900M TRY)",
+  "duration": "24 months",
+  "location": "Kadikoy, Istanbul",
+  "emails": [
+    {
+      "id": 1,
+      "sender_name": "Ahmet Demir, IMM Inspector",
+      "subject": "URGENT: Stop work order — unauthorized utility crossing at Grid C-7",
+      "body": "Dear Project Manager,\n\nDuring today's site inspection at the Kadikoy Metro Station excavation, I identified an unmarked gas utility line crossing through Grid C-7 at a depth of approximately 4.5 meters. This line does not appear on any of the approved utility relocation drawings submitted with the excavation permit.\n\nEffective immediately, all excavation work within a 5-meter radius of Grid C-7 must cease until the following conditions are met:\n\n1. The gas utility line is positively identified and its operating status confirmed by IGDAS (Istanbul Gas Distribution).\n2. A revised excavation plan addressing the utility conflict is submitted to this office.\n3. Written clearance is obtained from IGDAS before any work resumes in the affected zone.\n\nFailure to comply with this stop-work directive may result in permit suspension for the entire excavation area.\n\nPlease acknowledge receipt of this notice within 2 hours.\n\nAhmet Demir\nSenior Inspector, Infrastructure Division\nIstanbul Metropolitan Municipality",
+      "intended_category": "URGENT",
+      "is_edge_case": false,
+      "edge_case_notes": null
+    },
+    {
+      "id": 2,
+      "sender_name": "Zeynep Kara, Geotechnical Engineer",
+      "subject": "Inclinometer readings — March 27 update",
+      "body": "Hi,\n\nPlease find attached the weekly inclinometer monitoring data for all stations as of March 27.\n\nSummary:\n- SI-01 through SI-03: Stable. No significant lateral movement detected. All readings within the 5mm serviceability threshold.\n- SI-04 (adjacent to the historic Kadikoy Hamam, Grid D-2): 2mm cumulative lateral movement recorded over the past 7 days. This is within the 5mm alert threshold but represents a 60% increase from the previous week's rate.\n\nGiven the proximity to the heritage structure and the accelerating trend at SI-04, I recommend increasing the monitoring frequency from weekly to every 48 hours until the rate stabilizes or we reach the 3.5mm review trigger.\n\nPlease confirm whether you would like to proceed with increased monitoring. This will require an additional cost authorization of approximately 8,000 TRY per month for the supplementary readings.\n\nBest regards,\nZeynep Kara, PhD\nGeotechnical Monitoring Lead\nKara Engineering Consultants",
+      "intended_category": "ACTION",
+      "is_edge_case": true,
+      "edge_case_notes": "Subject looks routine (weekly update). Body reveals accelerating movement near a historic building and requests a decision on increased monitoring with cost implications. Keyword-only triage on subject line would likely classify as FYI."
+    },
+    {
+      "id": 3,
+      "sender_name": "Burak Ozen, Secant Pile Subcontractor",
+      "subject": "RE: Pile installation schedule — Week 14",
+      "body": "Good morning,\n\nJust confirming that we are on track for the Week 14 schedule. Our crew of 12 mobilized at 07:00 this morning. We completed 8 piles yesterday and expect to maintain the same rate today.\n\nNo issues to report. Rig maintenance is scheduled for Saturday — no impact on the critical path.\n\nAttached: Updated pile installation log (PDF).\n\nRegards,\nBurak Ozen\nProject Manager\nOzen Piling Ltd.",
+      "intended_category": "FYI",
+      "is_edge_case": false,
+      "edge_case_notes": null
+    },
+    {
+      "id": 4,
+      "sender_name": "Elif Sahin, Structural Engineer",
+      "subject": "RFI-031: Waler beam connection detail at Section B-B",
+      "body": "Dear Project Manager,\n\nWe have identified a discrepancy between the structural drawings and the project specification for the waler beam connection at Section B-B.\n\n- Drawing S-204, Detail 7 shows a bolted connection (4x M24 Grade 8.8 bolts).\n- Specification Section 05 12 00, Paragraph 3.4.2 calls for a full-penetration welded connection.\n\nThese two details cannot both govern. Please clarify which connection type should be used. We need a response before pile cap formwork begins at Section B-B, currently scheduled for April 7.\n\nIf welding is required, the subcontractor will need to mobilize a certified welder, which may add 3-4 working days to the schedule for that section.\n\nPlease advise at your earliest convenience.\n\nElif Sahin, PE\nSenior Structural Engineer\nSahin Structural Consultants",
+      "intended_category": "ACTION",
+      "is_edge_case": false,
+      "edge_case_notes": null
+    },
+    {
+      "id": 5,
+      "sender_name": "Mehmet Yilmaz, Site Superintendent",
+      "subject": "Daily report — March 27 — no incidents",
+      "body": "Daily Construction Report\nProject: Kadikoy Metro Station Deep Excavation\nDate: March 27, 2026\nWeather: Clear, 14°C, wind NE 8 km/h\n\nManpower: 47 workers on site (12 piling crew, 8 formwork, 6 rebar, 4 dewatering, 5 survey/QC, 12 general labor)\n\nWork Completed:\n- Concrete placement for base slab Sector 2 completed (68 m3, pump truck #2)\n- Secant pile installation at Grid E: 8 piles completed (cumulative: 142 of 186)\n- Dewatering system operating normally, discharge to settlement tank\n\nSafety:\n- Zero incidents, zero near-misses\n- Toolbox talk conducted: confined space entry procedures\n\nVisitors: None\n\nTomorrow's Plan:\n- Continue pile installation at Grid E\n- Begin rebar placement for base slab Sector 3\n- Scheduled concrete delivery: 45 m3 at 08:00\n\nMehmet Yilmaz\nSite Superintendent",
+      "intended_category": "FYI",
+      "is_edge_case": false,
+      "edge_case_notes": null
+    },
+    {
+      "id": 6,
+      "sender_name": "Deniz Arslan, Marketing, ProBuild Software",
+      "subject": "Invitation: Smart Construction Project Management Platform — Free Trial",
+      "body": "Dear Project Manager,\n\nWe are excited to introduce ProBuild 3.0, the AI-powered construction project management platform trusted by over 500 firms across Turkey and the Middle East.\n\nKey features:\n- Real-time schedule tracking with AI delay prediction\n- Automated RFI routing and response tracking\n- BIM integration with clash detection alerts\n- Mobile daily reporting with photo markup\n\nAs a special offer for metro construction projects, we are providing a 60-day free trial with full onboarding support.\n\nClick here to schedule a 15-minute demo: [Demo Link]\n\nBest regards,\nDeniz Arslan\nBusiness Development Associate\nProBuild Construction Technologies\nIstanbul, Turkey",
+      "intended_category": "ARCHIVE",
+      "is_edge_case": false,
+      "edge_case_notes": null
+    },
+    {
+      "id": 7,
+      "sender_name": "Fatma Celik, Dewatering Subcontractor",
+      "subject": "Pump failure at Well DW-03 — water level rising",
+      "body": "URGENT — Requesting immediate decision.\n\nThe submersible pump at dewatering well DW-03 failed at 14:30 today. Cause appears to be motor burnout — the unit is not recoverable on site.\n\nCurrent status:\n- Water level in the excavation near DW-03 is rising at approximately 8 cm/hour.\n- At current rate, water will reach the base slab formwork in Sector 2 within approximately 6 hours (by 20:30 tonight).\n- Our backup pump is at our Uskudar depot. We have dispatched a crew to retrieve it. ETA: 2 hours (by 16:30).\n\nHowever, if the backup pump is delayed for any reason, we will not have enough time to prevent flooding of the Sector 2 formwork.\n\nI am requesting your authorization to rent an emergency pump from Kadikoy Su Pompalari (local supplier) as a contingency. Rental cost is approximately 15,000 TRY/week.\n\nPlease advise immediately.\n\nFatma Celik\nDewatering Operations Manager\nAquaDrain Engineering",
+      "intended_category": "URGENT",
+      "is_edge_case": false,
+      "edge_case_notes": null
+    },
+    {
+      "id": 8,
+      "sender_name": "Canan Erdogan, IMM Environmental Affairs",
+      "subject": "Monthly noise monitoring report — February 2026",
+      "body": "Dear Project Team,\n\nPlease find attached the February 2026 noise monitoring summary for the Kadikoy Metro Station excavation project.\n\nKey findings:\n- All daytime measurements (07:00-19:00) were within the 75 dB(A) limit specified in the Environmental Impact Assessment.\n- Evening measurements (19:00-22:00) recorded a maximum of 62 dB(A), well within the 65 dB(A) limit.\n- No noise complaints were received from adjacent residents during February.\n\nThe next quarterly environmental review meeting is scheduled for April 15, 2026 at IMM headquarters. A formal invitation will follow.\n\nPlease retain this report for your project records.\n\nBest regards,\nCanan Erdogan\nEnvironmental Compliance Officer\nIstanbul Metropolitan Municipality",
+      "intended_category": "FYI",
+      "is_edge_case": false,
+      "edge_case_notes": "The April 15 meeting mention might make some students think ACTION, but no response is required from the PM at this time."
+    },
+    {
+      "id": 9,
+      "sender_name": "Hakan Yildiz, Owner's Representative (IMM)",
+      "subject": "RE: RE: RE: Progress meeting minutes — February 28",
+      "body": "All,\n\nOne more item to add to the February 28 meeting minutes:\n\nItem 14: The landscaping subcontractor (Yesil Peyzaj Ltd.) has requested access to the south staging area in Q3 2026 to begin topsoil stockpiling for the station entrance plaza. This is noted for future coordination — no action required at this time.\n\nRegards,\nHakan Yildiz\nOwner's Representative\nIMM Metro Projects Division\n\n--- Original Message ---\nFrom: Project Secretary\nSubject: RE: RE: Progress meeting minutes — February 28\n\n\"Minutes have been updated with the corrections from the structural team. Final version attached.\"\n\n--- Original Message ---\nFrom: Elif Sahin, Structural Engineer\nSubject: RE: Progress meeting minutes — February 28\n\n\"Minor correction to Item 7: the pile diameter should read 1200mm, not 1000mm.\"\n\n--- Original Message ---\nFrom: Project Secretary\nSubject: Progress meeting minutes — February 28\n\n\"Attached are the draft minutes from the February 28 progress meeting. Please review and send any corrections by March 5.\"",
+      "intended_category": "ARCHIVE",
+      "is_edge_case": true,
+      "edge_case_notes": "The sender is the Owner's Representative, which by Rule 1 (sender hierarchy) would normally elevate to at least ACTION. However, the content is a trivial addition to old meeting minutes about a Q3 landscaping request with 'no action required at this time' explicitly stated. Tests whether students blindly apply sender-based priority without reading content."
+    },
+    {
+      "id": 10,
+      "sender_name": "Selin Aksoy, Resident",
+      "subject": "Complaint: Vibration damage to my building at Moda Caddesi 47",
+      "body": "To whom it may concern,\n\nI am writing to formally notify you that visible cracks have appeared in the interior walls of my apartment at Moda Caddesi 47, Kadikoy. These cracks were not present before your excavation project commenced in January 2026.\n\nI have documented the damage with dated photographs and have consulted with a structural engineer who has confirmed that the crack patterns are consistent with vibration-induced settlement.\n\nI am requesting the following:\n1. An immediate pre-condition survey of my building by your project team.\n2. A written explanation of what vibration mitigation measures are in place.\n3. A commitment to repair all damage caused by your construction activities.\n\nIf I do not receive a written response within 48 hours, I will be filing a formal complaint with the Istanbul Metropolitan Municipality and consulting with my lawyer regarding compensation for property damage.\n\nSelin Aksoy\nResident, Moda Caddesi 47, Daire 5\nKadikoy, Istanbul\nTel: 0532 XXX XX XX",
+      "intended_category": "URGENT",
+      "is_edge_case": true,
+      "edge_case_notes": "The sender is an unknown external party not in the project directory. Rule 1 from the lecture would default unknown senders to ARCHIVE. However, the email contains legal threat language ('lawyer', 'compensation'), a 48-hour deadline, and potential third-party property damage claim — all of which make this URGENT. Tests the tension between sender-based rules and content-based urgency."
+    },
+    {
+      "id": 11,
+      "sender_name": "Osman Kaya, Company HR Department",
+      "subject": "Reminder: Annual occupational health screening — deadline April 10",
+      "body": "Dear Colleagues,\n\nThis is a reminder that all field personnel must complete their annual occupational health screening by April 10, 2026, as required by Turkish Labor Law No. 6331.\n\nScreening includes:\n- General physical examination\n- Hearing test (audiometry)\n- Lung function test (spirometry)\n- Blood work (lead levels for workers exposed to concrete dust)\n\nScreening locations:\n- Kadikoy Occupational Health Center, Sogutlucesme Caddesi 12\n- Company headquarters clinic, Levent\n\nPlease book your appointment through the HR portal. Walk-ins are accepted on Wednesdays.\n\nOsman Kaya\nHR Coordinator\nHealth & Safety Compliance",
+      "intended_category": "ARCHIVE",
+      "is_edge_case": false,
+      "edge_case_notes": "Company-wide HR process. Has a deadline and mentions field personnel, which is project-adjacent, but is not project-specific communication requiring PM action. Some students may classify as ACTION."
+    },
+    {
+      "id": 12,
+      "sender_name": "Ayse Demirci, Quality Control Manager",
+      "subject": "Concrete cube test results — 28-day break — Sector 1 base slab",
+      "body": "Dear Project Manager,\n\nThe 28-day compressive strength test results for the Sector 1 base slab concrete (placed February 27, 2026) are as follows:\n\nMix Design: C40/50, w/c ratio 0.40\nSpecification Requirement: 40 MPa minimum at 28 days\n\nResults:\n- Sample A (Cast #S1-001): 42.3 MPa — PASS\n- Sample B (Cast #S1-002): 41.8 MPa — PASS\n- Sample C (Cast #S1-003): 38.1 MPa — FAIL\n\nSample C is 4.75% below the specification minimum of 40 MPa.\n\nPer Section 5.4.2 of the project QA/QC plan, when any test sample falls below the specified minimum strength, the following actions are required:\n1. Core extraction and testing at the location represented by the failed sample.\n2. Structural assessment by the Engineer of Record if core results confirm the deficiency.\n3. Written notification to the Owner's Representative within 5 business days.\n\nI recommend initiating the coring investigation immediately, as the base slab in Sector 1 is on the critical path for the next phase of excavation support.\n\nPlease advise how you would like to proceed.\n\nAyse Demirci\nQuality Control Manager\nKadikoy Metro Station Project",
+      "intended_category": "URGENT",
+      "is_edge_case": true,
+      "edge_case_notes": "The subject line ('Concrete cube test results') reads as routine QC — keyword triage on the subject alone would likely classify as FYI. The urgency is buried in the body: one sample failed, the QA/QC plan mandates specific corrective actions, and the affected slab is on the critical path. This is the pedagogical crown jewel — mirrors email #14 from the in-class triage drill but the signal is in the body, not the subject."
+    },
+    {
+      "id": 13,
+      "sender_name": "Levent Saglam, Insurance Broker",
+      "subject": "Certificate of insurance — renewal required by April 1",
+      "body": "Dear Project Manager,\n\nThis is a reminder that the Contractor's All Risk (CAR) insurance policy for the Kadikoy Metro Station project (Policy No. KMS-2025-0471) expires on April 1, 2026.\n\nTo ensure continuous coverage, I need the following from your office by March 31 at the latest:\n\n1. Updated project valuation (current contract value including approved change orders).\n2. Confirmation of the current workforce count for the Employer's Liability extension.\n3. Any changes to the list of named subcontractors.\n\nIf the policy lapses, you will be in breach of Section 18.1 of the General Conditions, which requires the Contractor to maintain insurance coverage at all times during the contract period.\n\nPlease treat this as a priority.\n\nLevent Saglam\nSenior Account Manager\nAnadolu Sigorta — Construction Division\nTel: 0212 XXX XX XX",
+      "intended_category": "ACTION",
+      "is_edge_case": true,
+      "edge_case_notes": "The sender is an insurance broker — not a typical project stakeholder. The subject line mentions 'renewal' which sounds administrative. But the body reveals a hard contractual deadline (April 1) and warns of a General Conditions breach if the policy lapses. Close to URGENT given the 3-day window, but technically ACTION since there is still time to respond."
+    },
+    {
+      "id": 14,
+      "sender_name": "Kerem Balik, Traffic Management Coordinator",
+      "subject": "Road closure permit — Sogutlucesme Caddesi — expiring March 31",
+      "body": "Hi,\n\nJust a heads-up that the temporary road closure permit for Sogutlucesme Caddesi (Permit No. IMM-TRF-2026-0088) expires at midnight on March 31.\n\nIf the closure needs to continue into April (which I believe it does, based on the current schedule), we need to submit a renewal application to IMM Traffic Division at least 48 hours before expiry — meaning by Saturday, March 29 at the latest.\n\nThe renewal application requires:\n- Updated traffic management plan (if any changes since initial submission)\n- Confirmation letter from the General Contractor\n- Payment of the renewal fee (12,500 TRY)\n\nI can prepare the paperwork, but I need your written authorization and the updated TMP by end of day tomorrow.\n\nKerem Balik\nTraffic Management Coordinator\nKadikoy Metro Station Project",
+      "intended_category": "URGENT",
+      "is_edge_case": true,
+      "edge_case_notes": "Subject line says 'expiring March 31' which sounds like there is time. But the body reveals the renewal must be submitted 48 hours before expiry — meaning the real deadline is March 29 (tomorrow). Without renewal, the road closure expires and excavation cannot proceed. The hidden urgency is in the timeline math, not the keywords."
+    },
+    {
+      "id": 15,
+      "sender_name": "Beton Istanbul Ready-Mix",
+      "subject": "Price adjustment notice — effective April 2026",
+      "body": "Dear Valued Customer,\n\nDue to increases in cement and aggregate costs, we are adjusting our ready-mix concrete prices effective April 1, 2026. The updated price list is as follows:\n\n- C30/37: 2,850 TRY/m3 (was 2,650 TRY/m3) — increase of 7.5%\n- C40/50: 3,200 TRY/m3 (was 2,950 TRY/m3) — increase of 8.5%\n- C50/60: 3,600 TRY/m3 (was 3,300 TRY/m3) — increase of 9.1%\n\nThese prices apply to all new orders placed on or after April 1. Orders placed before April 1 with confirmed delivery dates will be honored at current prices.\n\nWe value your continued partnership and remain committed to delivering high-quality concrete on schedule.\n\nCommercial Department\nBeton Istanbul Ready-Mix Concrete\nwww.betonistanbul.com.tr",
+      "intended_category": "ACTION",
+      "is_edge_case": true,
+      "edge_case_notes": "Looks like an FYI/ARCHIVE vendor notice. But the PM should act: the project uses C40/50 concrete extensively, and an 8.5% price increase on a major cost item has budget implications. The PM may want to pre-order remaining concrete quantities at the old price before April 1. Tests whether students recognize cost/budget impact even when the email tone is purely informational."
+    },
+    {
+      "id": 16,
+      "sender_name": "Murat Tekin, Survey Manager",
+      "subject": "As-built survey completed — Sector 1 base slab",
+      "body": "Project Manager,\n\nThe as-built survey for the Sector 1 base slab has been completed. All elevations are within the +/- 10mm tolerance specified in the contract.\n\nSurvey data has been uploaded to the project SharePoint folder:\n/Surveys/As-Built/Sector1_BaseSlab_20260327.dwg\n\nNo deviations or non-conformances were found.\n\nMurat Tekin\nSurvey Manager\nTekin Surveying & Geomatics",
+      "intended_category": "FYI",
+      "is_edge_case": false,
+      "edge_case_notes": null
+    },
+    {
+      "id": 17,
+      "sender_name": "Ali Korkmaz, Site Safety Officer",
+      "subject": "Weekly safety inspection report — Week 13",
+      "body": "Dear Project Manager,\n\nPlease find below the summary of the Week 13 safety inspection conducted on March 26, 2026.\n\nInspection Areas: Excavation face (Grid C through E), dewatering wells, rebar staging area, site office compound.\n\nFindings:\n- All excavation edges properly barricaded with guardrails.\n- Personal Protective Equipment (PPE) compliance: 100% observed.\n- Fire extinguisher at rebar staging area due for monthly inspection (last inspected Feb 25). Minor finding — scheduled for inspection this week.\n- Emergency evacuation routes clearly marked and unobstructed.\n- First aid kit at site office fully stocked.\n\nOverall Rating: SATISFACTORY\nNo lost-time incidents this week. Cumulative project record: 47 days without a lost-time incident.\n\nAli Korkmaz\nSite Safety Officer\nKadikoy Metro Station Project",
+      "intended_category": "FYI",
+      "is_edge_case": false,
+      "edge_case_notes": "Contains the word 'safety' in sender title and throughout the body, which keyword-based triage may elevate to URGENT. However, the content is a routine weekly report with no actionable safety issues — everything is satisfactory. Tests whether students' keyword rules are too aggressive on 'safety'."
+    },
+    {
+      "id": 18,
+      "sender_name": "IGDAS Istanbul Gas Distribution",
+      "subject": "Scheduled maintenance — gas main at Bahariye Caddesi — April 2-3",
+      "body": "Dear Sir/Madam,\n\nIGDAS will be performing scheduled maintenance on the 300mm medium-pressure gas main running along Bahariye Caddesi, approximately 120 meters north of your project site, on April 2-3, 2026.\n\nDuring this maintenance window:\n- Gas supply to the immediate area may be temporarily interrupted.\n- IGDAS field crews will be working in the vicinity of your northern site boundary.\n- We request that your personnel do not obstruct access along Bahariye Caddesi during these two days.\n\nIf your project activities may conflict with our maintenance schedule, please contact our field coordinator, Volkan Erdogan, at 0212 XXX XX XX by March 31.\n\nIGDAS Operations Division\nIstanbul Gas Distribution Corporation",
+      "intended_category": "ACTION",
+      "is_edge_case": false,
+      "edge_case_notes": "Requires coordination — the PM needs to check whether any project activities conflict with the IGDAS work near the northern boundary and potentially notify site staff."
+    },
+    {
+      "id": 19,
+      "sender_name": "Pinar Yildiz",
+      "subject": "Job application — Civil Engineer position",
+      "body": "Dear Hiring Manager,\n\nI am writing to express my interest in any open Civil Engineer positions on the Kadikoy Metro Station project. I recently graduated from Istanbul Technical University with a B.Sc. in Civil Engineering and completed my internship at a deep excavation project in Atasehir.\n\nI am particularly interested in geotechnical and structural monitoring work. My resume is attached for your consideration.\n\nI would welcome the opportunity to discuss how I can contribute to your project team.\n\nBest regards,\nPinar Yildiz\nTel: 0535 XXX XX XX\npinar.yildiz.itu@gmail.com",
+      "intended_category": "ARCHIVE",
+      "is_edge_case": false,
+      "edge_case_notes": null
+    },
+    {
+      "id": 20,
+      "sender_name": "Selcuk Demir, Formwork Subcontractor",
+      "subject": "Delay notice — formwork materials for Sector 3",
+      "body": "Dear Project Manager,\n\nI regret to inform you that the formwork panels for the Sector 3 base slab will be delayed by approximately 5 working days. The panels are being fabricated at our facility in Gebze, and the steel supplier has notified us of a raw material shortage affecting delivery.\n\nRevised delivery date: April 8, 2026 (originally scheduled April 1).\n\nImpact:\n- Rebar placement for Sector 3 can proceed as planned — it does not depend on formwork.\n- Concrete placement for Sector 3 will be delayed from April 3 to approximately April 10.\n- This delay does not currently affect the overall project critical path, as Sector 3 has 12 days of float in the baseline schedule.\n\nWe are exploring alternative suppliers to mitigate the delay. I will keep you updated daily.\n\nApologies for the inconvenience.\n\nSelcuk Demir\nProject Manager\nDemir Formwork Systems",
+      "intended_category": "ACTION",
+      "is_edge_case": true,
+      "edge_case_notes": "Contains 'delay' in subject — keyword triage may flag as URGENT. However, the body explicitly states the delay does not affect the critical path (12 days of float). This is ACTION (PM should acknowledge, monitor, and update the schedule) but not URGENT. Tests whether students read past the alarming subject to assess actual impact."
+    }
+  ]
+}
