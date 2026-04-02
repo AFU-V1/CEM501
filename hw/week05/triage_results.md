@@ -1,6 +1,6 @@
 # CEM501: Week 5 Assignment — Email Triage Results
 **Author:** Furkan Üstündağ
-
+ 
 ---
 
 ## 1. Raw reader.py Output
@@ -65,8 +65,8 @@ ARCHIVE   Pinar Yildiz <eyuphan.koc@g...  Job application — Civil Engineer pos
 
 - **Which emails did your keyword rules handle well?** Following iterative refinements, the system reliably handles standard construction communication categories. "Stop work order", "RFI", "meeting minutes", and obvious junk all cleanly fall into appropriate categories. 
 
-- **Which did they miss?** Our initial test encountered negation blindness ("no incidents"), broad singles masking compound phrases ("safety" taking priority over "safety report"), and simple missed contexts ("gas main maintenance", "vibration damage"). 
+- **Which did they miss?** My initial test encountered negation blindness ("no incidents"), broad singles masking compound phrases ("safety" taking priority over "safety report"), and simple missed contexts ("gas main maintenance", "vibration damage"). 
 
-- **What improvements would you make to your triage logic based on this exercise?** Based on our initial analysis, we augmented `reader.py` with specific multi-word phrase filtering logic checked at Pass 0 ("server maintenance" vs "maintenance", "job application") and Pass 1 ("safety inspection" and "daily report"). This hierarchy allowed complex phrases to correctly catch context issues before defaulting to less specific single-word parsers, allowing the system to achieve exactly the outcome documented above.
+- **What improvements would you make to your triage logic based on this exercise?** Based on my initial analysis, I augmented `reader.py` with specific multi-word phrase filtering logic checked at Pass 0 ("server maintenance" vs "maintenance", "job application") and Pass 1 ("safety inspection" and "daily report"). This hierarchy allowed complex phrases to correctly catch context issues before defaulting to less specific single-word parsers, allowing the system to achieve exactly the outcome documented above.
 
 - **Which AI tools did you use during this assignment, and how?** I used the Antigravity agent in VS Code to quickly run tests on these scenarios, adjust the multiple-pass sorting strategy in `reader.py` to overcome negation blindness and edge-cases (vibration complaint, safety inspection report), document the final result sets dynamically into markdown, and format our detailed rationale describing the transition toward 100% classification accuracy.
