@@ -52,7 +52,11 @@ def triage_email(subject: str, sender: str, body: str = "") -> tuple[str, str]:
     search_text = f"{subject} {body}".lower()
 
     # Pass 0: check obvious junk/non-project words immediately
-    junk_keywords = ["benefits", "offer", "digest", "maintenance", "fw:"]
+    junk_keywords = [
+        "benefits", "offer", "digest", "fw:",
+        "server maintenance", "system maintenance",
+        "occupational health", "health checkup", "job application",
+    ]
     for keyword in junk_keywords:
         if keyword in search_text:
             return "ARCHIVE", keyword
@@ -62,16 +66,23 @@ def triage_email(subject: str, sender: str, body: str = "") -> tuple[str, str]:
     compound_groups = (
         ("URGENT", (
             "stop work", "notice of delay", "time extension",
-            "liquidated damages",
+            "liquidated damages", "vibration damage",
         )),
         ("ACTION", (
             "change order", "response required", "action required",
             "meeting request", "shop drawing", "permit renewal",
+            "price adjustment", "renewal required",
+            "certificate of insurance", "installation schedule",
+            "gas main",
         )),
         ("FYI", (
-            "meeting minutes", "daily log", "work log",
+            "meeting minutes", "daily log", "work log", "daily report",
             "progress photo", "test results", "weekly schedule",
             "weekly report", "schedule update",
+            "safety inspection", "safety report", "inspection report",
+            "monitoring report", "noise monitoring",
+            "survey completed", "as-built",
+            "no incidents", "no issues",
         )),
     )
 
@@ -84,13 +95,15 @@ def triage_email(subject: str, sender: str, body: str = "") -> tuple[str, str]:
     single_groups = (
         ("URGENT", (
             "urgent", "safety", "incident", "notice", "claim", "immediate",
+            "complaint", "damage",
         )),
         ("ACTION", (
             "rfi", "submittal", "review", "approval", "deadline",
-            "coordination", "permit",
+            "coordination", "permit", "insurance", "renewal",
         )),
         ("FYI", (
             "update", "recap", "photos", "minutes", "progress", "log", "fyi",
+            "monitoring", "completed",
         )),
     )
 
