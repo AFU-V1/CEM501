@@ -2,7 +2,7 @@
 """
 CEM501 — Send scenario emails for the Week 5 Triage Live Test.
 
-Loads 12 fictional project emails from scenario_emails.json and sends them
+Loads 20 fictional project emails from scenario_emails.json and sends them
 to student inboxes listed in triage_recipients.json.
 
 Usage:

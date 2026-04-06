@@ -505,7 +505,7 @@ After your lightning talk and receiving peer feedback, write a 1-page reflection
 
 Save as `project/reflections/week04_presentation_reflection.md`. Commit and push.
 
-**Due:** Before Week 5 session.
+**Due:**  March 31st, 2026
 
 Grading: Completion and depth of self-analysis. There is no "right answer" -- honest, specific reflection is what matters.
 
