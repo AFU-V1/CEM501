@@ -1,0 +1,59 @@
+Here is the comprehensive Daily Construction Report.
+
+***
+
+### **DAILY CONSTRUCTION REPORT**
+
+**1. GENERAL INFORMATION**
+*   **Project Name:** Kadikoy Bridge Rehabilitation Project
+*   **Contract #:** BR-2024-071
+*   **Date:** March 14, 2026
+*   **Report #:** DCR-048
+
+**2. WEATHER**
+*   **Morning (07:00):** Overcast, 6°C. Wind from the north at 15-20 km/h. Light drizzle began at approximately 10:30.
+*   **Afternoon (14:00):** Partly sunny, 11°C. Wind decreased. Drizzle stopped at approximately 12:30.
+
+**3. MANPOWER**
+| Subcontractor                 | Trade                     | Count | Notes                                 |
+| ----------------------------- | ------------------------- | ----- | ------------------------------------- |
+| General Contractor (GC)       | Superintendent            | 1     |                                       |
+|                               | Project Engineer          | 1     | On site until 14:00                   |
+|                               | Laborer                   | 5     |                                       |
+|                               | Crane Operator            | 1     | Operating MC-02                       |
+| **Kaya Steel**                | Foreman                   | 1     |                                       |
+|                               | Ironworker                | 6     | 2 workers absent (reported sick)      |
+| **Beton Plus**                | Foreman                   | 1     |                                       |
+|                               | Carpenter / Concrete Crew | 10    |                                       |
+|                               | Pump Truck Operator       | 1     | On site for concrete pour             |
+|                               | Concrete Truck Driver     | 1     | On site for concrete pour             |
+| **Yoltek Trafik Hizmetleri**  | Traffic Control Supervisor| 1     |                                       |
+|                               | Flagger                   | 2     |                                       |
+
+**4. EQUIPMENT**
+| Equipment                          | ID / Type                     | Status    | Notes                                                               |
+| ---------------------------------- | ----------------------------- | --------- | ------------------------------------------------------------------- |
+| Mobile Crane                       | MC-02 (150 ton Liebherr)      | Active    | Assisted with bearing removal at Pier 4 and formwork lifts at Span 3. |
+| Concrete Pump Truck                | -                             | Active    | On site from 10:55 to 13:40 for approach slab pour.                 |
+| Concrete Mixer Truck               | Mixer #14 (8 m³ capacity)     | Active    | On site from 10:55 to 13:40 for delivery.                           |
+| Backhoe                            | -                             | Idle      | At north abutment. Noted to have a flat rear left tire.             |
+| Vibrating Compactor                | -                             | Standby   | Staged for future drainage and sub-base work.                       |
+
+**5. WORK PERFORMED**
+*   **Pier 4, East Bearing (P4-E):** Kaya Steel removed the existing neoprene bearing pad and cleaned the bearing seat. Work on this location is 100% complete up to the point of installing the new bearing plate. Work was halted at 14:00 due to pending RFI-018.
+*   **South Approach Slab:** Beton Plus placed 7.8 m³ of C35/45 concrete between station 0+040 and 0+065. Placement, vibration, finishing, and commencement of wet curing were completed. Three sets of concrete test cylinders were taken (ID: KBR-0314-01 to -03).
+*   **Span 3, Deck (East Side):** Beton Plus installed formwork for the deck slab replacement, completing the area covering grids D4 to D7. This scope is estimated at 70% complete.
+*   **Traffic Control:** Yoltek Trafik Hizmetleri set up, maintained, and removed a single right-lane closure on the southbound approach from station 0+020 to 0+090. The closure was active from 06:30 to 17:00.
+
+**6. DELAYS, ISSUES, AND RFI STATUS**
+*   **Delay (Critical Path):** Work on new bearing installation at Pier 4 is stopped pending a response to **RFI-018 (Anchor Bolt Specification)**, submitted on February 19, 2026. This RFI is critical for the work sequence at Piers 4 and 5. The Kaya Steel crew was underutilized from 14:00 onwards.
+*   **Delay:** Excavation at the north abutment for drainage installation is delayed, pending utility locates from the Istanbul Metropolitan Municipality (IBB), reference UTL-2026-0283. The backhoe has been idle for 3 days. Per a voicemail from IBB, the gas line locate is scheduled for March 20 at the earliest, and the water line locate for March 18 or 19.
+*   **Issue:** The backhoe located at the north abutment was reported by night security to have a flat rear left tire.
+
+**7. SAFETY AND VISITORS**
+*   **Safety:**
+    *   A toolbox talk was conducted at 07:00 on the topic of "Working over water / fall protection — pier scaffolding." 19 personnel attended and signed the attendance sheet.
+    *   **Near Miss (15:00):** At Span 3, a formwork panel slipped from its rigging during a crane lift. The panel fell approximately 2 meters before being caught by its safety line. No personnel were in the drop zone.
+        *   **Corrective Action:** Work was stopped for 15 minutes. The rigging was inspected, and a worn shackle was identified and replaced. The Beton Plus foreman was instructed to implement pre-lift rigging checks for all future lifts. The event was documented with photos (IMG_345, IMG_346).
+*   **Visitors:**
+    *   Dr. Arslan (Geotechnical Consultant) was on site from approximately 09:00 to 09:45 to inspect scour protection measures at Pier 2. He reported satisfaction with the current conditions and stated he will return for a follow-up inspection after the next significant rain event.
