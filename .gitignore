@@ -40,3 +40,6 @@ project/channels/*.json
 *.pem
 *.key
 credentials/
+
+# Confidential role-play briefings (distributed in class only)
+**/scenarios/confidential_*.md

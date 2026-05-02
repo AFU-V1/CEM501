@@ -25,9 +25,9 @@ This is not a technology problem — it is a people problem. Each stakeholder gr
 
 Research from the Harvard Business Review quantifies this at the individual level: workers toggle between different applications and websites roughly **1,200 times per day**, spending nearly **four hours per week** just reorienting themselves after each switch — about 9% of their total work time.
 
-*Source: Rogelberg, S. et al. (2022). ["How Much Time and Energy Do We Waste Toggling Between Applications?"](https://hbr.org/2022/08/how-much-time-and-energy-do-we-waste-toggling-between-applications) Harvard Business Review.*
+*Source: Murty, R. N., Dadlani, S., & Das, R. B. (2022). ["How Much Time and Energy Do We Waste Toggling Between Applications?"](https://hbr.org/2022/08/how-much-time-and-energy-do-we-waste-toggling-between-applications) Harvard Business Review.*
 
-At the organizational level, Haiilo's research on digital workplace fatigue found that the average employee uses **35+ different digital tools** daily. And 91% of enterprises now use **two or more chat platforms** simultaneously — not because they planned to, but because different teams adopted different tools organically.
+At the organizational level, Haiilo's research on digital workplace fatigue found that employees spend roughly **1.8 hours per day just searching for information** scattered across systems, and only **29% of organizations** are satisfied with their digital tools (down from 40% in 2022). And 91% of enterprises now use **two or more chat platforms** simultaneously — not because they planned to, but because different teams adopted different tools organically.
 
 *Sources: [Haiilo (2024). "Digital Fatigue: How Fragmented Tools Are Hurting Your Team."](https://blog.haiilo.com/blog/digital-fatigue-how-fragmented-tools-are-hurting-your-team/) [Mio (2024). "The State of Workplace Messaging."](https://www.m.io/blog/state-of-workplace-messaging)*
 
@@ -39,7 +39,7 @@ At the organizational level, Haiilo's research on digital workplace fatigue foun
 
 Construction makes fragmentation worse than most industries for three reasons:
 
-1. **The field-office divide.** Field crews work on mobile devices in dusty, noisy environments with unreliable connectivity. They need fast, lightweight tools — which is why WhatsApp dominates. According to a BauInfoConsult industry survey, **72% of construction professionals** use WhatsApp for brief business exchanges with colleagues and subcontractors. A JBKnowledge ConTech Report found that **92% of construction workers** use their smartphone every day at work — and most of these are personal devices, not company-issued.
+1. **The field-office divide.** Field crews work on mobile devices in dusty, noisy environments with unreliable connectivity. They need fast, lightweight tools — which is why WhatsApp dominates. According to a BauInfoConsult industry survey, **72% of construction professionals** use WhatsApp for brief business exchanges with colleagues and subcontractors. The 2019 JBKnowledge ConTech Report found that over **92% of construction professionals use smartphones for work** — and most of these are personal devices, not company-issued.
 
 2. **Subcontractor diversity.** A typical commercial project involves 20-50 subcontractors, each with their own communication preferences and systems. You cannot dictate what tools a steel erector or an electrical sub uses internally.
 
@@ -55,13 +55,13 @@ When information is trapped in the wrong channel, projects pay the price:
 
 - **Rework:** Recall from Week 1 — the FMI/PlanGrid study found that **48% of all rework** traces back to miscommunication and poor data access, costing **$31.3 billion annually** in the U.S. alone. Much of this starts with a message that never reached the right person because it was sent on the wrong platform.
 
-- **Decision delays:** A ClickUp survey of 5,000 professionals found that **1 in 5 workers** spends more than **3 hours daily** just searching for files, messages, or context scattered across tools.
+- **Decision delays:** A 2025 ClickUp analysis of workplace communication found that **over 60% of a team's time** is spent searching for context, information, and action items across fragmented tools instead of doing actual work.
 
-- **Productivity loss:** Research indicates that poor communication caused by fragmented tools reduces productivity by up to **40%**, and employees overwhelmed by fragmented digital tools are **twice as likely** to leave their jobs.
+- **Productivity loss:** Research cited by Haiilo indicates that poor communication caused by fragmented tools reduces productivity by up to **40%** (Grammarly), and employees overwhelmed by poor digital tools are **twice as likely** to leave their jobs (YaYa).
 
-- **Per-team cost:** Industry analysis estimates that information silos cost construction firms up to **$450,000 annually per team** in lost efficiency and rework.
+- **Operational drag:** Industry analyses of construction silos consistently point to duplicated effort, delayed decisions, and rework as the dominant hidden costs of fragmentation — though concrete per-team dollar figures vary widely by firm size and project type.
 
-*Sources: [FMI & PlanGrid (2018). "Construction Disconnected."](https://www.prnewswire.com/news-releases/new-research-from-plangrid-and-fmi-identifies-factors-costing-the-construction-industry-more-than-177-billion-annually-300689826.html) [ClickUp Insights (2025). "The State of Workplace Communication."](https://clickup.com/blog/team-communication-survey/) [Haiilo (2024).](https://blog.haiilo.com/blog/digital-fatigue-how-fragmented-tools-are-hurting-your-team/) [CrewView (2024). "Breaking Down Silos."](https://www.crewview.com/blog/breaking-down-silos-how-centralized-construction-management-technology-reduces-costs-and-boosts)*
+*Sources: [FMI & PlanGrid (2018). "Construction Disconnected."](https://www.prnewswire.com/news-releases/new-research-from-plangrid-and-fmi-identifies-factors-costing-the-construction-industry-more-than-177-billion-annually-300689826.html) [ClickUp Insights (2025). "Always Connected, Never in Sync: The State of Workplace Communication."](https://clickup.com/blog/team-communication-survey/) [Haiilo (2024).](https://blog.haiilo.com/blog/digital-fatigue-how-fragmented-tools-are-hurting-your-team/) [CrewView (2025). "Breaking Down Silos."](https://www.crewview.com/blog/breaking-down-silos-how-centralized-construction-management-technology-reduces-costs-and-boosts)*
 
 > **Key Insight:** A foreman texts a photo of a cracked beam to the superintendent on WhatsApp. That photo never reaches the structural engineer's email thread. Three days later, concrete is poured over the problem. Your agent, sitting at the center of multiple channels, can prevent exactly this scenario — routing field reports to the right people regardless of which app originated the message.
 
@@ -90,11 +90,11 @@ Notice the pattern: **formality increases as you move from field to office to co
 
 ### 2.2 The Major Messaging Platforms at a Glance
 
-**WhatsApp** — 3 billion monthly active users worldwide (as of late 2025). Over 130 billion messages sent daily. In construction, it is the de facto field communication tool in most markets outside the U.S., and increasingly within the U.S. as well. Its strength is ubiquity — every worker already has it. Its weakness: no project structure, no audit trail, messages buried in endless scrolling. WhatsApp Business (400+ million businesses) adds some structure but remains limited for construction workflows.
+**WhatsApp** — over 3 billion monthly active users worldwide (3.3 billion as of January 2026). Over 150 billion messages sent daily. In construction, it is the de facto field communication tool in most markets outside the U.S., and increasingly within the U.S. as well. Its strength is ubiquity — every worker already has it. Its weakness: no project structure, no audit trail, messages buried in endless scrolling. WhatsApp Business (200+ million businesses actively using it) adds some structure but remains limited for construction workflows.
 
 *Source: [Infobip (2025). "WhatsApp Statistics."](https://www.infobip.com/blog/whatsapp-statistics)*
 
-**Microsoft Teams** — approximately 320 million monthly active users (2024), with around 220 million daily active users by mid-2025. Dominant in office environments, especially organizations already using Microsoft 365. Strong for video meetings, file sharing, and integration with SharePoint/OneDrive. Less adopted by field crews who find it heavy on mobile data and overly complex for quick messages.
+**Microsoft Teams** — approximately 320 million users worldwide (2024). Dominant in office environments, especially organizations already using Microsoft 365. Strong for video meetings, file sharing, and integration with SharePoint/OneDrive. Less adopted by field crews who find it heavy on mobile data and overly complex for quick messages.
 
 *Source: [DemandSage (2026). "Microsoft Teams Statistics."](https://www.demandsage.com/microsoft-teams-statistics/)*
 
@@ -102,7 +102,7 @@ Notice the pattern: **formality increases as you move from field to office to co
 
 *Source: [SQ Magazine (2025). "Slack Statistics."](https://sqmagazine.co.uk/slack-statistics/)*
 
-**Telegram** — surpassed 1 billion monthly active users in March 2025, with approximately 500 million daily active users. Open bot API makes it the easiest platform for building integrations (which is why we use it in this class). Strong in international markets and increasingly popular for automated notifications and bot-driven workflows.
+**Telegram** — surpassed 1 billion monthly active users in March 2025 (announced by founder Pavel Durov on March 19, 2025), with approximately 450 million daily active users at that time. Open bot API makes it the easiest platform for building integrations (which is why we use it in this class). Strong in international markets and increasingly popular for automated notifications and bot-driven workflows.
 
 *Source: [Backlinko (2026). "How Many People Use Telegram."](https://backlinko.com/telegram-users)*
 
@@ -491,7 +491,7 @@ The abstraction pattern means switching to any of these is a matter of writing *
 - Slack API — Getting Started: [api.slack.com/start](https://api.slack.com/start)
 
 **Industry Data Cited in This Lecture:**
-- HBR (2022). ["How Much Time and Energy Do We Waste Toggling Between Applications?"](https://hbr.org/2022/08/how-much-time-and-energy-do-we-waste-toggling-between-applications)
+- Murty, R. N., Dadlani, S., & Das, R. B. (2022). ["How Much Time and Energy Do We Waste Toggling Between Applications?"](https://hbr.org/2022/08/how-much-time-and-energy-do-we-waste-toggling-between-applications) Harvard Business Review.
 - Haiilo (2024). ["Digital Fatigue: How Fragmented Tools Are Hurting Your Team."](https://blog.haiilo.com/blog/digital-fatigue-how-fragmented-tools-are-hurting-your-team/)
 - Mio (2024). ["The State of Workplace Messaging."](https://www.m.io/blog/state-of-workplace-messaging)
 - ClickUp Insights (2025). ["The State of Workplace Communication."](https://clickup.com/blog/team-communication-survey/)

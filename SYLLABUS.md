@@ -69,7 +69,7 @@ System architecture, multi-channel integration, agent memory, and the final demo
 | 10 | Negotiation & Conflict Resolution | A | Negotiation role-play | Negotiation memo HW | Week 10 notes; Fisher & Ury, *Getting to Yes* |
 | 11 | Multi-Channel Integration | C | Telegram bot workshop | M6: Multi-channel agent | Week 11 notes |
 | 12 | Agent Memory & Scheduling | C | Reliability workshop | M7: Persistent agent | Week 12 notes |
-| 13 | Cross-Cultural Communication | A | International project simulation | M8: Final integration | Week 13 notes; Hofstede Insights |
+| 13 | Project Progress Presentations | C | 10-min progress presentation + 3-min Q&A | M8: Progress presentation + integrated agent pushed | Week 13 notes |
 | 14 | **Final Demos** | C | 7-min demo + 3-min Q&A | M9: Final submission | — |
 
 ---
@@ -90,7 +90,7 @@ The semester project is the construction of a **personal AI communication agent*
 | M5 | 9 | `project/ARCHITECTURE.md` — system design document |
 | M6 | 11 | `project/channels/` — at least one additional channel |
 | M7 | 12 | `project/memory/` + `project/logs/` — persistence and logging |
-| M8 | 13 | Full integration, all tests passing |
+| M8 | 13 | Project progress presentation (7-min talk + 3-min Q&A); integrated agent state pushed to GitHub |
 | M9 | 14 | Final demo + `project/REFLECTION.md` (500–800 words) |
 
 ### Project Grading Breakdown

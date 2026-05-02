@@ -32,7 +32,7 @@ Milestones build on each other inside your `project/` folder:
 | M5 | 9 | `project/ARCHITECTURE.md` — system design document |
 | M6 | 11 | `project/channels/` — at least one extra channel |
 | M7 | 12 | `project/memory/` — persistence + `project/logs/` |
-| M8 | 13 | Full integration, all tests passing |
+| M8 | 13 | Progress presentation (7-min talk + 3-min Q&A) and integrated agent state pushed to GitHub |
 | M9 | 14 | Final demo + `project/REFLECTION.md` |
 
 ## Verbal Communication Assessments
@@ -45,6 +45,13 @@ Milestones build on each other inside your `project/` folder:
 
 - **Part A (10%):** 5-minute individual presentation on a CEM communication challenge. Rubric same as Week 4.
 - **Part B (10%):** Take-home assignment — build a specified feature for your agent. Due 48 hours after distribution.
+
+## Progress Presentations (Week 13)
+
+- **7 minutes** progress presentation on your agent project (rough demo OK).
+- **3 minutes** Q&A and feedback from instructor and peers.
+- Ungraded but mandatory; missing your slot without prior arrangement costs 5 points from your final M9 grade.
+- See `Week13_Progress_Presentations/Week13_Progress_Presentations.md` for the format and checklist.
 
 ## Final Demo (Week 14)
 

@@ -62,7 +62,7 @@ Think of a database as a structured spreadsheet. Like Excel, it stores data in r
 SQLite is the most widely deployed database engine in the world — and it is not close.
 
 - There are over **1 trillion SQLite databases** in active use today. Every smartphone, every web browser (Chrome, Firefox, Safari), every copy of iTunes, and even aircraft flight systems contain SQLite databases.
-- The entire library is **350 KiB** in size — smaller than a single high-resolution photo.
+- The entire library is typically **under 1 MB** in size (around 700–900 KiB depending on compile options) — smaller than a single high-resolution photo.
 - No server needed. The entire database is a **single ordinary disk file** that you can copy, email, or back up like any other file.
 - Python includes SQLite by default: `import sqlite3` — no installation required.
 - For many read-heavy workloads, SQLite is **35% faster than reading directly from the filesystem** — the database's indexing and caching outperform raw file I/O.
@@ -256,9 +256,8 @@ logging.basicConfig(
 
 Why does reliability matter so much? Because failure is expensive:
 
-- **ITIC (2024):** 91% of mid-size and large enterprises report that one hour of downtime costs more than **$300,000**. Among those, **44% say it exceeds $1 million per hour**.
-- **Error handling bugs** — the kind where a program crashes instead of recovering gracefully — take an average of **44.1 days to fully address** from discovery to final fix.
-- **88% of users** form negative opinions about brands with poorly performing apps, and **34% switch to a competitor immediately** after a bad experience.
+- **ITIC (2024):** 91% of mid-size and large enterprises report that one hour of downtime costs more than **$300,000**. **41%** say hourly downtime costs their firm between **$1 million and $5 million**.
+- **88% of users** form negative opinions about brands with poorly performing websites or mobile apps (Limelight Networks survey), and **34% stop using the app entirely** after a bad experience.
 
 For your communication agent, "downtime" means missed follow-ups, unsent reminders, and broken workflows — exactly the communication failures that PMI says cause 56% of project failures.
 

@@ -36,7 +36,7 @@ In 2026, AI-augmented communication is the norm. You will learn to **direct AI c
 | 10 | Negotiation & Conflict Resolution | Negotiation memo HW |
 | 11 | Multi-Channel Integration | M6: Multi-channel agent |
 | 12 | Agent Memory & Scheduling | M7: Persistent agent |
-| 13 | Cross-Cultural Communication | M8: Final integration |
+| 13 | Project Progress Presentations | M8: Progress presentation |
 | 14 | Final Demos | M9: Final submission |
 
 ## Grading
