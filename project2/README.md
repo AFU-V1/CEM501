@@ -14,7 +14,7 @@
 
 ## Description
 
-An AI-powered communication agent for construction project managers that automates email triage, drafts professional replies, and sends them with human-in-the-loop safety guardrails. The agent reads incoming project emails via IMAP, classifies them by urgency (URGENT/ACTION/FYI/ARCHIVE) using a multi-pass keyword engine, generates context-aware draft responses using Google Gemini 2.5 Flash, and supports multi-channel communication through both Email and Telegram. Built with a modular architecture that enables independent testing and incremental improvement.
+An AI-powered communication agent for construction project managers that automates email triage, drafts professional replies, and sends them with human-in-the-loop safety guardrails. The agent reads incoming project emails via IMAP, classifies them by urgency (URGENT/ACTION/FYI/ARCHIVE) using a multi-pass keyword engine, generates context-aware draft responses using OpenAI (gpt-4o-mini), and supports multi-channel communication through both Email and Telegram. Built with a modular architecture that enables independent testing and incremental improvement.
 
 ---
 
@@ -22,7 +22,7 @@ An AI-powered communication agent for construction project managers that automat
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the full system architecture, component descriptions, data flow diagram, and design decisions.
 
-**High-level summary:** A modular pipeline that reads incoming emails via IMAP, classifies them by urgency using keyword-based triage, drafts context-aware responses via Gemini LLM, and sends them after explicit user approval -- with persistent SQLite memory for contacts and message history.
+**High-level summary:** A modular pipeline that reads incoming emails via IMAP, classifies them by urgency using keyword-based triage, drafts context-aware responses via OpenAI LLM, and sends them after explicit user approval -- with persistent SQLite memory for contacts and message history.
 
 ---
 
@@ -31,7 +31,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for the full system architecture, compone
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/CEM501.git
+git clone https://github.com/AFU-V1/CEM501.git
 cd CEM501
 ```
 
@@ -59,7 +59,7 @@ cp .env.example .env
 ### 5. Verify setup
 
 ```bash
-python -c "from google import genai; print('Setup OK')"
+python -c "import openai; print('Setup OK')"
 ```
 
 ---
@@ -102,7 +102,7 @@ python -m memory.memory
 - [x] **M0:** Environment setup and API key configuration
 - [x] **M1:** Prompt template library (`templates/` -- RFI, daily report, delay notice)
 - [x] **M2:** Email reader and triage module (`reader.py` -- IMAP + keyword classification)
-- [x] **M3:** Daily digest generator (`digest.py` -- Gemini summarization + HTML output)
+- [x] **M3:** Daily digest generator (`digest.py` -- OpenAI summarization + HTML output)
 - [x] **M4:** Email agent v1 (`agent.py` -- read + triage + draft + send with 4 guardrails)
 - [x] **M5:** Architecture documentation (`ARCHITECTURE.md` -- components, data flow, 4 ADRs)
 - [x] **M6:** Multi-channel integration (`channels/` -- Email + Telegram with shared triage)
@@ -116,7 +116,7 @@ python -m memory.memory
 
 | Tool / Model | How It Was Used |
 |--------------|-----------------|
-| Google Gemini 2.5 Flash | Email draft generation, daily digest summarization, Telegram response drafting |
+| OpenAI (gpt-4o-mini) | Email draft generation, daily digest summarization, Telegram response drafting |
 | Gemini CLI / Antigravity | Building and debugging the agent pipeline, generating architecture documentation |
 | Cursor | Primary IDE for development and code review |
 

@@ -31,7 +31,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for the full system architecture, compone
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/CEM501.git
+git clone https://github.com/AFU-V1/CEM501.git
 cd CEM501
 ```
 
