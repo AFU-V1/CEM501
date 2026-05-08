@@ -10,9 +10,9 @@ A complete email-agent pipeline that:
   4. Sends approved drafts via SMTP -- with human-in-the-loop confirmation
 
 Usage:
-    python agent.py              # Full pipeline with send capability
-    python agent.py --dry-run    # Show drafts without sending
-    python agent.py --summary    # Triage only, no drafting or sending
+    py agent.py              # Full pipeline with send capability
+    py agent.py --dry-run    # Show drafts without sending
+    py agent.py --summary    # Triage only, no drafting or sending
 """
 
 import argparse
@@ -154,6 +154,11 @@ def _validate_content(subject: str, body: str) -> list[str]:
         warnings.append("[!] Body is very short (< 20 characters).")
 
     return warnings
+
+
+def get_send_warnings(to_address: str, subject: str, body: str) -> list[str]:
+    """Return all non-blocking warnings for a proposed outbound email."""
+    return _validate_recipient(to_address) + _validate_content(subject, body)
 
 
 def _extract_sender_email(sender_field: str) -> str:
@@ -360,6 +365,33 @@ def send_email(
         print("  -> Skipped.")
         logger.info("User skipped sending for: %s -> %s", subject[:40], to_address)
         return False
+
+
+def send_approved_email(
+    to_address: str,
+    subject: str,
+    body: str,
+    dry_run: bool = False,
+) -> tuple[bool, list[str], str]:
+    """
+    Send an already-reviewed draft without CLI prompts.
+
+    This is intended for the web dashboard, where the dashboard itself is the
+    human confirmation surface required by ADR 2.
+    """
+    warnings = get_send_warnings(to_address, subject, body)
+
+    if dry_run:
+        logger.info("[DRY RUN] Approved dashboard draft for: %s -> %s", subject[:40], to_address)
+        return True, warnings, "dry_run"
+
+    if not _check_rate_limit():
+        warning = "Rate limit exceeded. Try again later."
+        logger.warning("Blocked approved send for %s: %s", to_address, warning)
+        return False, warnings + [warning], "blocked"
+
+    success = _do_send(to_address, subject, body)
+    return success, warnings, "sent" if success else "error"
 
 
 def _do_send(to_address: str, subject: str, body: str) -> bool:

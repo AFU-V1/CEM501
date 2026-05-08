@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CEM501 Agent Console</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body data-theme="dark">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">CEM</div>
+        <div>
+          <p class="eyebrow">Construction AI</p>
+          <h1>Agent Console</h1>
+        </div>
+      </div>
+
+      <div class="sidebar-panel">
+        <button id="refreshLiveBtn" class="btn btn-primary">Refresh Live Inbox</button>
+        <button id="refreshSampleBtn" class="btn btn-secondary">Load Demo Snapshot</button>
+        <button id="probeBtn" class="btn btn-ghost">Run Health Probe</button>
+        <button id="themeBtn" class="btn btn-ghost">Toggle Theme</button>
+      </div>
+
+      <nav class="nav-list">
+        <a href="#overview">Overview</a>
+        <a href="#inbox">Triage Inbox</a>
+        <a href="#queue">Review Queue</a>
+        <a href="#memory">Memory</a>
+        <a href="#tasks">Scheduler</a>
+        <a href="#status">Status</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <p class="eyebrow">ADR 2</p>
+        <p>Human approval is mandatory before any outbound email is sent.</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section id="overview" class="hero glass-panel">
+        <div class="hero-copy">
+          <p class="eyebrow">Personal AI Communication Agent</p>
+          <h2>Operational surface for inbox triage, draft review, memory, and follow-ups.</h2>
+          <p id="heroStatus" class="hero-status">Loading current agent state...</p>
+        </div>
+        <div id="metricGrid" class="metric-grid"></div>
+      </section>
+
+      <section id="inbox" class="panel-grid">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Inbox</p>
+            <h3>Triage Inbox View</h3>
+          </div>
+          <div class="legend">
+            <span class="pill urgent">URGENT</span>
+            <span class="pill action">ACTION</span>
+            <span class="pill fyi">FYI</span>
+            <span class="pill archive">ARCHIVE</span>
+          </div>
+        </div>
+        <div id="inboxColumns" class="inbox-columns"></div>
+      </section>
+
+      <section id="queue" class="glass-panel">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Approval Flow</p>
+            <h3>Draft Review Queue</h3>
+          </div>
+          <div id="queueMetrics" class="queue-metrics"></div>
+        </div>
+        <div id="queueList" class="queue-list"></div>
+      </section>
+
+      <section id="memory" class="dual-grid">
+        <div class="glass-panel">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Memory</p>
+              <h3>Contacts Manager</h3>
+            </div>
+            <input id="memorySearch" class="search-input" type="search" placeholder="Search contacts, companies, roles">
+          </div>
+          <div id="contactsList" class="stack-list"></div>
+        </div>
+
+        <div class="glass-panel">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Audit Trail</p>
+              <h3>Message History</h3>
+            </div>
+          </div>
+          <div id="messagesList" class="stack-list"></div>
+        </div>
+      </section>
+
+      <section id="tasks" class="triple-grid">
+        <div class="glass-panel">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Scheduler</p>
+              <h3>Pending Tasks</h3>
+            </div>
+          </div>
+          <div id="pendingTasks" class="stack-list"></div>
+        </div>
+
+        <div class="glass-panel">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Attention</p>
+              <h3>Overdue Tasks</h3>
+            </div>
+          </div>
+          <div id="overdueTasks" class="stack-list"></div>
+        </div>
+
+        <div class="glass-panel digest-panel">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Digest</p>
+              <h3>Morning Preview</h3>
+            </div>
+            <button id="digestBtn" class="btn btn-secondary">Generate Preview</button>
+          </div>
+          <div id="digestPreview" class="digest-preview">Digest preview will appear here.</div>
+        </div>
+      </section>
+
+      <section id="status" class="dual-grid">
+        <div class="glass-panel">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Systems</p>
+              <h3>Status Indicators</h3>
+            </div>
+          </div>
+          <div id="statusList" class="status-list"></div>
+        </div>
+
+        <div class="glass-panel">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Logs</p>
+              <h3>Recent Activity</h3>
+            </div>
+          </div>
+          <div id="logFeed" class="log-feed"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <template id="emptyStateTemplate">
+    <div class="empty-state">
+      <p>Nothing to show yet.</p>
+    </div>
+  </template>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

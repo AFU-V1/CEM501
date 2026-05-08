@@ -9,9 +9,9 @@ Runs scheduled tasks for the communication agent:
   - Logs all operations
 
 Usage:
-    python scheduler.py              # Run once and check pending tasks
-    python scheduler.py --loop       # Run continuously (check every 60s)
-    python scheduler.py --seed       # Seed database with sample data first
+    py scheduler.py              # Run once and check pending tasks
+    py scheduler.py --loop       # Run continuously (check every 60s)
+    py scheduler.py --seed       # Seed database with sample data first
 """
 
 import argparse

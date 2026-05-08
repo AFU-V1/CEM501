@@ -7,3 +7,4 @@ schedule
 python-dotenv
 rich
 httpx
+Flask

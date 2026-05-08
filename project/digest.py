@@ -8,9 +8,9 @@ groups them by triage category, generates LLM summaries for
 URGENT and ACTION items, and prints a formatted morning digest.
 
 Usage:
-    python digest.py              # Run with hardcoded test emails
-    python digest.py --live       # Run with live inbox data via reader.py
-    python digest.py --format html  # Output as HTML (stretch goal)
+    py digest.py              # Run with hardcoded test emails
+    py digest.py --live       # Run with live inbox data via reader.py
+    py digest.py --format html  # Output as HTML (stretch goal)
 """
 
 import os

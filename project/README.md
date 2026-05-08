@@ -38,7 +38,7 @@ cd CEM501
 ### 2. Create a virtual environment
 
 ```bash
-python -m venv venv
+py -m venv venv
 source venv/bin/activate  # macOS/Linux
 # venv\Scripts\activate   # Windows
 ```
@@ -59,7 +59,7 @@ cp .env.example .env
 ### 5. Verify setup
 
 ```bash
-python -c "import openai; print('Setup OK')"
+py -c "import openai; print('Setup OK')"
 ```
 
 ---
@@ -68,31 +68,34 @@ python -c "import openai; print('Setup OK')"
 
 ```bash
 # Run the email agent (full pipeline with send capability)
-python agent.py
+py agent.py
 
 # Run in dry-run mode (show drafts without sending)
-python agent.py --dry-run
+py agent.py --dry-run
 
 # Show triage summary only (no drafting)
-python agent.py --summary
+py agent.py --summary
 
 # Run the daily digest generator (hardcoded samples)
-python digest.py
+py digest.py
 
 # Run the daily digest with live inbox data
-python digest.py --live
+py digest.py --live
 
 # Run the Telegram bot
-python run_telegram_bot.py
+py run_telegram_bot.py
 
 # Run the scheduler (single check)
-python scheduler.py
+py scheduler.py
 
 # Run the scheduler in continuous mode
-python scheduler.py --loop
+py scheduler.py --loop
 
 # View memory database status
-python -m memory.memory
+py -m memory.memory
+
+# Run the web dashboard
+py -m flask --app dashboard_app run --debug
 ```
 
 ---
@@ -130,6 +133,8 @@ project/
   reader.py             # M2: IMAP email reader + triage engine
   digest.py             # M3: Daily digest generator
   scheduler.py          # M7: Task scheduler with retry logic
+  dashboard_app.py      # Web dashboard entry point
+  dashboard_store.py    # Dashboard state and API helpers
   run_telegram_bot.py   # M6: Telegram bot entry point
   test_bot.py           # Telegram bot echo test
   ARCHITECTURE.md       # M5: System architecture document
@@ -151,6 +156,9 @@ project/
   logs/
     agent.log           # M7: Agent operation log
     sent_log.txt        # M4: Sent email audit trail
+  web/
+    templates/          # Dashboard HTML shell
+    static/             # Dashboard CSS and JS
   tests/
     (test scripts and results)
 ```

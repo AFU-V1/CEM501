@@ -72,7 +72,7 @@ git clone https://github.com/YOUR_USERNAME/CEM501.git
 cd CEM501
 
 # 3. Create a virtual environment
-python -m venv venv
+py -m venv venv
 source venv/bin/activate   # macOS/Linux
 venv\Scripts\activate      # Windows
 

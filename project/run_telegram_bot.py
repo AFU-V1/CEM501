@@ -5,7 +5,7 @@ This is the entry point to start the Telegram channel.
 It loads credentials from .env and starts polling for messages.
 
 Usage:
-    python run_telegram_bot.py
+    py run_telegram_bot.py
 """
 
 from channels.telegram_channel import TelegramChannel
