@@ -134,6 +134,44 @@ def list_contacts() -> list[dict]:
         conn.close()
 
 
+def get_or_create_contact(
+    name: str,
+    email: str = "",
+    phone: str = "",
+    role: str = "",
+    company: str = "",
+    notes: str = "",
+) -> int:
+    """Return an existing contact ID when possible, otherwise create it."""
+    normalized_email = email.strip().lower()
+    normalized_phone = phone.strip()
+    conn = get_connection()
+    try:
+        row = None
+        if normalized_email:
+            row = conn.execute(
+                "SELECT id FROM contacts WHERE LOWER(email) = LOWER(?)",
+                (normalized_email,),
+            ).fetchone()
+        if row is None and normalized_phone:
+            row = conn.execute(
+                "SELECT id FROM contacts WHERE phone = ?",
+                (normalized_phone,),
+            ).fetchone()
+        if row is not None:
+            return int(row["id"])
+
+        cursor = conn.execute(
+            "INSERT INTO contacts (name, email, phone, role, company, notes) "
+            "VALUES (?, ?, ?, ?, ?, ?)",
+            (name, email, phone, role, company, notes),
+        )
+        conn.commit()
+        return cursor.lastrowid
+    finally:
+        conn.close()
+
+
 # ---------------------------------------------------------------------------
 # Message history operations
 # ---------------------------------------------------------------------------
@@ -197,6 +235,35 @@ def get_recent_messages(limit: int = 20) -> list[dict]:
             (limit,),
         ).fetchall()
         return [dict(r) for r in rows]
+    finally:
+        conn.close()
+
+
+def has_logged_message(
+    contact_id: int | None,
+    direction: str,
+    subject: str,
+    body: str,
+    channel: str,
+) -> bool:
+    """Check if an identical message was already logged."""
+    conn = get_connection()
+    try:
+        if contact_id is None:
+            row = conn.execute(
+                "SELECT 1 FROM message_history "
+                "WHERE contact_id IS NULL AND direction = ? AND subject = ? AND body = ? AND channel = ? "
+                "LIMIT 1",
+                (direction, subject, body, channel),
+            ).fetchone()
+        else:
+            row = conn.execute(
+                "SELECT 1 FROM message_history "
+                "WHERE contact_id = ? AND direction = ? AND subject = ? AND body = ? AND channel = ? "
+                "LIMIT 1",
+                (contact_id, direction, subject, body, channel),
+            ).fetchone()
+        return row is not None
     finally:
         conn.close()
 
@@ -290,6 +357,25 @@ def skip_task(task_id: int) -> None:
             (task_id,),
         )
         conn.commit()
+    finally:
+        conn.close()
+
+
+def has_pending_task(description: str, contact_id: int | None = None) -> bool:
+    """Check whether a matching pending task already exists."""
+    conn = get_connection()
+    try:
+        if contact_id is None:
+            row = conn.execute(
+                "SELECT 1 FROM scheduled_tasks WHERE description = ? AND status = 'pending' LIMIT 1",
+                (description,),
+            ).fetchone()
+        else:
+            row = conn.execute(
+                "SELECT 1 FROM scheduled_tasks WHERE description = ? AND contact_id = ? AND status = 'pending' LIMIT 1",
+                (description, contact_id),
+            ).fetchone()
+        return row is not None
     finally:
         conn.close()
 

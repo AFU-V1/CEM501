@@ -1,7 +1,4 @@
-"""
-classifier.py -- Classifier component
-Takes an email and classifies it by urgency using keyword triage.
-"""
+"""Construction message classifier used by every channel."""
 
 CATEGORY_PRIORITY = {
     "URGENT": 0,
@@ -10,69 +7,129 @@ CATEGORY_PRIORITY = {
     "ARCHIVE": 3,
 }
 
-def triage_email(subject: str, sender: str, body: str = "") -> tuple[str, str]:
+MESSAGE_TYPE_KEYWORDS = (
+    (
+        "SAFETY",
+        "URGENT",
+        (
+            "stop work", "lost time incident", "near miss", "first aid case",
+            "safety", "incident", "injury", "unsafe", "hazard", "ppe",
+        ),
+    ),
+    (
+        "DELAY",
+        "URGENT",
+        (
+            "notice of delay", "delay notice", "time extension",
+            "liquidated damages", "critical path", "behind schedule",
+            "extension of time", "slippage",
+        ),
+    ),
+    (
+        "RFI",
+        "ACTION",
+        (
+            "rfi", "request for information", "clarification",
+            "design discrepancy", "detail mismatch",
+        ),
+    ),
+    (
+        "APPROVAL",
+        "ACTION",
+        (
+            "approval", "approve", "approved", "shop drawing",
+            "submittal", "material approval", "sign off", "review and return",
+        ),
+    ),
+    (
+        "SITE_ISSUE",
+        "ACTION",
+        (
+            "site issue", "field condition", "access issue", "utility conflict",
+            "gas main", "water ingress", "congestion", "rework", "damage",
+        ),
+    ),
+    (
+        "PROCUREMENT",
+        "ACTION",
+        (
+            "procurement", "purchase order", "lead time", "vendor",
+            "delivery", "price adjustment", "material shortage",
+            "supplier", "fabrication",
+        ),
+    ),
+    (
+        "REPORT",
+        "FYI",
+        (
+            "daily report", "daily log", "weekly report", "weekly schedule",
+            "progress update", "progress photo", "meeting minutes",
+            "inspection report", "monitoring report", "test results",
+        ),
+    ),
+)
+
+JUNK_KEYWORDS = [
+    "benefits", "offer", "digest", "fw:",
+    "server maintenance", "system maintenance",
+    "occupational health", "health checkup", "job application",
+]
+
+
+def classify_message(subject: str, sender: str, body: str = "") -> dict:
+    """Return both workflow bucket and construction-specific message type."""
     del sender
 
     search_text = f"{subject} {body}".lower()
 
-    # Pass 0: check obvious junk/non-project words immediately
-    junk_keywords = [
-        "benefits", "offer", "digest", "fw:",
-        "server maintenance", "system maintenance",
-        "occupational health", "health checkup", "job application",
-    ]
-    for keyword in junk_keywords:
+    for keyword in JUNK_KEYWORDS:
         if keyword in search_text:
-            return "ARCHIVE", keyword
+            return {
+                "category": "ARCHIVE",
+                "message_type": "GENERAL",
+                "matched_keyword": keyword,
+                "priority": CATEGORY_PRIORITY["ARCHIVE"],
+                "needs_reply": False,
+            }
 
-    # Pass 1: compound (multi-word) keywords checked first for specificity.
-    compound_groups = (
-        ("URGENT", (
-            "stop work", "notice of delay", "time extension",
-            "liquidated damages", "vibration damage",
-        )),
-        ("ACTION", (
-            "change order", "response required", "action required",
-            "meeting request", "shop drawing", "permit renewal",
-            "price adjustment", "renewal required",
-            "certificate of insurance", "installation schedule",
-            "gas main",
-        )),
-        ("FYI", (
-            "meeting minutes", "daily log", "work log", "daily report",
-            "progress photo", "test results", "weekly schedule",
-            "weekly report", "schedule update",
-            "safety inspection", "safety report", "inspection report",
-            "monitoring report", "noise monitoring",
-            "survey completed", "as-built",
-            "no incidents", "no issues",
-        )),
-    )
-
-    for category, keywords in compound_groups:
+    for message_type, workflow_category, keywords in MESSAGE_TYPE_KEYWORDS:
         for keyword in keywords:
             if keyword in search_text:
-                return category, keyword
+                return {
+                    "category": workflow_category,
+                    "message_type": message_type,
+                    "matched_keyword": keyword,
+                    "priority": CATEGORY_PRIORITY[workflow_category],
+                    "needs_reply": workflow_category in {"URGENT", "ACTION"},
+                }
 
-    # Pass 2: single-word keywords for broader matching.
     single_groups = (
-        ("URGENT", (
-            "urgent", "safety", "incident", "notice", "claim", "immediate",
-            "complaint", "damage",
-        )),
-        ("ACTION", (
-            "rfi", "submittal", "review", "approval", "deadline",
-            "coordination", "permit", "insurance", "renewal",
-        )),
-        ("FYI", (
-            "update", "recap", "photos", "minutes", "progress", "log", "fyi",
-            "monitoring", "completed",
-        )),
+        ("URGENT", "SAFETY", ("urgent", "immediate", "claim", "complaint")),
+        ("ACTION", "GENERAL", ("review", "deadline", "coordination", "permit")),
+        ("FYI", "REPORT", ("update", "recap", "photos", "minutes", "progress", "log", "fyi")),
     )
 
-    for category, keywords in single_groups:
+    for workflow_category, message_type, keywords in single_groups:
         for keyword in keywords:
             if keyword in search_text:
-                return category, keyword
+                return {
+                    "category": workflow_category,
+                    "message_type": message_type,
+                    "matched_keyword": keyword,
+                    "priority": CATEGORY_PRIORITY[workflow_category],
+                    "needs_reply": workflow_category in {"URGENT", "ACTION"},
+                }
 
-    return "ARCHIVE", "default"
+    return {
+        "category": "ARCHIVE",
+        "message_type": "GENERAL",
+        "matched_keyword": "default",
+        "priority": CATEGORY_PRIORITY["ARCHIVE"],
+        "needs_reply": False,
+    }
+
+
+def triage_email(subject: str, sender: str, body: str = "") -> tuple[str, str]:
+    """Backward-compatible wrapper for earlier milestone code."""
+    result = classify_message(subject, sender, body)
+    return result["category"], result["matched_keyword"]

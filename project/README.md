@@ -1,166 +1,124 @@
 # CEM501 Construction Communication Agent
 
-**CEM501 Communication Skills for CEM -- Spring 2026**
-**Bogazici University | Dr. Eyuphan Koc**
+This project is a course-appropriate communication agent for construction project management. It is not only a generic chatbot: it reads project communications, classifies them into construction-relevant categories, drafts professional responses, logs the communication history, stores contacts and follow-up tasks in SQLite, and supports both Email and Telegram as channels.
 
----
+## What the app does
 
-## Student Information
+- Reads incoming email messages from IMAP.
+- Classifies messages into workflow buckets: `URGENT`, `ACTION`, `FYI`, `ARCHIVE`.
+- Adds construction-specific types: `RFI`, `DELAY`, `APPROVAL`, `SITE_ISSUE`, `SAFETY`, `PROCUREMENT`, `REPORT`.
+- Drafts a response with OpenAI and uses simple fallbacks if the API is unavailable.
+- Logs incoming and outgoing messages to SQLite.
+- Stores contacts and message history in `memory.db`.
+- Creates follow-up tasks for items that usually require tracking.
+- Supports a Telegram bot for live message classification and drafting.
+- Provides daily and weekly summary output through the scheduler.
+- Includes a demo channel with realistic Week 14 scenarios so the final presentation can run reliably.
 
-- **Name:** Furkan
-- **Email:** furkan.cem501@gmail.com
+## Architecture summary
 
----
+Main modules:
 
-## Description
+- `agent.py`: main orchestrator for the email pipeline.
+- `pipeline.py`: shared receive -> classify -> draft -> save workflow.
+- `channels/base.py`: adapter interface.
+- `channels/email_channel.py`: email adapter.
+- `channels/demo_channel.py`: reliable demo adapter with realistic scenarios.
+- `channels/telegram_channel.py`: Telegram adapter.
+- `classifier.py`: workflow and construction-type classification.
+- `drafter.py`: response drafting.
+- `memory.py`: SQLite contacts, messages, and tasks.
+- `scheduler.py`: reminders and summaries.
 
-An AI-powered communication agent for construction project managers that automates email triage, drafts professional replies, and sends them with human-in-the-loop safety guardrails. The agent reads incoming project emails via IMAP, classifies them by urgency (URGENT/ACTION/FYI/ARCHIVE) using a multi-pass keyword engine, generates context-aware draft responses using OpenAI (gpt-4o-mini), and supports multi-channel communication through both Email and Telegram. Built with a modular architecture that enables independent testing and incremental improvement.
+This is the intended architecture for the presentation:
 
----
+1. Channel receives message.
+2. Shared pipeline classifies it.
+3. Memory stores the incoming message and loads recent history.
+4. Drafter produces a reply draft.
+5. Channel sends or displays the draft.
+6. Memory stores the outgoing message and any reminder task.
 
-## Architecture Overview
+## Setup
 
-See [ARCHITECTURE.md](ARCHITECTURE.md) for the full system architecture, component descriptions, data flow diagram, and design decisions.
-
-**High-level summary:** A modular pipeline that reads incoming emails via IMAP, classifies them by urgency using keyword-based triage, drafts context-aware responses via OpenAI LLM, and sends them after explicit user approval -- with persistent SQLite memory for contacts and message history.
-
----
-
-## Setup Instructions
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/AFU-V1/CEM501.git
-cd CEM501
-```
-
-### 2. Create a virtual environment
-
-```bash
-python -m venv venv
-source venv/bin/activate  # macOS/Linux
-# venv\Scripts\activate   # Windows
-```
-
-### 3. Install dependencies
+1. Create a virtual environment.
+2. Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Configure environment variables
+3. Copy the environment template and fill it in:
 
 ```bash
-cp .env.example .env
-# Edit .env with your actual API keys and credentials
+copy .env.example .env
 ```
 
-### 5. Verify setup
+Required variables:
+
+- `OPENAI_API_KEY`
+- `EMAIL_ADDRESS`
+- `EMAIL_PASSWORD`
+- `IMAP_SERVER`
+- `SMTP_SERVER`
+- `SMTP_PORT`
+- `TELEGRAM_BOT_TOKEN` for Telegram demo
+
+## Run
+
+Recommended Week 14 demo pipeline:
 
 ```bash
-python -c "import openai; print('Setup OK')"
-```
-
----
-
-## How to Run
-
-```bash
-# Run the email agent (full pipeline with send capability)
 python agent.py
-
-# Run in dry-run mode (show drafts without sending)
-python agent.py --dry-run
-
-# Show triage summary only (no drafting)
-python agent.py --summary
-
-# Run the daily digest generator (hardcoded samples)
-python digest.py
-
-# Run the daily digest with live inbox data
-python digest.py --live
-
-# Run the Telegram bot
-python run_telegram_bot.py
-
-# Run the scheduler (single check)
 python scheduler.py
+```
 
-# Run the scheduler in continuous mode
+Email pipeline:
+
+```bash
+python agent.py --summary
+python agent.py --channel email --dry-run
+python agent.py
+```
+
+Telegram bot:
+
+```bash
+python run_telegram_bot.py
+```
+
+Scheduler:
+
+```bash
+python scheduler.py
 python scheduler.py --loop
-
-# View memory database status
-python -m memory.memory
 ```
 
----
+## Recommended demo
 
-## Milestones Completed
+Use `--dry-run` for the presentation unless you want to send real mail.
 
-- [x] **M0:** Environment setup and API key configuration
-- [x] **M1:** Prompt template library (`templates/` -- RFI, daily report, delay notice)
-- [x] **M2:** Email reader and triage module (`reader.py` -- IMAP + keyword classification)
-- [x] **M3:** Daily digest generator (`digest.py` -- OpenAI summarization + HTML output)
-- [x] **M4:** Email agent v1 (`agent.py` -- read + triage + draft + send with 4 guardrails)
-- [x] **M5:** Architecture documentation (`ARCHITECTURE.md` -- components, data flow, 4 ADRs)
-- [x] **M6:** Multi-channel integration (`channels/` -- Email + Telegram with shared triage)
-- [x] **M7:** Persistent memory + scheduling (`memory/` + `scheduler.py` + `agent.log`)
-- [ ] **M8:** Progress presentation
-- [ ] **M9:** Final demo + reflection document
+Suggested flow:
 
----
+1. Run `python agent.py` to show 3 realistic construction scenarios from the demo channel.
+2. Show one RFI, one delay notice, and one safety escalation.
+3. Point out the workflow class and construction-specific type.
+4. Show the drafted reply.
+5. Explain that the message and contact are stored in SQLite and that a follow-up task is added automatically.
+6. Run `python scheduler.py` to show the reminder and weekly summary output.
+7. Optionally switch to `python agent.py --channel email --dry-run` or `python run_telegram_bot.py` as the extra-channel proof.
 
-## AI Tools Used
+Alternative live-email flow:
 
-| Tool / Model | How It Was Used |
-|--------------|-----------------|
-| OpenAI (gpt-4o-mini) | Email draft generation, daily digest summarization, Telegram response drafting |
-| Gemini CLI / Antigravity | Building and debugging the agent pipeline, generating architecture documentation |
-| Cursor | Primary IDE for development and code review |
+1. Show an incoming RFI or delay email in the inbox.
+2. Run `python agent.py --channel email --dry-run`.
+3. Show the classification table with the construction type.
+4. Show the drafted reply.
+5. Run `python scheduler.py`.
 
----
+## Notes
 
-## Project Structure
-
-```
-project/
-  agent.py              # M4: Email agent v1 (main pipeline)
-  reader.py             # M2: IMAP email reader + triage engine
-  digest.py             # M3: Daily digest generator
-  scheduler.py          # M7: Task scheduler with retry logic
-  run_telegram_bot.py   # M6: Telegram bot entry point
-  test_bot.py           # Telegram bot echo test
-  ARCHITECTURE.md       # M5: System architecture document
-  README.md             # This file
-  .env                  # API keys and credentials (not committed)
-  .env.example          # Template for .env
-  requirements.txt      # Python dependencies
-  channels/
-    base.py             # M6: Channel base class (interface)
-    email_channel.py    # M6: Email channel implementation
-    telegram_channel.py # M6: Telegram channel implementation
-  memory/
-    memory.py           # M7: SQLite persistence module
-    memory.db           # M7: Agent database (auto-generated)
-  templates/
-    rfi_drafter.md      # M1: RFI prompt template
-    daily_report.md     # M1: Daily report prompt template
-    delaynotice_report.md # M1: Delay notice prompt template
-  logs/
-    agent.log           # M7: Agent operation log
-    sent_log.txt        # M4: Sent email audit trail
-  tests/
-    (test scripts and results)
-```
-
----
-
-## Reflection
-
-See [REFLECTION.md](REFLECTION.md) for the full project reflection, including lessons learned, challenges encountered, and thoughts on AI-assisted development.
-
----
-
-*CEM501 - Spring 2026 - Dr. Eyuphan Koc - Bogazici University*
+- The default Week 14 demo path is the built-in demo channel.
+- The email channel is the main real-world operational path.
+- Telegram is implemented as an event-driven adapter that reuses the same classification, drafting, and memory pipeline.
+- `.env` is ignored by Git. Do not commit real credentials.

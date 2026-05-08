@@ -189,6 +189,28 @@ def generate_morning_summary() -> None:
     logger.info("Morning summary complete.")
 
 
+def generate_weekly_summary() -> None:
+    """Print a simple weekly communication summary for demo use."""
+    logger.info("Generating weekly summary...")
+    messages = get_recent_messages(limit=20)
+    pending = get_pending_tasks()
+    overdue = get_overdue_tasks()
+
+    print("\n" + "=" * 50)
+    print("  WEEKLY COMMUNICATION SUMMARY")
+    print("=" * 50)
+    print(f"  Messages reviewed: {len(messages)}")
+    print(f"  Pending follow-ups: {len(pending)}")
+    print(f"  Overdue follow-ups: {len(overdue)}")
+
+    for message in messages[:10]:
+        direction = "OUT" if message["direction"] == "sent" else "IN"
+        print(f"  {direction} | {message['channel']} | {message['subject']}")
+
+    print("=" * 50)
+    logger.info("Weekly summary complete.")
+
+
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
@@ -227,6 +249,7 @@ def main() -> int:
         # Set up scheduled jobs
         schedule_lib.every(60).seconds.do(check_overdue_tasks)
         schedule_lib.every().day.at("08:00").do(generate_morning_summary)
+        schedule_lib.every().monday.at("08:30").do(generate_weekly_summary)
 
         logger.info("Scheduler started in loop mode.")
 
@@ -247,6 +270,8 @@ def main() -> int:
 
         # Run all checks once
         generate_morning_summary()
+        print()
+        generate_weekly_summary()
         print()
         check_overdue_tasks()
         print()

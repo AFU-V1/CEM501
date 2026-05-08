@@ -1,0 +1,28 @@
+{
+  "scenarios": [
+    {
+      "name": "RFI coordination",
+      "sender": "Mehmet Arslan <mehmet@archdesign.com>",
+      "sender_email": "mehmet@archdesign.com",
+      "subject": "RFI-042 Beam connection detail at Grid B4",
+      "body": "Please confirm whether Detail 5 on S-204 or Spec 05 12 00 governs the beam connection at Grid B4. Fabrication needs a response by tomorrow to avoid delay.",
+      "notes": "Shows RFI classification, drafting, and follow-up task creation."
+    },
+    {
+      "name": "Delay notice",
+      "sender": "Hasan Yilmaz <hasan@betonplus.com.tr>",
+      "sender_email": "hasan@betonplus.com.tr",
+      "subject": "Notice of delay for raft foundation concrete pour",
+      "body": "Due to unplanned plant maintenance, tomorrow's C35/45 concrete delivery will slip by 24 hours. Please advise whether the pour sequence should be rescheduled.",
+      "notes": "Shows urgent delay handling and construction-specific response tone."
+    },
+    {
+      "name": "Safety escalation",
+      "sender": "Zeynep Kara <zeynep@meridianbuilders.com>",
+      "sender_email": "zeynep@meridianbuilders.com",
+      "subject": "Stop work at Grid C7 due to exposed utility line",
+      "body": "A crew exposed an unidentified live utility line near Grid C7 during trenching. Stop work has been issued within the area until the line is isolated and cleared.",
+      "notes": "Shows urgent safety scenario and escalated acknowledgement."
+    }
+  ]
+}
