@@ -37,7 +37,7 @@ This system is a personal AI communication agent designed for construction proje
                 └──────────────────────────────────┘
 ```
 
-**Data flow:** Scheduler wakes Reader on a timer. Reader connects to IMAP, fetches unread emails. Classifier (embedded in Reader via `triage_email()`) labels each email as URGENT, ACTION, FYI, or ARCHIVE. Drafter generates a reply using OpenAI, pulling context from Memory. Sender delivers the approved draft via SMTP. Memory logs every interaction for future reference.
+**Data flow:** Scheduler wakes Reader on a timer. Reader connects to IMAP, fetches unread emails. Classifier (in `classifier.py` via `triage_email()`) labels each email as URGENT, ACTION, FYI, or ARCHIVE. Drafter generates a reply using OpenAI, pulling context from Memory. Sender delivers the approved draft via SMTP. Memory logs every interaction for future reference.
 
 ---
 
