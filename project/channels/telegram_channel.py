@@ -26,7 +26,7 @@ from channels.base import Channel
 
 # Import triage from reader.py
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-from reader import triage_email
+from classifier import triage_email
 
 # Import OpenAI for drafting responses
 from openai import OpenAI

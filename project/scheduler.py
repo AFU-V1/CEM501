@@ -27,7 +27,7 @@ import schedule as schedule_lib
 # Add project root to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from memory.memory import (
+from memory import (
     seed_database,
     get_pending_tasks,
     get_overdue_tasks,

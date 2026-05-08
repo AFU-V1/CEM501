@@ -21,15 +21,8 @@ from channels.base import Channel
 
 # Import helpers from reader.py (same project directory)
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-from reader import (
-    triage_email,
-    require_env,
-    decode_mime_header,
-    extract_body_preview,
-    DEFAULT_IMAP_SERVER,
-    MAILBOX,
-    FETCH_COUNT,
-)
+from reader import require_env, fetch_emails
+from classifier import triage_email
 
 
 class EmailChannel(Channel):
@@ -64,50 +57,16 @@ class EmailChannel(Channel):
         messages = []
 
         try:
-            with imaplib.IMAP4_SSL(self._imap_server) as mail:
-                mail.login(self._address, self._password)
-                status, _ = mail.select(MAILBOX)
-                if status != "OK":
-                    print(f"[email] Could not open mailbox: {MAILBOX}", file=sys.stderr)
-                    return messages
-
-                status, data = mail.search(None, "ALL")
-                if status != "OK":
-                    print("[email] Could not fetch message IDs.", file=sys.stderr)
-                    return messages
-
-                message_ids = data[0].split()
-                recent_ids = message_ids[-FETCH_COUNT:][::-1]
-
-                for msg_id in recent_ids:
-                    status, msg_data = mail.fetch(msg_id, "(RFC822)")
-                    if status != "OK":
-                        continue
-
-                    raw_message = None
-                    for response_part in msg_data:
-                        if isinstance(response_part, tuple):
-                            raw_message = response_part[1]
-                            break
-                    if not raw_message:
-                        continue
-
-                    message = email.message_from_bytes(raw_message)
-                    sender = decode_mime_header(message.get("From"))
-                    subject = decode_mime_header(message.get("Subject"))
-                    body = extract_body_preview(message, limit=500)
-                    category, _ = triage_email(subject, sender, body)
-
-                    messages.append({
-                        "sender": sender,
-                        "subject": subject,
-                        "text": body,
-                        "channel": self.channel_name,
-                        "triage_category": category,
-                    })
-
-        except imaplib.IMAP4.error as exc:
-            print(f"[email] IMAP error: {exc}", file=sys.stderr)
+            raw_emails = fetch_emails()
+            for em in raw_emails:
+                category, _ = triage_email(em["subject"], em["sender"], em["body"])
+                messages.append({
+                    "sender": em["sender"],
+                    "subject": em["subject"],
+                    "text": em["body"],
+                    "channel": self.channel_name,
+                    "triage_category": category,
+                })
         except Exception as exc:
             print(f"[email] Error fetching emails: {exc}", file=sys.stderr)
 

@@ -324,59 +324,22 @@ def fetch_live_emails() -> list[dict]:
     Connects to the user's inbox via IMAP (reusing reader.py's logic)
     and returns a list of email dicts with triage categories assigned.
     """
-    # Import triage logic from reader.py (same project directory)
+    # Import logic from components
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    from reader import (
-        triage_email, require_env, decode_mime_header,
-        extract_body_preview, DEFAULT_IMAP_SERVER, MAILBOX, FETCH_COUNT
-    )
-    from dotenv import load_dotenv
-    load_dotenv()
-
-    email_address = require_env("EMAIL_ADDRESS")
-    email_password = require_env("EMAIL_PASSWORD")
-    imap_server = os.getenv("IMAP_SERVER", DEFAULT_IMAP_SERVER).strip() or DEFAULT_IMAP_SERVER
+    from reader import fetch_emails
+    from classifier import triage_email
 
     emails = []
+    raw_emails = fetch_emails()
 
-    with imaplib.IMAP4_SSL(imap_server) as mail:
-        mail.login(email_address, email_password)
-        status, _ = mail.select(MAILBOX)
-        if status != "OK":
-            raise RuntimeError(f"Could not open mailbox: {MAILBOX}")
-
-        status, data = mail.search(None, "ALL")
-        if status != "OK":
-            raise RuntimeError("Could not fetch message ids")
-
-        message_ids = data[0].split()
-        recent_ids = message_ids[-FETCH_COUNT:][::-1]
-
-        for msg_id in recent_ids:
-            status, msg_data = mail.fetch(msg_id, "(RFC822)")
-            if status != "OK":
-                continue
-
-            raw_message = None
-            for response_part in msg_data:
-                if isinstance(response_part, tuple):
-                    raw_message = response_part[1]
-                    break
-            if not raw_message:
-                continue
-
-            message = email.message_from_bytes(raw_message)
-            sender = decode_mime_header(message.get("From"))
-            subject = decode_mime_header(message.get("Subject"))
-            body = extract_body_preview(message, limit=500)
-            category, _ = triage_email(subject, sender, body)
-
-            emails.append({
-                "subject": subject,
-                "sender": sender,
-                "body": body,
-                "triage_category": category,
-            })
+    for em in raw_emails:
+        category, _ = triage_email(em["subject"], em["sender"], em["body"])
+        emails.append({
+            "subject": em["subject"],
+            "sender": em["sender"],
+            "body": em["body"],
+            "triage_category": category,
+        })
 
     return emails
 
