@@ -29,8 +29,8 @@ This system is a personal AI communication agent designed for construction proje
                                        v
 +----------+        +-----------+        +---------+
 |  Memory  |<------>|  Drafter  |------->| Sender  |
-| memory/  | context| (OpenAI    | (draft)| (SMTP)  |
-| memory.db| + logs |  LLM)     |        +----+----+
+| memory.py| context| drafter.py| (draft)|sender.py|
+| memory.db| + logs | (OpenAI)  |        +----+----+
 +----------+        +-----------+             |
                                               v
 +-------------------+                  +----------+
@@ -57,28 +57,28 @@ This system is a personal AI communication agent designed for construction proje
 - **Responsibility:** Applies a multi-pass keyword matching algorithm to categorize emails into URGENT, ACTION, FYI, or ARCHIVE.
 - **Input:** Email subject, sender, and body text
 - **Output:** Tuple of (category, matched_keyword)
-- **File:** `reader.py` (function: `triage_email()`)
+- **File:** `classifier.py` (function: `triage_email()`)
 - **Key dependencies:** None (pure Python logic)
 
 ### Drafter
 - **Responsibility:** Takes a classified email and generates a professional reply using OpenAI (gpt-4o-mini). Falls back to template-based responses if the LLM is unavailable.
 - **Input:** Email data dict with category, subject, sender, body
 - **Output:** Draft reply text (string)
-- **File:** `agent.py` (function: `draft_reply()`), also used in `channels/telegram_channel.py`
+- **File:** `drafter.py` (function: `draft_reply()`)
 - **Key dependencies:** `openai` (OpenAI API)
 
 ### Sender
 - **Responsibility:** Sends approved drafts via SMTP with TLS. Implements four safety guardrails: confirmation prompt, recipient validation, content check, and rate limiting.
 - **Input:** Recipient address, subject, body, dry-run flag
 - **Output:** Boolean (sent or skipped)
-- **File:** `agent.py` (functions: `send_email()`, `_do_send()`)
+- **File:** `sender.py` (functions: `send_email()`, `_do_send()`)
 - **Key dependencies:** `smtplib` (standard library)
 
 ### Memory
 - **Responsibility:** Stores contacts, message history, and scheduled tasks in a SQLite database. Provides context for future interactions and an audit trail of all communications.
 - **Input:** Contact data, message data, task data
 - **Output:** Query results (contacts, messages, tasks)
-- **File:** `memory/memory.py`
+- **File:** `memory.py`
 - **Key dependencies:** `sqlite3` (standard library)
 
 ### Scheduler
