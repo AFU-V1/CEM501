@@ -20,7 +20,8 @@ import imaplib
 from datetime import datetime
 from email.header import decode_header
 
-from google import genai
+import os
+from openai import OpenAI
 
 
 # ---------------------------------------------------------------------------
@@ -155,22 +156,22 @@ def group_by_category(emails: list[dict]) -> dict[str, list[dict]]:
 
 def summarize_email(body: str) -> str:
     """
-    Uses the Gemini API to generate a one-sentence summary of an email body.
+    Uses the OpenAI API to generate a one-sentence summary of an email body.
     Only called for URGENT and ACTION emails to keep API usage minimal.
     Falls back to a truncated body if the API call fails.
     """
     try:
-        client = genai.Client()
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=(
+        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": (
                 "Summarize the following construction project email in exactly "
                 "one concise sentence. Focus on the key action item or issue. "
                 "Do not add any information not present in the email.\n\n"
                 f"{body}"
-            ),
+            )}],
         )
-        return response.text.strip()
+        return response.choices[0].message.content.strip()
     except Exception as e:
         # Graceful fallback: return truncated body if LLM is unavailable
         print(f"    [!] LLM summary failed ({e}), using truncated body.", file=sys.stderr)

@@ -7,7 +7,7 @@
 
 ## System Overview
 
-This system is a personal AI communication agent designed for construction project managers. It reads incoming emails via IMAP, classifies them by urgency using a keyword-based triage engine, drafts professional replies using Google's Gemini LLM, and sends approved drafts via SMTP -- all with mandatory human-in-the-loop confirmation. The agent also integrates with Telegram for real-time messaging and uses SQLite for persistent memory across sessions. The design philosophy is **modular and incremental**: each component does one job, can be tested independently, and was built in the order prescribed by the course milestones (M0-M9).
+This system is a personal AI communication agent designed for construction project managers. It reads incoming emails via IMAP, classifies them by urgency using a keyword-based triage engine, drafts professional replies using OpenAI LLMs, and sends approved drafts via SMTP -- all with mandatory human-in-the-loop confirmation. The agent also integrates with Telegram for real-time messaging and uses SQLite for persistent memory across sessions. The design philosophy is **modular and incremental**: each component does one job, can be tested independently, and was built in the order prescribed by the course milestones (M0-M9).
 
 ### Architecture Diagram
 
@@ -29,7 +29,7 @@ This system is a personal AI communication agent designed for construction proje
                                        v
 +----------+        +-----------+        +---------+
 |  Memory  |<------>|  Drafter  |------->| Sender  |
-| memory/  | context| (Gemini   | (draft)| (SMTP)  |
+| memory/  | context| (OpenAI    | (draft)| (SMTP)  |
 | memory.db| + logs |  LLM)     |        +----+----+
 +----------+        +-----------+             |
                                               v
@@ -40,7 +40,7 @@ This system is a personal AI communication agent designed for construction proje
 +-------------------+
 ```
 
-**Data flow:** Scheduler wakes Reader on a timer. Reader connects to IMAP, fetches unread emails. Classifier (embedded in Reader via `triage_email()`) labels each email as URGENT, ACTION, FYI, or ARCHIVE. Drafter generates a reply using Gemini, pulling context from Memory. Sender delivers the approved draft via SMTP. Memory logs every interaction for future reference.
+**Data flow:** Scheduler wakes Reader on a timer. Reader connects to IMAP, fetches unread emails. Classifier (embedded in Reader via `triage_email()`) labels each email as URGENT, ACTION, FYI, or ARCHIVE. Drafter generates a reply using OpenAI, pulling context from Memory. Sender delivers the approved draft via SMTP. Memory logs every interaction for future reference.
 
 ---
 
@@ -61,11 +61,11 @@ This system is a personal AI communication agent designed for construction proje
 - **Key dependencies:** None (pure Python logic)
 
 ### Drafter
-- **Responsibility:** Takes a classified email and generates a professional reply using Google Gemini 2.5 Flash. Falls back to template-based responses if the LLM is unavailable.
+- **Responsibility:** Takes a classified email and generates a professional reply using OpenAI (gpt-4o-mini). Falls back to template-based responses if the LLM is unavailable.
 - **Input:** Email data dict with category, subject, sender, body
 - **Output:** Draft reply text (string)
 - **File:** `agent.py` (function: `draft_reply()`), also used in `channels/telegram_channel.py`
-- **Key dependencies:** `google-genai` (Gemini API)
+- **Key dependencies:** `openai` (OpenAI API)
 
 ### Sender
 - **Responsibility:** Sends approved drafts via SMTP with TLS. Implements four safety guardrails: confirmation prompt, recipient validation, content check, and rate limiting.
@@ -89,7 +89,7 @@ This system is a personal AI communication agent designed for construction proje
 - **Key dependencies:** `schedule` library
 
 ### Telegram Channel
-- **Responsibility:** Receives messages via the Telegram Bot API, classifies them using the triage engine, drafts responses via Gemini, and replies in real-time.
+- **Responsibility:** Receives messages via the Telegram Bot API, classifies them using the triage engine, drafts responses via OpenAI, and replies in real-time.
 - **Input:** Telegram messages (Bot API polling)
 - **Output:** Telegram replies with classification + drafted response
 - **File:** `channels/telegram_channel.py`
@@ -106,7 +106,7 @@ This system is a personal AI communication agent designed for construction proje
 - **Input:** List of email dicts (live or hardcoded samples)
 - **Output:** Formatted text or HTML digest
 - **File:** `digest.py`
-- **Key dependencies:** `google-genai` (Gemini API)
+- **Key dependencies:** `openai` (OpenAI API)
 
 ---
 
@@ -116,7 +116,7 @@ This system is a personal AI communication agent designed for construction proje
 2. **Reader** connects to the IMAP server, fetches the 20 most recent emails, and parses headers + body.
 3. **Classifier** (`triage_email()`) runs a three-pass keyword analysis on each email to assign a category: URGENT, ACTION, FYI, or ARCHIVE.
 4. **Agent** filters for actionable emails (URGENT + ACTION) and passes each to the Drafter.
-5. **Drafter** calls Gemini 2.5 Flash with a structured prompt to generate a professional reply. On failure, it falls back to pre-written templates.
+5. **Drafter** calls OpenAI (gpt-4o-mini) with a structured prompt to generate a professional reply. On failure, it falls back to pre-written templates.
 6. **Sender** displays the draft for human review with all warnings, then sends via SMTP after explicit `y` confirmation.
 7. **Memory** logs the sent message for future reference.
 8. **Telegram Channel** runs a parallel pipeline: incoming messages are classified and replied to in real-time.
@@ -129,7 +129,7 @@ This system is a personal AI communication agent designed for construction proje
 
 **Decision:** Use a multi-pass keyword matching algorithm for email classification instead of calling the LLM for every email.
 
-**Context:** Calling the Gemini API for each of the 20 fetched emails would be slow (3-5 seconds per call) and consume API quota. The keyword approach processes all 20 emails in under 1 second with zero API cost. Construction project emails follow predictable patterns: "stop work", "RFI", "submittal", "meeting minutes" are reliable signals. The three-pass design (junk words first, compound keywords second, single keywords third) handles edge cases like "meeting minutes" not falsely matching the single keyword "review".
+**Context:** Calling the OpenAI API for each of the 20 fetched emails would be slow (3-5 seconds per call) and consume API quota. The keyword approach processes all 20 emails in under 1 second with zero API cost. Construction project emails follow predictable patterns: "stop work", "RFI", "submittal", "meeting minutes" are reliable signals. The three-pass design (junk words first, compound keywords second, single keywords third) handles edge cases like "meeting minutes" not falsely matching the single keyword "review".
 
 **Consequences:** Classification is fast, free, and deterministic. However, it may miss novel email types that do not contain expected keywords. Future improvement: use LLM classification as a fallback for emails that fall to the default "ARCHIVE" category.
 
@@ -141,13 +141,13 @@ This system is a personal AI communication agent designed for construction proje
 
 **Consequences:** The agent cannot run fully autonomously -- it always requires a human at the keyboard for sends. This is slower but prevents costly mistakes. The `--dry-run` mode allows the full pipeline to run unattended for testing and digest generation.
 
-### ADR 3: Google Gemini 2.5 Flash as the LLM Provider
+### ADR 3: OpenAI (gpt-4o-mini) as the LLM Provider
 
-**Decision:** Use Google Gemini 2.5 Flash for all LLM tasks (drafting, summarization) instead of Anthropic Claude or OpenAI GPT.
+**Decision:** Use OpenAI (gpt-4o-mini) for all LLM tasks (drafting, summarization) instead of Google Gemini or Anthropic Claude.
 
-**Context:** The project originally planned to use Anthropic's Claude API. During development, the Gemini API proved more accessible with the available API key and offered competitive quality for email drafting tasks. Gemini 2.5 Flash is optimized for speed, which matters when generating 11 drafts in sequence.
+**Context:** The project originally planned to use Anthropic's Claude API. During development, the OpenAI API proved more accessible and offered high quality for email drafting tasks. The `gpt-4o-mini` model is optimized for speed and cost, which matters when generating many drafts.
 
-**Consequences:** Single provider dependency. If Gemini is unavailable, the agent falls back to pre-written templates. All LLM calls are wrapped in try/except with fallback behavior. Switching providers would require changing only the `draft_reply()` and `summarize_email()` functions.
+**Consequences:** Single provider dependency. If OpenAI is unavailable, the agent falls back to pre-written templates. All LLM calls are wrapped in try/except with fallback behavior. Switching providers would require changing only the `draft_reply()` and `summarize_email()` functions.
 
 ### ADR 4: SQLite for Persistent Memory
 
@@ -183,7 +183,7 @@ All secrets are stored in `.env` (never committed). See `.env.example` for requi
 | `IMAP_SERVER` | Incoming mail server (default: imap.gmail.com) |
 | `SMTP_SERVER` | Outgoing mail server (default: smtp.gmail.com) |
 | `SMTP_PORT` | SMTP port (default: 587 for TLS) |
-| `GEMINI_API_KEY` | Google Gemini API access |
+| `OPENAI_API_KEY` | OpenAI API access |
 | `TELEGRAM_BOT_TOKEN` | Telegram bot for messaging channel |
 
 ---
@@ -191,7 +191,7 @@ All secrets are stored in `.env` (never committed). See `.env.example` for requi
 ## Future Extensions
 
 - [ ] **Attachment handling:** Parse PDF attachments (RFI responses, submittals) and include content in classification context
-- [ ] **LLM classification fallback:** For emails that default to ARCHIVE, run a second pass with Gemini to catch novel email types
+- [ ] **LLM classification fallback:** For emails that default to ARCHIVE, run a second pass with OpenAI to catch novel email types
 - [ ] **Web dashboard:** Build a simple Flask/Streamlit UI for reviewing drafts, managing contacts, and viewing message history
 - [ ] **Multi-language support:** Add Turkish language handling for cross-cultural project communication on Istanbul-based projects
 

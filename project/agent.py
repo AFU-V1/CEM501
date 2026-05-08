@@ -6,7 +6,7 @@ Bogazici University -- Spring 2026
 A complete email-agent pipeline that:
   1. Reads the inbox via IMAP (reuses reader.py)
   2. Triages each email into URGENT / ACTION / FYI / ARCHIVE
-  3. Drafts professional replies for URGENT and ACTION emails (Gemini)
+  3. Drafts professional replies for URGENT and ACTION emails (OpenAI)
   4. Sends approved drafts via SMTP -- with human-in-the-loop confirmation
 
 Usage:
@@ -29,7 +29,7 @@ from email.header import decode_header
 from email.mime.text import MIMEText
 
 from dotenv import load_dotenv
-from google import genai
+from openai import OpenAI
 
 # ---------------------------------------------------------------------------
 # Import triage helpers from reader.py (same project directory)
@@ -248,7 +248,7 @@ def fetch_emails() -> list[dict]:
 
 def draft_reply(email_data: dict) -> str:
     """
-    DECIDE phase -- use Gemini to generate a professional draft reply.
+    DECIDE phase -- use OpenAI to generate a professional draft reply.
     """
     category = email_data["category"]
     subject = email_data["subject"]
@@ -275,12 +275,12 @@ def draft_reply(email_data: dict) -> str:
     )
 
     try:
-        client = genai.Client()
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt,
+        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}],
         )
-        draft = response.text.strip()
+        draft = response.choices[0].message.content.strip()
         logger.info("Draft generated for: %s", subject[:60])
         return draft
     except Exception as exc:

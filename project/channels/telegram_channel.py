@@ -2,7 +2,7 @@
 telegram_channel.py — Telegram channel implementation.
 
 Connects the Telegram Bot API to the agent pipeline:
-    receive message → classify (reader.py) → draft response (Gemini) → reply
+    receive message → classify (reader.py) → draft response (OpenAI) → reply
 
 Uses python-telegram-bot library in polling mode (no server needed).
 
@@ -28,8 +28,8 @@ from channels.base import Channel
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from reader import triage_email
 
-# Import Gemini for drafting responses
-from google import genai
+# Import OpenAI for drafting responses
+from openai import OpenAI
 
 
 class TelegramChannel(Channel):
@@ -169,7 +169,7 @@ class TelegramChannel(Channel):
             body=incoming_text,
         )
 
-        # Step 2: Draft a response using Gemini
+        # Step 2: Draft a response using OpenAI
         draft = self._draft_response(incoming_text, category)
 
         # Step 3: Reply with classification + draft
@@ -188,7 +188,7 @@ class TelegramChannel(Channel):
 
     def _draft_response(self, message_text: str, category: str) -> str:
         """
-        Use Gemini to draft a professional construction response.
+        Use OpenAI to draft a professional construction response.
 
         Args:
             message_text: The original message from the user.
@@ -198,7 +198,7 @@ class TelegramChannel(Channel):
             A drafted response string.
         """
         try:
-            client = genai.Client()
+            client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
             prompt = (
                 f"You are a construction project manager's AI assistant. "
@@ -209,14 +209,14 @@ class TelegramChannel(Channel):
                 f"Be direct and action-oriented."
             )
 
-            response = client.models.generate_content(
-                model="gemini-2.5-flash",
-                contents=prompt,
+            response = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}],
             )
-            return response.text.strip()
+            return response.choices[0].message.content.strip()
 
         except Exception as e:
-            print(f"[telegram] Gemini draft failed: {e}", file=sys.stderr)
+            print(f"[telegram] OpenAI draft failed: {e}", file=sys.stderr)
             # Fallback: simple acknowledgment based on category
             fallbacks = {
                 "URGENT": "⚠️ This has been flagged as urgent. Escalating to the project team immediately.",
