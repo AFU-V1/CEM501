@@ -12,32 +12,29 @@ This system is a personal AI communication agent designed for construction proje
 ### Architecture Diagram
 
 ```
-                        +-----------+
-                        | Scheduler |  (triggers pipeline on interval)
-                        | scheduler |  scheduler.py
-                        +-----+-----+
-                              |
-                              v
-+-------+    +----------+         +-----------+
-| IMAP  |--->|  Reader  |-------->| Classifier|
-| Inbox |    | reader.py|  (raw   | (keyword  |
-+-------+    +----------+  email) |  triage)  |
-                                  +-----------+
-                                       |
-                            (category + email)
-                                       |
-                                       v
-+----------+        +-----------+        +---------+
-|  Memory  |<------>|  Drafter  |------->| Sender  |
-| memory.py| context| drafter.py| (draft)|sender.py|
-| memory.db| + logs | (OpenAI)  |        +----+----+
-+----------+        +-----------+             |
-                                              v
-+-------------------+                  +----------+
-| Telegram Channel  |                  |   SMTP   |
-| channels/         |                  |  Outbox  |
-| telegram_channel  |                  +----------+
-+-------------------+
+┌─────────────────────────────────────────────────────────┐
+│                      Scheduler                          │
+│               (runs pipeline on interval)               │
+└──────────────────────┬──────────────────────────────────┘
+                       │
+                       v
+┌──────────┐    ┌──────────────┐    ┌──────────────┐
+│  Reader  │───>│  Classifier  │───>│   Drafter    │
+│(reader.py)    │(classifier.py)    │ (drafter.py) │
+└──────────┘    └──────────────┘    └──────┬───────┘
+                                          │
+                       ┌──────────────────┘
+                       v
+                ┌──────────────┐    ┌──────────────┐
+                │    Sender    │    │   Messenger  │
+                │ (sender.py)  │    │  (Telegram)  │
+                └──────────────┘    └──────────────┘
+                       │                    │
+                       v                    v
+                ┌──────────────────────────────────┐
+                │            Memory                │
+                │         (memory.py)              │
+                └──────────────────────────────────┘
 ```
 
 **Data flow:** Scheduler wakes Reader on a timer. Reader connects to IMAP, fetches unread emails. Classifier (embedded in Reader via `triage_email()`) labels each email as URGENT, ACTION, FYI, or ARCHIVE. Drafter generates a reply using OpenAI, pulling context from Memory. Sender delivers the approved draft via SMTP. Memory logs every interaction for future reference.
