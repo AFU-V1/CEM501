@@ -27,6 +27,8 @@ from channels.base import Channel
 # Import triage from reader.py
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from reader import triage_email
+from memory.memory import log_message, add_contact, DB_PATH
+import sqlite3
 
 # Import OpenAI for drafting responses
 from openai import OpenAI
@@ -169,8 +171,20 @@ class TelegramChannel(Channel):
             body=incoming_text,
         )
 
+        # Telegram'dan gelenlerde ARCHIVE kategorisini FYI olarak kabul et
+        if category == "ARCHIVE":
+            category = "FYI"
+
         # Step 2: Draft a response using OpenAI
         draft = self._draft_response(incoming_text, category)
+
+        # Log to memory database
+        try:
+            contact_id = self._get_or_create_contact(sender_name)
+            log_message(contact_id=contact_id, direction="received", subject=f"Telegram ({category})", body=incoming_text, channel="telegram")
+            log_message(contact_id=contact_id, direction="sent", subject=f"Re: Telegram ({category})", body=draft, channel="telegram")
+        except Exception as e:
+            print(f"[telegram] Failed to log to memory: {e}", file=sys.stderr)
 
         # Step 3: Reply with classification + draft
         emoji_map = {"URGENT": "🔴", "ACTION": "🟡", "FYI": "🔵", "ARCHIVE": "⚫"}
@@ -185,6 +199,15 @@ class TelegramChannel(Channel):
 
         self._message_count += 1
         print(f"[telegram] {sender_name} → {category} (keyword: {matched_keyword})")
+
+    def _get_or_create_contact(self, name: str) -> int:
+        """Find contact by name, or create if not exists."""
+        conn = sqlite3.connect(DB_PATH)
+        row = conn.execute("SELECT id FROM contacts WHERE name = ?", (name,)).fetchone()
+        conn.close()
+        if row:
+            return row[0]
+        return add_contact(name=name, notes="Telegram User")
 
     def _draft_response(self, message_text: str, category: str) -> str:
         """

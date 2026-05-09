@@ -62,15 +62,18 @@ def passive_system_status() -> list[dict]:
     email_address = os.getenv("EMAIL_ADDRESS", "").strip()
     email_password = os.getenv("EMAIL_PASSWORD", "").strip()
     openai_key = os.getenv("OPENAI_API_KEY", "").strip()
+    telegram_token = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
 
     imap_state = "configured" if email_address and email_password else "missing"
     smtp_state = "configured" if email_address and email_password else "missing"
     openai_state = "configured" if openai_key else "missing"
+    telegram_state = "configured" if telegram_token else "missing"
 
     return [
         status_badge("IMAP", imap_state, "Credentials loaded." if imap_state == "configured" else "Missing email credentials."),
         status_badge("SMTP", smtp_state, "Ready for reviewed sends." if smtp_state == "configured" else "Missing email credentials."),
         status_badge("OpenAI", openai_state, "API key present." if openai_state == "configured" else "Missing OPENAI_API_KEY."),
+        status_badge("Telegram", telegram_state, "Bot token present." if telegram_state == "configured" else "Missing TELEGRAM_BOT_TOKEN."),
     ]
 
 
@@ -107,6 +110,18 @@ def active_system_status() -> list[dict]:
             statuses[2] = status_badge("OpenAI", "healthy", "API probe succeeded.")
         except Exception as exc:
             statuses[2] = status_badge("OpenAI", "error", str(exc))
+
+    telegram_token = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
+    if telegram_token:
+        try:
+            import urllib.request, json
+            req = urllib.request.Request(f"https://api.telegram.org/bot{telegram_token}/getMe")
+            with urllib.request.urlopen(req, timeout=5) as response:
+                data = json.loads(response.read().decode())
+                bot_name = data.get("result", {}).get("first_name", "Bot")
+                statuses[3] = status_badge("Telegram", "healthy", f"Connected as {bot_name}.")
+        except Exception as exc:
+            statuses[3] = status_badge("Telegram", "error", str(exc))
 
     return statuses
 
@@ -213,6 +228,18 @@ def reject_queue(queue_id: str):
     return jsonify({"ok": True, "item": item})
 
 
+@app.post("/api/queue/<queue_id>/delete")
+def delete_queue(queue_id: str):
+    """Completely delete a draft from the review queue."""
+    from dashboard_store import delete_queue_item
+    try:
+        delete_queue_item(queue_id)
+    except KeyError:
+        return json_error("Draft not found.", 404)
+
+    return jsonify({"ok": True})
+
+
 @app.get("/api/contacts")
 def contacts():
     """Search the memory contact list."""
@@ -278,5 +305,54 @@ def logs():
     return jsonify({"ok": True, "items": parse_log_lines(limit=limit)})
 
 
+@app.post("/api/reports/daily")
+def generate_daily_report_api():
+    payload = request.get_json(silent=True) or {}
+    message_ids = payload.get("message_ids", [])
+    if not message_ids:
+        return json_error("No messages selected.", 400)
+    
+    from dashboard_store import generate_daily_report_from_messages
+    try:
+        report = generate_daily_report_from_messages(message_ids)
+        return jsonify({"ok": True, "report": report})
+    except Exception as e:
+        return json_error(str(e), 500)
+
+
+@app.post("/api/queue/synthetic")
+def create_synthetic_queue_item():
+    payload = request.get_json(silent=True) or {}
+    draft = payload.get("draft", "")
+    if not draft:
+        return json_error("Draft is empty.", 400)
+    
+    from dashboard_store import queue_synthetic_draft
+    item = queue_synthetic_draft("Daily Construction Report", "Generated from selected messages.", draft, "eyuphan.koc@gmail.com")
+    return jsonify({"ok": True, "item": item})
+
+
+import subprocess
+import sys
+
+telegram_process = None
+
+def start_telegram_bot():
+    global telegram_process
+    try:
+        # Başlatırken konsola bilgi veriyoruz
+        print("Starting Telegram bot in background...")
+        telegram_process = subprocess.Popen([sys.executable, "run_telegram_bot.py"])
+    except Exception as e:
+        print(f"Failed to start Telegram bot: {e}")
+
 if __name__ == "__main__":
-    app.run(debug=True, host="127.0.0.1", port=5000)
+    start_telegram_bot()
+    try:
+        # use_reloader=False ile Flask'ın kendi kendini yeniden başlatıp 
+        # iki tane bot çalıştırmasını engelliyoruz.
+        app.run(debug=True, use_reloader=False, host="127.0.0.1", port=5000)
+    finally:
+        if telegram_process:
+            print("Shutting down Telegram bot...")
+            telegram_process.terminate()

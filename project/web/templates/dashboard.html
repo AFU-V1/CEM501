@@ -29,6 +29,7 @@
         <a href="#inbox">Triage Inbox</a>
         <a href="#queue">Review Queue</a>
         <a href="#memory">Memory</a>
+        <a href="#report-builder">Daily Report</a>
         <a href="#tasks">Scheduler</a>
         <a href="#status">Status</a>
       </nav>
@@ -96,6 +97,23 @@
             </div>
           </div>
           <div id="messagesList" class="stack-list"></div>
+        </div>
+      </section>
+
+      <section id="report-builder" class="glass-panel" style="margin-top: 2rem;">
+        <div class="section-header">
+            <div>
+              <p class="eyebrow">Report Builder</p>
+              <h3>Daily Report Generator</h3>
+            </div>
+            <button id="generateReportBtn" class="btn btn-primary">Generate Daily Report</button>
+        </div>
+        <p class="microcopy">Select messages from the Message History above using the checkboxes to include their data in the daily report.</p>
+        <div class="draft-block" style="margin-top: 1rem;">
+           <textarea id="reportContent" class="draft-input" placeholder="Generated report will appear here..." style="min-height: 200px; font-family: monospace;"></textarea>
+           <div class="queue-actions" style="margin-top: 10px;">
+              <button id="queueReportBtn" class="btn btn-secondary" style="display: none;">Add to Review Queue (Prepare Email)</button>
+           </div>
         </div>
       </section>
 

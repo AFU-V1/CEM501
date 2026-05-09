@@ -18,29 +18,34 @@ This system is a personal AI communication agent designed for construction proje
                         +-----+-----+
                               |
                               v
-+-------+    +----------+         +-----------+
-| IMAP  |--->|  Reader  |-------->| Classifier|
-| Inbox |    | reader.py|  (raw   | (keyword  |
-+-------+    +----------+  email) |  triage)  |
-                                  +-----------+
-                                       |
-                            (category + email)
-                                       |
-                                       v
-+----------+        +-----------+        +---------+
-|  Memory  |<------>|  Drafter  |------->| Sender  |
-| memory/  | context| (OpenAI    | (draft)| (SMTP)  |
-| memory.db| + logs |  LLM)     |        +----+----+
-+----------+        +-----------+             |
-                                              v
-+-------------------+                  +----------+
-| Telegram Channel  |                  |   SMTP   |
-| channels/         |                  |  Outbox  |
-| telegram_channel  |                  +----------+
++-------+    +----------+         +-----------+       +-------------------+
+| IMAP  |--->|  Reader  |-------->| Classifier|       |   Web Dashboard   |
+| Inbox |    | reader.py|  (raw   | (keyword  |<----->| dashboard_app.py  |
++-------+    +----------+  email) |  triage)  |       | dashboard_store.py|
+                                  +-----------+       +-------------------+
+                                       |                       ^
+                            (category + email)                 |
+                                       |                       v
+                                       v              +-------------------+
++----------+        +-----------+        +---------+  | Review Queue /    |
+|  Memory  |<------>|  Drafter  |------->| Sender  |<-+ Daily Reports     |
+| memory/  | context| (OpenAI    | (draft)| (SMTP)  |  +-------------------+
+| memory.db| + logs |  LLM)     |        +----+----+            ^
++----------+        +-----------+             |                   |
+  ^    |                                      v                   |
+  |    | (Reads memory to generate reports)  +----------+             |
+  |    +----------------------------------------------------------+
+  |                                          |   SMTP   |
+  | (Logs messages to memory)                |  Outbox  |
+  v                                          +----------+
++-------------------+
+| Telegram Channel  |
+| channels/         |
+| telegram_channel  |
 +-------------------+
 ```
 
-**Data flow:** Scheduler wakes Reader on a timer. Reader connects to IMAP, fetches unread emails. Classifier (embedded in Reader via `triage_email()`) labels each email as URGENT, ACTION, FYI, or ARCHIVE. Drafter generates a reply using OpenAI, pulling context from Memory. Sender delivers the approved draft via SMTP. Memory logs every interaction for future reference.
+**Data flow:** Scheduler wakes Reader on a timer. Reader connects to IMAP, fetches unread emails. Classifier (embedded in Reader via `triage_email()`) labels each email as URGENT, ACTION, FYI, or ARCHIVE. Drafter generates a reply using OpenAI, pulling context from Memory. Sender delivers the approved draft via SMTP. Telegram Channel logs all incoming/outgoing messages to Memory. The Web Dashboard reads from Memory to generate aggregate Daily Reports, which then go to the Review Queue.
 
 ---
 
@@ -100,6 +105,13 @@ This system is a personal AI communication agent designed for construction proje
 - **Input:** Same as Reader (IMAP credentials)
 - **Output:** Standardized message dicts
 - **File:** `channels/email_channel.py`
+
+### Web Dashboard
+- **Responsibility:** Provides a modern GUI (Flask + Vanilla HTML/JS/CSS) to monitor agent health, triage emails, review/approve/delete drafts in the queue, view memory (contacts and message history), and generate daily reports based on selected messages.
+- **Input:** Agent memory (`memory.db`), live IMAP inbox
+- **Output:** JSON API, rendered HTML
+- **File:** `dashboard_app.py`, `dashboard_store.py`, `web/`
+- **Key dependencies:** `Flask`, `sqlite3`
 
 ### Digest Generator
 - **Responsibility:** Groups triaged emails by category and produces a formatted morning digest with LLM-generated summaries for URGENT and ACTION items.
@@ -192,7 +204,8 @@ All secrets are stored in `.env` (never committed). See `.env.example` for requi
 
 - [ ] **Attachment handling:** Parse PDF attachments (RFI responses, submittals) and include content in classification context
 - [ ] **LLM classification fallback:** For emails that default to ARCHIVE, run a second pass with OpenAI to catch novel email types
-- [ ] **Web dashboard:** Build a simple Flask/Streamlit UI for reviewing drafts, managing contacts, and viewing message history
+- [x] **Web dashboard:** Build a simple Flask/Streamlit UI for reviewing drafts, managing contacts, and viewing message history
+- [x] **Daily Report Generator:** Allow selecting messages from memory to compile a daily construction report draft.
 - [ ] **Multi-language support:** Add Turkish language handling for cross-cultural project communication on Istanbul-based projects
 
 ---

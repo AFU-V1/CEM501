@@ -18,6 +18,8 @@ function bindEvents() {
   $("#probeBtn").addEventListener("click", probeSystems);
   $("#themeBtn").addEventListener("click", toggleTheme);
   $("#digestBtn").addEventListener("click", generateDigest);
+  $("#generateReportBtn").addEventListener("click", generateDailyReport);
+  $("#queueReportBtn").addEventListener("click", queueDailyReport);
   $("#memorySearch").addEventListener("input", debounce((event) => searchMemory(event.target.value), 250));
 }
 
@@ -198,6 +200,7 @@ function renderQueue(queue) {
     const editButton = document.getElementById(`save-${item.id}`);
     const approveButton = document.getElementById(`approve-${item.id}`);
     const rejectButton = document.getElementById(`reject-${item.id}`);
+    const deleteButton = document.getElementById(`delete-${item.id}`);
 
     if (editButton) {
       editButton.addEventListener("click", () => saveDraft(item.id));
@@ -207,6 +210,9 @@ function renderQueue(queue) {
     }
     if (rejectButton) {
       rejectButton.addEventListener("click", () => rejectDraft(item.id));
+    }
+    if (deleteButton) {
+      deleteButton.addEventListener("click", () => deleteDraft(item.id));
     }
   });
 }
@@ -241,6 +247,7 @@ function renderQueueCard(item) {
             <button id="save-${item.id}" class="btn btn-secondary">Edit Draft</button>
             <button id="approve-${item.id}" class="btn btn-primary">Approve & Send</button>
             <button id="reject-${item.id}" class="btn btn-ghost">Reject</button>
+            <button id="delete-${item.id}" class="btn btn-ghost" style="color: var(--color-urgent);">Delete</button>
           </div>
         </div>
       </div>
@@ -287,6 +294,12 @@ async function rejectDraft(queueId) {
   await loadDashboard($("#memorySearch").value || "");
 }
 
+async function deleteDraft(queueId) {
+  if (!confirm("Are you sure you want to completely delete this item from the queue?")) return;
+  await fetch(`/api/queue/${queueId}/delete`, { method: "POST" });
+  await loadDashboard($("#memorySearch").value || "");
+}
+
 function renderContacts(items) {
   $("#contactsList").innerHTML = items.length
     ? items
@@ -309,13 +322,16 @@ function renderMessages(items) {
     ? items
         .map(
           (item) => `
-            <article class="message-card">
-              <div class="meta-row">${escapeHtml(item.contact_name || "Unknown")} • ${escapeHtml(item.sent_at || "")}</div>
-              <h4>${escapeHtml(item.subject || "(no subject)")}</h4>
-              <p>${escapeHtml(item.body || "")}</p>
-              <div class="legend">
-                <span class="pill ${item.direction === "sent" ? "action" : "fyi"}">${escapeHtml(item.direction)}</span>
-                <span class="pill archive">${escapeHtml(item.channel || "email")}</span>
+            <article class="message-card" style="display: flex; gap: 10px;">
+              <input type="checkbox" class="message-select" value="${item.id}" style="margin-top: 5px; cursor: pointer;">
+              <div style="flex-grow: 1;">
+                <div class="meta-row">${escapeHtml(item.contact_name || "Unknown")} • ${escapeHtml(item.sent_at || "")}</div>
+                <h4>${escapeHtml(item.subject || "(no subject)")}</h4>
+                <p>${escapeHtml(item.body || "")}</p>
+                <div class="legend">
+                  <span class="pill ${item.direction === "sent" ? "action" : "fyi"}">${escapeHtml(item.direction)}</span>
+                  <span class="pill archive">${escapeHtml(item.channel || "email")}</span>
+                </div>
               </div>
             </article>
           `
@@ -399,6 +415,56 @@ function renderLogs(items) {
         )
         .join("")
     : emptyState("No recent log entries.");
+}
+
+async function generateDailyReport() {
+  const checkboxes = document.querySelectorAll('.message-select:checked');
+  const message_ids = Array.from(checkboxes).map(cb => parseInt(cb.value));
+  
+  if (message_ids.length === 0) {
+    alert("Please select at least one message from the Message History first.");
+    return;
+  }
+  
+  $("#reportContent").value = "Generating daily report using OpenAI, please wait...";
+  $("#queueReportBtn").style.display = "none";
+  
+  const response = await fetch("/api/reports/daily", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message_ids }),
+  });
+  const payload = await response.json();
+  
+  if (payload.ok) {
+    $("#reportContent").value = payload.report;
+    $("#queueReportBtn").style.display = "inline-block";
+  } else {
+    $("#reportContent").value = "Error generating report: " + payload.error;
+  }
+}
+
+async function queueDailyReport() {
+  const draft = $("#reportContent").value;
+  if (!draft) return;
+  
+  $("#queueReportBtn").textContent = "Adding...";
+  
+  const response = await fetch("/api/queue/synthetic", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ draft }),
+  });
+  
+  const payload = await response.json();
+  if (payload.ok) {
+    alert("Daily report added to Review Queue! You can now review it and send it as an email.");
+    loadDashboard();
+    $("#queueReportBtn").textContent = "Add to Review Queue (Prepare Email)";
+  } else {
+    alert("Failed to queue report: " + payload.error);
+    $("#queueReportBtn").textContent = "Add to Review Queue (Prepare Email)";
+  }
 }
 
 function setHeroStatus(message) {

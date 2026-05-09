@@ -17,7 +17,7 @@ from datetime import datetime
 from email.utils import parseaddr
 
 from agent import draft_reply, fetch_emails, get_send_warnings, send_approved_email
-from digest import SAMPLE_EMAILS, format_html_digest, format_text_digest, group_by_category
+from digest import SAMPLE_EMAILS, format_html_digest, format_text_digest, group_by_category, summarize_email
 from memory.memory import (
     add_contact,
     complete_task,
@@ -96,7 +96,7 @@ def _display_name(sender: str, sender_email: str) -> str:
     return sender
 
 
-def _normalize_email(email_item: dict, fallback_date: str) -> dict:
+def _normalize_email(email_item: dict, fallback_date: str, previous_emails: dict | None = None) -> dict:
     sender = email_item.get("sender", "")
     sender_name, sender_email = parseaddr(sender)
     if not sender_email:
@@ -113,11 +113,20 @@ def _normalize_email(email_item: dict, fallback_date: str) -> dict:
         "keyword": email_item.get("keyword", "default"),
     }
     normalized["id"] = _queue_key(normalized)
-    normalized["preview"] = normalized["body"][:180]
+    
+    # Triage inbox için mail body'sini digest.py'daki summarize_email ile özetle
+    # Eğer önceden özetlenmişse önbellekten oku, LLM'i tekrar yorma
+    if previous_emails and normalized["id"] in previous_emails and previous_emails[normalized["id"]].get("preview"):
+        normalized["preview"] = previous_emails[normalized["id"]]["preview"]
+    elif normalized["body"]:
+        normalized["preview"] = summarize_email(normalized["body"])
+    else:
+        normalized["preview"] = ""
+        
     return normalized
 
 
-def sample_inbox_snapshot() -> list[dict]:
+def sample_inbox_snapshot(previous_emails: dict | None = None) -> list[dict]:
     """Build a demo inbox snapshot from the digest samples."""
     stamp = now_iso()
     snapshot = []
@@ -135,6 +144,7 @@ def sample_inbox_snapshot() -> list[dict]:
                     "keyword": keyword,
                 },
                 fallback_date=stamp,
+                previous_emails=previous_emails
             )
         )
 
@@ -184,17 +194,18 @@ def refresh_inbox_state(source: str = "live") -> dict:
     """
     state = load_dashboard_state()
     previous_queue = {item["id"]: item for item in state.get("queue", [])}
+    previous_emails = {item["id"]: item for item in state.get("emails", [])}
     resolved_source = source
 
     try:
-        emails = fetch_emails() if source == "live" else sample_inbox_snapshot()
+        emails = fetch_emails() if source == "live" else sample_inbox_snapshot(previous_emails)
         status_message = "Live inbox snapshot loaded." if source == "live" else "Sample inbox snapshot loaded."
     except Exception as exc:
-        emails = sample_inbox_snapshot()
+        emails = sample_inbox_snapshot(previous_emails)
         resolved_source = "sample"
         status_message = f"Live inbox unavailable. Showing sample inbox instead: {exc}"
 
-    normalized_emails = [_normalize_email(item, fallback_date=now_iso()) for item in emails]
+    normalized_emails = [_normalize_email(item, fallback_date=now_iso(), previous_emails=previous_emails) for item in emails]
     actionable = [item for item in normalized_emails if item["category"] in ("URGENT", "ACTION")]
 
     pending_queue = []
@@ -303,6 +314,18 @@ def reject_queue_item(queue_id: str) -> dict:
     state["queue"][index] = item
     save_dashboard_state(state)
     return item
+
+
+def delete_queue_item(queue_id: str) -> bool:
+    """Completely remove a queued draft from the state."""
+    state = load_dashboard_state()
+    queue = state.get("queue", [])
+    for index, item in enumerate(queue):
+        if item["id"] == queue_id:
+            del queue[index]
+            save_dashboard_state(state)
+            return True
+    raise KeyError(queue_id)
 
 
 def _ensure_contact(sender_name: str, sender_email: str) -> int | None:
@@ -468,3 +491,93 @@ def parse_log_lines(limit: int = 20) -> list[dict]:
         else:
             entries.append({"timestamp": "", "level": "INFO", "message": line.strip()})
     return entries
+
+
+def generate_daily_report_from_messages(message_ids: list[int]) -> str:
+    from memory.memory import get_connection
+    import os
+    conn = get_connection()
+    messages = []
+    try:
+        placeholders = ",".join("?" for _ in message_ids)
+        rows = conn.execute(
+            f"SELECT mh.*, c.name AS contact_name FROM message_history mh "
+            f"LEFT JOIN contacts c ON mh.contact_id = c.id "
+            f"WHERE mh.id IN ({placeholders})",
+            message_ids
+        ).fetchall()
+        messages = [dict(r) for r in rows]
+    finally:
+        conn.close()
+    
+    if not messages:
+        return "No messages selected."
+        
+    messages_text = ""
+    for m in messages:
+        direction = "sent to" if m["direction"] == "sent" else "received from"
+        messages_text += f"- Message {direction} {m.get('contact_name', 'Unknown')} (Subject: {m.get('subject', '')}):\n  {m.get('body', '')}\n\n"
+        
+    from dotenv import load_dotenv
+    load_dotenv()
+    template_path = os.path.join(BASE_DIR, "templates", "daily_report.md")
+    if os.path.exists(template_path):
+        with open(template_path, "r", encoding="utf-8") as f:
+            template_content = f.read()
+    else:
+        template_content = "DAILY CONSTRUCTION REPORT TEMPLATE"
+
+    prompt = (
+        "You are an AI assistant generating a Daily Construction Report.\n"
+        "Use the following template rules and structure.\n"
+        "Extract information ONLY from the provided messages below.\n"
+        "If information required by the template is missing, write '[Not Provided]'.\n\n"
+        "--- TEMPLATE START ---\n"
+        f"{template_content}\n"
+        "--- TEMPLATE END ---\n\n"
+        "--- MESSAGES START ---\n"
+        f"{messages_text}\n"
+        "--- MESSAGES END ---\n\n"
+        "Generate the completed report now. Do not include any other conversational text."
+    )
+    
+    from openai import OpenAI
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}],
+    )
+    return response.choices[0].message.content.strip()
+
+
+def queue_synthetic_draft(subject: str, body: str, draft: str, sender_email: str = "project@example.com") -> dict:
+    state = load_dashboard_state()
+    import hashlib
+    
+    item_id = hashlib.sha1(now_iso().encode()).hexdigest()[:12]
+    
+    new_item = {
+        "id": item_id,
+        "status": "pending",
+        "category": "ACTION",
+        "keyword": "report",
+        "sender": "System <system@local>",
+        "sender_name": "System",
+        "sender_email": sender_email,
+        "subject": subject,
+        "reply_subject": subject,
+        "date": now_iso(),
+        "body": body,
+        "draft": draft,
+        "warnings": get_send_warnings(sender_email, subject, draft),
+        "edited": False,
+        "created_at": now_iso(),
+        "updated_at": now_iso(),
+        "last_action": None,
+        "send_mode": None,
+        "error": None
+    }
+    
+    state.setdefault("queue", []).insert(0, new_item)
+    save_dashboard_state(state)
+    return new_item
