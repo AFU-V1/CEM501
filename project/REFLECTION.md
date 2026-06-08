@@ -14,7 +14,7 @@ I used AI coding tools as a director, not only as a source of code. First, I def
 
 ## What I'd Do Differently
 
-Although the agent works as a functional prototype, it still has some limitations. Attachment handling can be improved. In real construction communication, drawings, photos, RFIs, and reports are often sent as attachments, so the system should analyze them more effectively.
+I would start everything in planning mode from the beginning. We often encounter many errors when implementing something first and then making adjustments. That's why I would do extensive planning before writing code.Although the agent works as a functional prototype, it still has some limitations. Attachment handling can be improved. In real construction communication, drawings, photos, RFIs, and reports are often sent as attachments, so the system should analyze them more effectively.
 
 ## Connection to Professional Practice
 
