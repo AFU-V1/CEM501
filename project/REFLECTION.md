@@ -1,30 +1,21 @@
 # REFLECTION.md
 
-> Submission note: The instructor requires this reflection to be written by you, not AI. Replace the prompts below with your own 500-800 word reflection before the M9 deadline.
-
 ## What I Built
 
-[Write 100-150 words in first person. Describe the communication agent as a tool for a construction project manager. Mention the main working parts: email reading, urgency triage, OpenAI draft generation, human approval, SQLite memory, scheduler, dashboard, digest/report builder, and Telegram channel if you plan to mention the bonus feature.]
+This project is a communication assistant for project engineers. It reads emails and Telegram messages (texts, voices, images), classifies their urgency, summarizes content, and generates draft replies using LLM. The system stores communication history, supports daily reports and digests, and requires human approval before sending any response. Its goal is to reduce communication workload and improve project communication efficiency. As an additional feature, the agent also supports Telegram voice messages and images. Site teams can send short updates through Telegram, and the system can understand the message, classify its importance, and prepare a suitable response or daily report input.
 
 ## Communication Lessons
 
-[Write 100-150 words. Explain what building the agent taught you about professional CEM communication. Focus on urgency, tone, deadlines, responsibility, stakeholder roles, and why a short construction email can carry legal, cost, schedule, or safety consequences.]
+Building this agent taught me that professional CEM communication is not only about writing clearly, but also about understanding urgency, responsibility, and possible consequences. In construction projects, even a short email can affect cost, schedule, safety, or contractual rights. For example, a delay notice, an RFI, or a safety warning must be classified correctly because each one requires a different response time and tone. I also learned that the sender's role matters. A message from the owner, consultant, subcontractor, or site engineer may require different wording and level of formality. The agent helped me think more carefully about deadlines, action items, and who is responsible for the next step. Most importantly, I understood why human approval is necessary before sending responses, because an incorrect sentence may create legal or financial risk.
 
 ## AI-Assisted Development Lessons
 
-[Write 100-150 words. Explain how you used AI coding tools as a director rather than simply copying output. Mention where AI helped, where you had to debug or correct it, and how you checked whether the system matched the course milestones.]
+I used AI coding tools as a director, not only as a source of code. First, I defined the project goal, the required modules, and the construction communication scenario. AI helped me generate draft functions, improve the dashboard structure, write sample data, and create clearer documentation. However, I had to review and correct the outputs because some suggestions did not match my project architecture or the course requirements. For example, I checked whether the agent still had email reading, urgency triage, OpenAI draft generation, human approval, SQLite memory, scheduler, digest/report builder, and dashboard functions. I also debugged integration issues and made sure the system did not send messages without approval. To control the process, I compared the final structure with the course milestones and adjusted the implementation according to those expectations.
 
 ## What I'd Do Differently
 
-[Write 100-150 words. Be honest about limitations. Good options: better attachment handling, Turkish/English support, cleaner test logs, LLM fallback for uncertain ARCHIVE classifications, more realistic demo data, or stronger dashboard demo controls.]
+Although the agent works as a functional prototype, it still has some limitations. Attachment handling can be improved. In real construction communication, drawings, photos, RFIs, and reports are often sent as attachments, so the system should analyze them more effectively.
 
 ## Connection to Professional Practice
 
-[Write 100-150 words. Connect the project to future construction management work: PM communication load, RFI/submittal follow-up, safety notices, delay notices, client/subcontractor communication, and why human approval matters for professional accountability.]
-
-## Final Word Count Check
-
-- Target: 500-800 words total.
-- Before submission, delete this checklist and all bracketed prompts.
-- Keep the five required headings exactly as shown above.
-- Cite AI tools used in the project README or in your final paragraph if your instructor expects it here too.
+This project is closely related to future construction management work because communication is one of the main responsibilities of a project engineers. In real projects, engineers receive many RFIs, submittal updates, safety notices, delay notices, and messages from clients, consultants, and subcontractors. Missing or misunderstanding one message can create cost, schedule, quality, or safety problems. This agent can support the project engineer by organizing messages, identifying urgent issues, preparing draft responses, and helping follow up on open action items. For example, it can make RFI and submittal tracking easier and help ensure that delay or safety notices are not ignored. However, human approval is still essential.
