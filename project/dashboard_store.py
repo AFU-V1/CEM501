@@ -30,7 +30,7 @@ from memory.memory import (
     log_message,
     skip_task,
 )
-from reader import triage_email
+from reader import clean_triage_reason, triage_email
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -55,6 +55,19 @@ def default_state() -> dict:
     }
 
 
+def _sanitize_state_reasons(state: dict) -> bool:
+    changed = False
+    for collection_name in ("emails", "queue"):
+        for item in state.get(collection_name, []):
+            if not isinstance(item, dict) or "keyword" not in item:
+                continue
+            cleaned = clean_triage_reason(item.get("keyword"))
+            if item.get("keyword") != cleaned:
+                item["keyword"] = cleaned
+                changed = True
+    return changed
+
+
 def load_dashboard_state() -> dict:
     """Load the cached dashboard state from disk."""
     os.makedirs(LOG_DIR, exist_ok=True)
@@ -64,7 +77,11 @@ def load_dashboard_state() -> dict:
         return state
 
     with open(STATE_PATH, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+        state = json.load(handle)
+
+    if _sanitize_state_reasons(state):
+        save_dashboard_state(state)
+    return state
 
 
 def save_dashboard_state(state: dict) -> None:
@@ -110,7 +127,7 @@ def _normalize_email(email_item: dict, fallback_date: str, previous_emails: dict
         "date": email_item.get("date", fallback_date),
         "body": email_item.get("body") or email_item.get("preview") or "",
         "category": email_item.get("category", "ARCHIVE"),
-        "keyword": email_item.get("keyword", "default"),
+        "keyword": clean_triage_reason(email_item.get("keyword", "review manually")),
     }
     normalized["id"] = _queue_key(normalized)
     
@@ -167,7 +184,7 @@ def _build_queue_item(email_item: dict, existing_item: dict | None = None) -> di
         "id": email_item["id"],
         "status": existing_item.get("status", "pending") if existing_item else "pending",
         "category": email_item["category"],
-        "keyword": email_item["keyword"],
+        "keyword": clean_triage_reason(email_item["keyword"]),
         "sender": email_item["sender"],
         "sender_name": email_item["sender_name"],
         "sender_email": email_item["sender_email"],

@@ -1,0 +1,27 @@
+﻿2026-06-08 13:11:50,442 | INFO | M9 DEMO LOG START: 3 realistic CEM email scenarios; classifier=OpenAI semantic triage; approval mode=dry-run; real_email_sent=False
+2026-06-08 13:11:50,442 | INFO | Scenario 1 READ: from=Ahmet Demir, IMM Inspector <inspector@example.com> | subject=URGENT: Stop work order - unauthorized utility crossing at Grid C-7
+2026-06-08 13:11:53,478 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 13:11:53,488 | INFO | Scenario 1 TRIAGE: category=URGENT | reason=Stop work order due to safety risk.
+2026-06-08 13:11:53,488 | INFO | Scenario 1 DRAFT: prepared_review_draft_chars=344
+2026-06-08 13:11:53,488 | INFO | [DRY RUN] Draft displayed for: URGENT: Stop work order - unauthorized u -> inspector@example.com
+2026-06-08 13:11:53,488 | INFO | Scenario 1 REVIEW: dry-run approval displayed | send_function_result=True | real_email_sent=False
+2026-06-08 13:11:53,489 | INFO | Scenario 2 READ: from=Elif Sahin, Structural Engineer <structural@example.com> | subject=RFI-031: Waler beam connection detail at Section B-B
+2026-06-08 13:11:54,749 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 13:11:54,750 | INFO | Scenario 2 TRIAGE: category=ACTION | reason=RFI requires clarification before upcoming deadline.
+2026-06-08 13:11:54,750 | INFO | Scenario 2 DRAFT: prepared_review_draft_chars=325
+2026-06-08 13:11:54,750 | INFO | [DRY RUN] Draft displayed for: RFI-031: Waler beam connection detail at -> structural@example.com
+2026-06-08 13:11:54,750 | INFO | Scenario 2 REVIEW: dry-run approval displayed | send_function_result=True | real_email_sent=False
+2026-06-08 13:11:54,750 | INFO | Scenario 3 READ: from=Levent Saglam, Insurance Broker <insurance@example.com> | subject=Certificate of insurance - renewal required by April 1
+2026-06-08 13:11:56,276 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 13:11:56,277 | INFO | Scenario 3 TRIAGE: category=ACTION | reason=Insurance renewal requires project details by March 31.
+2026-06-08 13:11:56,277 | INFO | Scenario 3 DRAFT: prepared_review_draft_chars=336
+2026-06-08 13:11:56,277 | INFO | [DRY RUN] Draft displayed for: Certificate of insurance - renewal requi -> insurance@example.com
+2026-06-08 13:11:56,277 | INFO | Scenario 3 REVIEW: dry-run approval displayed | send_function_result=True | real_email_sent=False
+2026-06-08 13:11:56,277 | INFO | M9 DEMO LOG COMPLETE: 3 scenarios read, semantically triaged by OpenAI, drafted, and approved in dry-run; real_email_sent=False
+2026-06-08 15:14:49,519 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+2026-06-08 15:14:49,520 | INFO | [33mPress CTRL+C to quit[0m
+2026-06-08 15:15:37,754 | INFO | 127.0.0.1 - - [08/Jun/2026 15:15:37] "GET / HTTP/1.1" 200 -
+2026-06-08 15:15:37,868 | INFO | 127.0.0.1 - - [08/Jun/2026 15:15:37] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 15:15:37,868 | INFO | 127.0.0.1 - - [08/Jun/2026 15:15:37] "GET /static/index.css HTTP/1.1" 200 -
+2026-06-08 15:15:37,999 | INFO | 127.0.0.1 - - [08/Jun/2026 15:15:37] "GET /api/bootstrap?q= HTTP/1.1" 200 -

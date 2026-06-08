@@ -16,7 +16,9 @@ Usage:
 import os
 import sys
 import email
+import hashlib
 import imaplib
+import json
 from datetime import datetime
 from email.header import decode_header
 
@@ -25,6 +27,35 @@ from openai import OpenAI
 from dotenv import load_dotenv
 
 load_dotenv()
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+LOG_DIR = os.path.join(BASE_DIR, "logs")
+SUMMARY_CACHE_PATH = os.path.join(LOG_DIR, "email_summary_cache.json")
+SUMMARY_MODEL = "gpt-4o-mini"
+
+
+def _summary_cache_key(body: str) -> str:
+    normalized = " ".join((body or "").split())
+    return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
+
+
+def _load_summary_cache() -> dict:
+    if not os.path.exists(SUMMARY_CACHE_PATH):
+        return {}
+    try:
+        with open(SUMMARY_CACHE_PATH, "r", encoding="utf-8") as handle:
+            data = json.load(handle)
+        return data if isinstance(data, dict) else {}
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def _save_summary_cache(cache: dict) -> None:
+    os.makedirs(LOG_DIR, exist_ok=True)
+    temp_path = f"{SUMMARY_CACHE_PATH}.tmp"
+    with open(temp_path, "w", encoding="utf-8") as handle:
+        json.dump(cache, handle, indent=2, ensure_ascii=False, sort_keys=True)
+    os.replace(temp_path, SUMMARY_CACHE_PATH)
 
 
 # ---------------------------------------------------------------------------
@@ -163,10 +194,17 @@ def summarize_email(body: str) -> str:
     Only called for URGENT and ACTION emails to keep API usage minimal.
     Falls back to a truncated body if the API call fails.
     """
+    body = body or ""
+    cache_key = _summary_cache_key(body)
+    cache = _load_summary_cache()
+    cached = cache.get(cache_key)
+    if isinstance(cached, dict) and cached.get("summary"):
+        return cached["summary"]
+
     try:
         client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model=SUMMARY_MODEL,
             messages=[{"role": "user", "content": (
                 "Summarize the following construction project email in exactly "
                 "one concise sentence. Focus on the key action item or issue. "
@@ -174,11 +212,17 @@ def summarize_email(body: str) -> str:
                 f"{body}"
             )}],
         )
-        return response.choices[0].message.content.strip()
+        summary = response.choices[0].message.content.strip()
+        cache[cache_key] = {"summary": summary, "source": "openai", "model": SUMMARY_MODEL}
+        _save_summary_cache(cache)
+        return summary
     except Exception as e:
         # Graceful fallback: return truncated body if LLM is unavailable
         print(f"    [!] LLM summary failed ({e}), using truncated body.", file=sys.stderr)
-        return body[:120] + "..." if len(body) > 120 else body
+        summary = body[:120] + "..." if len(body) > 120 else body
+        cache[cache_key] = {"summary": summary, "source": "fallback", "model": SUMMARY_MODEL}
+        _save_summary_cache(cache)
+        return summary
 
 
 def format_text_digest(groups: dict[str, list[dict]], use_llm: bool = True) -> str:

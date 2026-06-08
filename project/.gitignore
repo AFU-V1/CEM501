@@ -1,2 +1,5 @@
 ﻿.env
 logs/dashboard_state.json
+logs/triage_cache.json
+logs/email_summary_cache.json
+logs/draft_cache.json

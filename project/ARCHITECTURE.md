@@ -1,51 +1,51 @@
 # System Architecture — CEM501 Communication Agent
 
 **CEM501 Communication Skills for CEM -- Spring 2026**
-**Milestone M5 Deliverable**
+**Final M9 Architecture Deliverable**
 
 ---
 
 ## System Overview
 
-This system is a personal AI communication agent designed for construction project managers. It reads incoming emails via IMAP, classifies them by urgency using a keyword-based triage engine, drafts professional replies using OpenAI LLMs, and sends approved drafts via SMTP -- all with mandatory human-in-the-loop confirmation. The agent also integrates with Telegram for real-time messaging and uses SQLite for persistent memory across sessions. The design philosophy is **modular and incremental**: each component does one job, can be tested independently, and was built in the order prescribed by the course milestones (M0-M9).
+This system is a personal AI communication agent designed for construction project managers. It reads incoming emails via IMAP, classifies them by urgency using OpenAI semantic triage, drafts professional replies using OpenAI LLMs, and sends approved drafts via SMTP -- all with mandatory human-in-the-loop confirmation. The agent also integrates with Telegram for real-time messaging and uses SQLite for persistent memory across sessions. The design philosophy is **modular and incremental**: each component does one job, can be tested independently, and was built in the order prescribed by the course milestones (M0-M9).
 
 ### Architecture Diagram
 
 ```
-                        +-----------+
-                        | Scheduler |  (triggers pipeline on interval)
-                        | scheduler |  scheduler.py
-                        +-----+-----+
-                              |
-                              v
-+-------+    +----------+         +-----------+       +-------------------+
-| IMAP  |--->|  Reader  |-------->| Classifier|       |   Web Dashboard   |
-| Inbox |    | reader.py|  (raw   | (keyword  |<----->| dashboard_app.py  |
-+-------+    +----------+  email) |  triage)  |       | dashboard_store.py|
-                                  +-----------+       +-------------------+
-                                       |                       ^
-                            (category + email)                 |
-                                       |                       v
-                                       v              +-------------------+
-+----------+        +-----------+        +---------+  | Review Queue /    |
-|  Memory  |<------>|  Drafter  |------->| Sender  |<-+ Daily Reports     |
-| memory/  | context| (OpenAI    | (draft)| (SMTP)  |  +-------------------+
-| memory.db| + logs |  LLM)     |        +----+----+            ^
-+----------+        +-----------+             |                   |
-  ^    |                                      v                   |
-  |    | (Reads memory to generate reports)  +----------+             |
-  |    +----------------------------------------------------------+
-  |                                          |   SMTP   |
-  | (Logs messages to memory)                |  Outbox  |
-  v                                          +----------+
-+-------------------+
-| Telegram Channel  |
-| channels/         |
-| telegram_channel  |
-+-------------------+
++------------+      +-----------+      +------------+      +--------------+
+| IMAP Inbox |----->| Reader    |----->| Semantic   |----->| OpenAI       |
+| Gmail      |      | reader.py |      | LLM Triage |      | Drafter      |
++------------+      +-----------+      +------------+      +------+-------+
+                                                                  |
+                                                                  v
+                                                        +------------------+
+                                                        | Web Dashboard    |
+                                                        | Review Queue     |
+                                                        | dashboard_app.py |
+                                                        +----+--------+----+
+                                                             |        |
+                                            demo dry-run/send |        | daily reports
+                                                             v        v
+                                                      +----------+  +----------+
+                                                      | SMTP     |  | Digest   |
+                                                      | Sender   |  | Builder  |
+                                                      +----+-----+  +----+-----+
+                                                           |             |
+                                                           v             v
+                                                      +----------------------+
+                                                      | SQLite Memory        |
+                                                      | contacts/messages/   |
+                                                      | tasks + audit trail  |
+                                                      +----+-------------+---+
+                                                           ^             ^
+                                                           |             |
+                                                  +--------+---+   +-----+------+
+                                                  | Scheduler  |   | Telegram   |
+                                                  | scheduler  |   | Channel    |
+                                                  +------------+   +------------+
 ```
 
-**Data flow:** Scheduler wakes Reader on a timer. Reader connects to IMAP, fetches unread emails. Classifier (embedded in Reader via `triage_email()`) labels each email as URGENT, ACTION, FYI, or ARCHIVE. Drafter generates a reply using OpenAI, pulling context from Memory. Sender delivers the approved draft via SMTP. Telegram Channel logs all incoming/outgoing messages to Memory. The Web Dashboard reads from Memory to generate aggregate Daily Reports, which then go to the Review Queue.
+**Data flow:** The Reader connects to IMAP and fetches recent project emails. The Classifier (embedded in Reader via `triage_email()`) first checks the local semantic triage cache; if the same sender, subject, and body were already classified, it reuses that result. Only new or changed messages are sent to OpenAI for semantic classification as URGENT, ACTION, FYI, or ARCHIVE. Inbox preview summaries and generated review drafts are cached the same way, so repeated dashboard refreshes do not resend unchanged emails to the LLM. Actionable messages are placed into the Web Dashboard review queue. A user can edit, reject, approve as a demo dry run, or approve for SMTP sending. Approved activity is logged to SQLite memory. Scheduler, digest generation, and Telegram use the same memory and triage foundations.
 
 ---
 
@@ -54,16 +54,17 @@ This system is a personal AI communication agent designed for construction proje
 ### Reader
 - **Responsibility:** Connects to the IMAP inbox, fetches recent emails, parses headers and body, and classifies each email by urgency.
 - **Input:** IMAP credentials from `.env`; mailbox name (INBOX)
-- **Output:** List of email dicts with fields: sender, subject, date, body, category, keyword
+- **Output:** List of email dicts with fields: sender, subject, date, body, category, keyword/reason
 - **File:** `reader.py`
 - **Key dependencies:** `imaplib`, `email` (standard library), `python-dotenv`
 
-### Classifier (Triage Engine)
-- **Responsibility:** Applies a multi-pass keyword matching algorithm to categorize emails into URGENT, ACTION, FYI, or ARCHIVE.
+### Classifier (Semantic Triage Engine)
+- **Responsibility:** Uses OpenAI (gpt-4o-mini) to classify emails into URGENT, ACTION, FYI, or ARCHIVE based on construction-management meaning, not just surface words.
 - **Input:** Email subject, sender, and body text
-- **Output:** Tuple of (category, matched_keyword)
+- **Output:** Tuple of (category, semantic_reason). The existing `keyword` field stores the LLM reason for backward compatibility.
 - **File:** `reader.py` (function: `triage_email()`)
-- **Key dependencies:** None (pure Python logic)
+- **Key dependencies:** `openai`, `python-dotenv`
+- **Cache:** `logs/triage_cache.json` stores category, reason, confidence, source, and model for each sender/subject/body hash. The file is ignored by Git because it contains runtime inbox-derived data.
 
 ### Drafter
 - **Responsibility:** Takes a classified email and generates a professional reply using OpenAI (gpt-4o-mini). Falls back to template-based responses if the LLM is unavailable.
@@ -71,6 +72,7 @@ This system is a personal AI communication agent designed for construction proje
 - **Output:** Draft reply text (string)
 - **File:** `agent.py` (function: `draft_reply()`), also used in `channels/telegram_channel.py`
 - **Key dependencies:** `openai` (OpenAI API)
+- **Cache:** `logs/draft_cache.json` stores generated drafts by category/sender/subject/body hash to avoid repeated draft-generation calls for unchanged emails.
 
 ### Sender
 - **Responsibility:** Sends approved drafts via SMTP with TLS. Implements four safety guardrails: confirmation prompt, recipient validation, content check, and rate limiting.
@@ -119,6 +121,7 @@ This system is a personal AI communication agent designed for construction proje
 - **Output:** Formatted text or HTML digest
 - **File:** `digest.py`
 - **Key dependencies:** `openai` (OpenAI API)
+- **Cache:** `logs/email_summary_cache.json` stores one-sentence summaries by email body hash.
 
 ---
 
@@ -126,24 +129,25 @@ This system is a personal AI communication agent designed for construction proje
 
 1. **Scheduler** triggers the pipeline at a configured interval (or user runs `agent.py` manually).
 2. **Reader** connects to the IMAP server, fetches the 20 most recent emails, and parses headers + body.
-3. **Classifier** (`triage_email()`) runs a three-pass keyword analysis on each email to assign a category: URGENT, ACTION, FYI, or ARCHIVE.
+3. **Classifier** (`triage_email()`) checks `logs/triage_cache.json`; cache hits return immediately, and cache misses send subject, sender, and body excerpt to OpenAI to receive JSON with category, reason, and confidence.
 4. **Agent** filters for actionable emails (URGENT + ACTION) and passes each to the Drafter.
-5. **Drafter** calls OpenAI (gpt-4o-mini) with a structured prompt to generate a professional reply. On failure, it falls back to pre-written templates.
+5. **Drafter** checks `logs/draft_cache.json`; cache misses call OpenAI (gpt-4o-mini) with a structured prompt to generate a professional reply. On failure, it falls back to pre-written templates.
 6. **Sender** displays the draft for human review with all warnings, then sends via SMTP after explicit `y` confirmation.
 7. **Memory** logs the sent message for future reference.
-8. **Telegram Channel** runs a parallel pipeline: incoming messages are classified and replied to in real-time.
+8. **Web Dashboard** exposes the review queue, health status, memory, daily report builder, and demo-safe dry-run approval path.
+9. **Telegram Channel** runs a parallel pipeline: incoming messages are classified, drafted with OpenAI, replied to in real-time, and logged to memory.
 
 ---
 
 ## Design Decisions (ADR-style)
 
-### ADR 1: Keyword-Based Triage Instead of LLM Classification
+### ADR 1: Semantic LLM Triage Instead of Keyword Matching
 
-**Decision:** Use a multi-pass keyword matching algorithm for email classification instead of calling the LLM for every email.
+**Decision:** Use OpenAI (gpt-4o-mini) for email classification instead of relying on keyword matching.
 
-**Context:** Calling the OpenAI API for each of the 20 fetched emails would be slow (3-5 seconds per call) and consume API quota. The keyword approach processes all 20 emails in under 1 second with zero API cost. Construction project emails follow predictable patterns: "stop work", "RFI", "submittal", "meeting minutes" are reliable signals. The three-pass design (junk words first, compound keywords second, single keywords third) handles edge cases like "meeting minutes" not falsely matching the single keyword "review".
+**Context:** Construction emails often hide urgency in the body rather than the subject line. A routine-looking report may include failed concrete test results, legal exposure, critical path risk, or a hidden deadline. Keyword matching is fast, but it can miss semantic priority and overreact to isolated words like "safety" in a routine report.
 
-**Consequences:** Classification is fast, free, and deterministic. However, it may miss novel email types that do not contain expected keywords. Future improvement: use LLM classification as a fallback for emails that fall to the default "ARCHIVE" category.
+**Consequences:** Classification is more context-aware and easier to explain in the final demo. It is slower on first pass and depends on API availability, so triage, summaries, and drafts are cached locally and reused on later refreshes. If the LLM call fails or returns invalid JSON, the agent labels the message as ACTION with `review manually` so a potentially important message is reviewed instead of silently archived.
 
 ### ADR 2: Human-in-the-Loop Mandatory Confirmation
 
@@ -175,12 +179,13 @@ This system is a personal AI communication agent designed for construction proje
 
 | Scenario | Behavior |
 |----------|----------|
-| **LLM API timeout / 403** | Logged as ERROR; fallback template used for drafts; agent continues processing remaining emails |
+| **LLM triage timeout / invalid JSON** | Email classified as ACTION with `review manually` so it enters manual review |
+| **LLM draft timeout / 403** | Logged as ERROR; fallback template used for drafts; agent continues processing remaining emails |
 | **IMAP connection failure** | RuntimeError raised; logged; agent exits with error code 1 |
 | **SMTP auth failure** | Logged as ERROR; user notified; draft is preserved (can retry) |
 | **Rate limit exceeded** | Send blocked; WARNING logged; user notified |
 | **Database locked** | Retry with exponential backoff (3 attempts, 1s/2s/4s delay + jitter) |
-| **Unknown email format** | `extract_body_preview()` gracefully returns empty string; email classified as ARCHIVE |
+| **Unknown email format** | `extract_body_preview()` gracefully returns empty string; LLM triage still uses sender and subject |
 
 ---
 
@@ -203,7 +208,7 @@ All secrets are stored in `.env` (never committed). See `.env.example` for requi
 ## Future Extensions
 
 - [ ] **Attachment handling:** Parse PDF attachments (RFI responses, submittals) and include content in classification context
-- [ ] **LLM classification fallback:** For emails that default to ARCHIVE, run a second pass with OpenAI to catch novel email types
+- [ ] **Confidence-aware routing:** Highlight low-confidence LLM classifications for manual review
 - [x] **Web dashboard:** Build a simple Flask/Streamlit UI for reviewing drafts, managing contacts, and viewing message history
 - [x] **Daily Report Generator:** Allow selecting messages from memory to compile a daily construction report draft.
 - [ ] **Multi-language support:** Add Turkish language handling for cross-cultural project communication on Istanbul-based projects

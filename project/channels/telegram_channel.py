@@ -42,7 +42,7 @@ class TelegramChannel(Channel):
         - TELEGRAM_BOT_TOKEN: Bot token from @BotFather
 
     The bot listens for messages, classifies them using the project's
-    triage logic, drafts a professional response via Gemini, and replies.
+    triage logic, drafts a professional response via OpenAI, and replies.
     """
 
     channel_name = "telegram"
@@ -158,14 +158,14 @@ class TelegramChannel(Channel):
 
         Pipeline:
             1. Classify using reader.py's triage_email()
-            2. Draft a response using Gemini
+            2. Draft a response using OpenAI
             3. Send the response back through Telegram
         """
         incoming_text = update.message.text
         sender_name = update.message.from_user.first_name or "User"
 
         # Step 1: Classify the message
-        category, matched_keyword = triage_email(
+        category, triage_reason = triage_email(
             subject="",  # Telegram messages don't have subjects
             sender=sender_name,
             body=incoming_text,
@@ -191,14 +191,14 @@ class TelegramChannel(Channel):
         emoji = emoji_map.get(category, "⚪")
 
         response = (
-            f"{emoji} **{category}** (matched: _{matched_keyword}_)\n\n"
+            f"{emoji} **{category}** (reason: _{triage_reason}_)\n\n"
             f"📝 **Draft Response:**\n{draft}"
         )
 
         await update.message.reply_text(response, parse_mode="Markdown")
 
         self._message_count += 1
-        print(f"[telegram] {sender_name} → {category} (keyword: {matched_keyword})")
+        print(f"[telegram] {sender_name} → {category} (reason: {triage_reason})")
 
     def _get_or_create_contact(self, name: str) -> int:
         """Find contact by name, or create if not exists."""

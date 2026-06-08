@@ -17,7 +17,9 @@ Usage:
 
 import argparse
 import email
+import hashlib
 import imaplib
+import json
 import logging
 import os
 import re
@@ -54,6 +56,8 @@ from reader import (
 LOG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
 SENT_LOG = os.path.join(LOG_DIR, "sent_log.txt")
 AGENT_LOG = os.path.join(LOG_DIR, "agent.log")
+DRAFT_CACHE_PATH = os.path.join(LOG_DIR, "draft_cache.json")
+DRAFT_MODEL = "gpt-4o-mini"
 
 # Rate-limit: max sends per window
 RATE_LIMIT_MAX = 10
@@ -251,6 +255,53 @@ def fetch_emails() -> list[dict]:
     return emails
 
 
+def _draft_cache_key(email_data: dict) -> str:
+    payload = {
+        "category": email_data.get("category", ""),
+        "sender": " ".join((email_data.get("sender") or "").split()).lower(),
+        "subject": " ".join((email_data.get("subject") or "").split()).lower(),
+        "body": " ".join((email_data.get("body") or "").split()),
+    }
+    serialized = json.dumps(payload, sort_keys=True, ensure_ascii=False)
+    return hashlib.sha256(serialized.encode("utf-8")).hexdigest()
+
+
+def _load_draft_cache() -> dict:
+    if not os.path.exists(DRAFT_CACHE_PATH):
+        return {}
+    try:
+        with open(DRAFT_CACHE_PATH, "r", encoding="utf-8") as handle:
+            data = json.load(handle)
+        return data if isinstance(data, dict) else {}
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def _save_draft_cache(cache: dict) -> None:
+    os.makedirs(LOG_DIR, exist_ok=True)
+    temp_path = f"{DRAFT_CACHE_PATH}.tmp"
+    with open(temp_path, "w", encoding="utf-8") as handle:
+        json.dump(cache, handle, indent=2, ensure_ascii=False, sort_keys=True)
+    os.replace(temp_path, DRAFT_CACHE_PATH)
+
+
+def _read_cached_draft(cache: dict, cache_key: str) -> str | None:
+    entry = cache.get(cache_key)
+    if not isinstance(entry, dict):
+        return None
+    draft = str(entry.get("draft", "")).strip()
+    return draft or None
+
+
+def _write_cached_draft(cache: dict, cache_key: str, draft: str, source: str) -> None:
+    cache[cache_key] = {
+        "draft": draft,
+        "source": source,
+        "model": DRAFT_MODEL,
+    }
+    _save_draft_cache(cache)
+
+
 def draft_reply(email_data: dict) -> str:
     """
     DECIDE phase -- use OpenAI to generate a professional draft reply.
@@ -259,6 +310,13 @@ def draft_reply(email_data: dict) -> str:
     subject = email_data["subject"]
     sender = email_data["sender"]
     body = email_data["body"]
+    cache_key = _draft_cache_key(email_data)
+    cache = _load_draft_cache()
+
+    cached_draft = _read_cached_draft(cache, cache_key)
+    if cached_draft:
+        logger.info("Draft cache hit for: %s", subject[:60])
+        return cached_draft
 
     prompt = (
         f"You are a construction project manager's AI communication assistant.\n\n"
@@ -282,26 +340,30 @@ def draft_reply(email_data: dict) -> str:
     try:
         client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model=DRAFT_MODEL,
             messages=[{"role": "user", "content": prompt}],
         )
         draft = response.choices[0].message.content.strip()
+        _write_cached_draft(cache, cache_key, draft, source="openai")
         logger.info("Draft generated for: %s", subject[:60])
         return draft
     except Exception as exc:
         logger.error("LLM draft generation failed: %s", exc)
         # Fallback templates based on category
         if category == "URGENT":
-            return (
+            draft = (
                 "Thank you for flagging this urgent matter. I have received your message "
                 "and am reviewing it immediately. I will respond with a detailed action "
                 "plan within the next two hours. Please do not hesitate to call if the "
                 "situation requires immediate attention."
             )
-        return (
-            "Thank you for your email. I have received your message and will review "
-            "the details. I will follow up with a response by end of business today."
-        )
+        else:
+            draft = (
+                "Thank you for your email. I have received your message and will review "
+                "the details. I will follow up with a response by end of business today."
+            )
+        _write_cached_draft(cache, cache_key, draft, source="fallback")
+        return draft
 
 
 def send_email(

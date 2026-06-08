@@ -14,7 +14,7 @@
 
 ## Description
 
-An AI-powered communication agent for construction project managers that automates email triage, drafts professional replies, and sends them with human-in-the-loop safety guardrails. The agent reads incoming project emails via IMAP, classifies them by urgency (URGENT/ACTION/FYI/ARCHIVE) using a multi-pass keyword engine, generates context-aware draft responses using OpenAI (gpt-4o-mini), and supports multi-channel communication through both Email and Telegram. Built with a modular architecture that enables independent testing and incremental improvement.
+An AI-powered communication agent for construction project managers that automates email triage, drafts professional replies, and sends them with human-in-the-loop safety guardrails. The agent reads incoming project emails via IMAP, classifies them semantically by urgency (URGENT/ACTION/FYI/ARCHIVE) using OpenAI (gpt-4o-mini), generates context-aware draft responses, and supports multi-channel communication through both Email and Telegram. Built with a modular architecture that enables independent testing and incremental improvement.
 
 ---
 
@@ -22,7 +22,9 @@ An AI-powered communication agent for construction project managers that automat
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the full system architecture, component descriptions, data flow diagram, and design decisions.
 
-**High-level summary:** A modular pipeline that reads incoming emails via IMAP, classifies them by urgency using keyword-based triage, drafts context-aware responses via OpenAI LLM, and sends them after explicit user approval -- with persistent SQLite memory for contacts and message history.
+**High-level summary:** A modular pipeline that reads incoming emails via IMAP, classifies them by urgency using semantic LLM triage, drafts context-aware responses via OpenAI, and sends them after explicit user approval -- with persistent SQLite memory for contacts and message history.
+
+**LLM cache:** Semantic classification, email previews, and draft replies are cached locally under `logs/`. Refreshing the live inbox reuses cached LLM results for emails with the same sender, subject, and body, so only new or changed emails require new OpenAI calls.
 
 ---
 
@@ -30,35 +32,34 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for the full system architecture, compone
 
 ### 1. Clone the repository
 
-```bash
+```powershell
 git clone https://github.com/AFU-V1/CEM501.git
 cd CEM501
 ```
 
 ### 2. Create a virtual environment
 
-```bash
+```powershell
 py -m venv venv
-source venv/bin/activate  # macOS/Linux
-# venv\Scripts\activate   # Windows
+venv\Scripts\activate
 ```
 
 ### 3. Install dependencies
 
-```bash
+```powershell
 pip install -r requirements.txt
 ```
 
 ### 4. Configure environment variables
 
-```bash
-cp .env.example .env
-# Edit .env with your actual API keys and credentials
+```powershell
+Copy-Item project\.env.example project\.env
+# Edit project\.env with your actual API keys and credentials
 ```
 
 ### 5. Verify setup
 
-```bash
+```powershell
 py -c "import openai; print('Setup OK')"
 ```
 
@@ -66,7 +67,9 @@ py -c "import openai; print('Setup OK')"
 
 ## How to Run
 
-```bash
+```powershell
+cd project
+
 # Run the email agent (full pipeline with send capability)
 py agent.py
 
@@ -94,8 +97,10 @@ py scheduler.py --loop
 # View memory database status
 py -m memory.memory
 
-# Run the web dashboard
-py -m flask --app dashboard_app run --debug
+# Run the web dashboard for the final demo
+py dashboard_app.py
+# Open http://127.0.0.1:5000
+# Use "Load Demo Snapshot" and "Approve Dry Run" for a safe live demo.
 ```
 
 ---
@@ -104,14 +109,14 @@ py -m flask --app dashboard_app run --debug
 
 - [x] **M0:** Environment setup and API key configuration
 - [x] **M1:** Prompt template library (`templates/` -- RFI, daily report, delay notice)
-- [x] **M2:** Email reader and triage module (`reader.py` -- IMAP + keyword classification)
+- [x] **M2:** Email reader and triage module (`reader.py` -- IMAP + semantic LLM classification)
 - [x] **M3:** Daily digest generator (`digest.py` -- OpenAI summarization + HTML output)
 - [x] **M4:** Email agent v1 (`agent.py` -- read + triage + draft + send with 4 guardrails)
 - [x] **M5:** Architecture documentation (`ARCHITECTURE.md` -- components, data flow, 4 ADRs)
 - [x] **M6:** Multi-channel integration (`channels/` -- Email + Telegram with shared triage)
 - [x] **M7:** Persistent memory + scheduling (`memory/` + `scheduler.py` + `agent.log`)
-- [ ] **M8:** Progress presentation
-- [ ] **M9:** Final demo + reflection document
+- [x] **M8:** Progress presentation completed
+- [ ] **M9:** Final demo package prepared; student-written `REFLECTION.md` must be finalized before submission
 
 ---
 
@@ -119,7 +124,7 @@ py -m flask --app dashboard_app run --debug
 
 | Tool / Model | How It Was Used |
 |--------------|-----------------|
-| OpenAI (gpt-4o-mini) | Email draft generation, daily digest summarization, Telegram response drafting |
+| OpenAI (gpt-4o-mini) | Semantic email triage, email draft generation, daily digest summarization, Telegram response drafting |
 | Gemini CLI / Antigravity | Building and debugging the agent pipeline, generating architecture documentation |
 | Cursor | Primary IDE for development and code review |
 
@@ -155,6 +160,9 @@ project/
     delaynotice_report.md # M1: Delay notice prompt template
   logs/
     agent.log           # M7: Agent operation log
+    triage_cache.json   # Runtime cache for semantic LLM triage (not committed)
+    email_summary_cache.json # Runtime cache for inbox preview summaries (not committed)
+    draft_cache.json     # Runtime cache for generated email drafts (not committed)
     sent_log.txt        # M4: Sent email audit trail
   web/
     templates/          # Dashboard HTML shell
@@ -167,7 +175,7 @@ project/
 
 ## Reflection
 
-See [REFLECTION.md](REFLECTION.md) for the full project reflection, including lessons learned, challenges encountered, and thoughts on AI-assisted development.
+See [REFLECTION.md](REFLECTION.md) for the required reflection structure. The final 500-800 word reflection must be written in Furkan's own words before submission.
 
 ---
 

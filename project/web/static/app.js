@@ -179,7 +179,7 @@ function renderInboxCard(item) {
       <p>${escapeHtml(item.preview || item.body || "")}</p>
       <div class="legend">
         <span class="pill ${item.category.toLowerCase()}">${escapeHtml(item.category)}</span>
-        <span class="pill archive">keyword: ${escapeHtml(item.keyword || "default")}</span>
+        <span class="pill archive">reason: ${escapeHtml(cleanReason(item.keyword))}</span>
       </div>
     </article>
   `;
@@ -199,6 +199,7 @@ function renderQueue(queue) {
   items.forEach((item) => {
     const editButton = document.getElementById(`save-${item.id}`);
     const approveButton = document.getElementById(`approve-${item.id}`);
+    const dryRunButton = document.getElementById(`dryrun-${item.id}`);
     const rejectButton = document.getElementById(`reject-${item.id}`);
     const deleteButton = document.getElementById(`delete-${item.id}`);
 
@@ -207,6 +208,9 @@ function renderQueue(queue) {
     }
     if (approveButton) {
       approveButton.addEventListener("click", () => approveDraft(item.id));
+    }
+    if (dryRunButton) {
+      dryRunButton.addEventListener("click", () => approveDraft(item.id, true));
     }
     if (rejectButton) {
       rejectButton.addEventListener("click", () => rejectDraft(item.id));
@@ -227,7 +231,7 @@ function renderQueueCard(item) {
             <span class="pill archive">${escapeHtml(item.status.toUpperCase())}</span>
           </div>
           <h4>${escapeHtml(item.reply_subject)}</h4>
-          <p class="microcopy">${escapeHtml(item.sender_name)} • ${escapeHtml(item.sender_email)} • keyword: ${escapeHtml(item.keyword)}</p>
+          <p class="microcopy">${escapeHtml(item.sender_name)} • ${escapeHtml(item.sender_email)} • reason: ${escapeHtml(cleanReason(item.keyword))}</p>
         </div>
         <div class="microcopy">${escapeHtml(item.last_action || item.updated_at || "")}</div>
       </div>
@@ -245,6 +249,7 @@ function renderQueueCard(item) {
           ${renderWarnings(item)}
           <div class="queue-actions">
             <button id="save-${item.id}" class="btn btn-secondary">Edit Draft</button>
+            <button id="dryrun-${item.id}" class="btn btn-secondary">Approve Dry Run</button>
             <button id="approve-${item.id}" class="btn btn-primary">Approve & Send</button>
             <button id="reject-${item.id}" class="btn btn-ghost">Reject</button>
             <button id="delete-${item.id}" class="btn btn-ghost" style="color: var(--color-urgent);">Delete</button>
@@ -280,11 +285,11 @@ async function saveDraft(queueId) {
   await loadDashboard($("#memorySearch").value || "");
 }
 
-async function approveDraft(queueId) {
+async function approveDraft(queueId, dryRun = false) {
   await fetch(`/api/queue/${queueId}/approve`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ dry_run: false }),
+    body: JSON.stringify({ dry_run: dryRun }),
   });
   await loadDashboard($("#memorySearch").value || "");
 }
@@ -482,6 +487,19 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+
+function cleanReason(value) {
+  let text = String(value || "review manually").trim();
+  if (!text || text.toLowerCase() === "llm_error_review_manually") {
+    return "review manually";
+  }
+
+  text = text.replace(/^llm:(?:(?:high|medium|low):)?/i, "").trim();
+  if (!text || text.toLowerCase() === "review") {
+    return "review manually";
+  }
+  return text;
 }
 
 function debounce(fn, wait) {
