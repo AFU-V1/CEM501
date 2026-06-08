@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function bindEvents() {
   $("#refreshLiveBtn").addEventListener("click", () => refreshInbox("live"));
   $("#refreshSampleBtn").addEventListener("click", () => refreshInbox("sample"));
+  $("#resetDemoBtn").addEventListener("click", resetDemoState);
   $("#probeBtn").addEventListener("click", probeSystems);
   $("#themeBtn").addEventListener("click", toggleTheme);
   $("#digestBtn").addEventListener("click", generateDigest);
@@ -35,7 +36,7 @@ async function loadDashboard(query = "") {
 
 async function refreshInbox(source) {
   state.source = source;
-  setHeroStatus(`Refreshing ${source === "live" ? "live" : "sample"} inbox snapshot...`);
+  setHeroStatus(`Refreshing ${source === "live" ? "live inbox and Telegram history" : "sample inbox snapshot"}...`);
 
   const response = await fetch("/api/inbox/refresh", {
     method: "POST",
@@ -53,24 +54,56 @@ async function refreshInbox(source) {
   renderInbox(payload.inbox);
   renderQueue(payload.queue);
   await refreshAuxiliaryPanels();
+  setHeroStatus(
+    `${payload.overview.status_message} Last refresh: ${payload.overview.last_refresh || "not yet refreshed"}. Message History refreshed.`
+  );
+}
+
+async function resetDemoState() {
+  if (!confirm("Reset demo inbox and review queue to the original sample state?")) {
+    return;
+  }
+
+  state.source = "sample";
+  setHeroStatus("Resetting demo snapshot...");
+
+  const response = await fetch("/api/demo/reset", { method: "POST" });
+  const payload = await response.json();
+
+  if (!payload.ok) {
+    setHeroStatus(payload.error || "Demo reset failed.");
+    return;
+  }
+
+  renderOverview(payload.overview);
+  renderInbox(payload.inbox);
+  renderQueue(payload.queue);
+  await refreshAuxiliaryPanels();
 }
 
 async function refreshAuxiliaryPanels() {
-  const [statusRes, logsRes, tasksRes] = await Promise.all([
+  const query = $("#memorySearch").value || "";
+  const [statusRes, logsRes, tasksRes, contactsRes, messagesRes] = await Promise.all([
     fetch("/api/status"),
     fetch("/api/logs"),
     fetch("/api/tasks"),
+    fetch(`/api/contacts?q=${encodeURIComponent(query)}`),
+    fetch(`/api/messages?q=${encodeURIComponent(query)}`),
   ]);
 
-  const [statusPayload, logsPayload, tasksPayload] = await Promise.all([
+  const [statusPayload, logsPayload, tasksPayload, contactsPayload, messagesPayload] = await Promise.all([
     statusRes.json(),
     logsRes.json(),
     tasksRes.json(),
+    contactsRes.json(),
+    messagesRes.json(),
   ]);
 
   renderStatus(statusPayload.items);
   renderLogs(logsPayload.items);
   renderTasks(tasksPayload);
+  renderContacts(contactsPayload.items || []);
+  renderMessages(messagesPayload.items || []);
 }
 
 async function searchMemory(query) {
@@ -104,6 +137,7 @@ async function generateDigest() {
   });
   const payload = await response.json();
   $("#digestPreview").textContent = payload.text || "Digest preview unavailable.";
+  renderDigestHistory(payload.history || []);
 }
 
 function toggleTheme() {
@@ -126,6 +160,7 @@ function renderDashboard(payload) {
   renderTasks(payload.tasks);
   renderStatus(payload.status || []);
   renderLogs(payload.logs || []);
+  renderArtifactHistories(payload.artifacts || {});
 }
 
 function renderOverview(overview) {
@@ -240,15 +275,25 @@ function renderQueueCard(item) {
         <div class="message-block">
           <p class="eyebrow">Original Email</p>
           <p><strong>${escapeHtml(item.subject)}</strong></p>
-          <p>${escapeHtml(item.body)}</p>
+          <p class="original-email-body">${escapeHtml(item.body)}</p>
         </div>
 
         <div class="draft-block">
           <p class="eyebrow">Proposed Draft</p>
+          <div class="recipient-grid">
+            <label>
+              <span class="eyebrow">To</span>
+              <input id="to-${item.id}" class="recipient-input" type="email" value="${escapeHtml(item.to_address || item.sender_email || "")}">
+            </label>
+            <label>
+              <span class="eyebrow">Cc / Additional Recipient</span>
+              <input id="cc-${item.id}" class="recipient-input" type="text" value="${escapeHtml(item.cc_address || "")}" placeholder="optional@example.com">
+            </label>
+          </div>
           <textarea id="draft-${item.id}" class="draft-input">${escapeHtml(item.draft)}</textarea>
           ${renderWarnings(item)}
           <div class="queue-actions">
-            <button id="save-${item.id}" class="btn btn-secondary">Edit Draft</button>
+            <button id="save-${item.id}" class="btn btn-secondary">Save Draft</button>
             <button id="dryrun-${item.id}" class="btn btn-secondary">Approve Dry Run</button>
             <button id="approve-${item.id}" class="btn btn-primary">Approve & Send</button>
             <button id="reject-${item.id}" class="btn btn-ghost">Reject</button>
@@ -276,16 +321,35 @@ function renderWarnings(item) {
 }
 
 async function saveDraft(queueId) {
+  await persistQueueItem(queueId, true);
+}
+
+async function persistQueueItem(queueId, reload = false) {
   const draft = document.getElementById(`draft-${queueId}`).value;
-  await fetch(`/api/queue/${queueId}/edit`, {
+  const toAddress = document.getElementById(`to-${queueId}`).value;
+  const ccAddress = document.getElementById(`cc-${queueId}`).value;
+
+  const response = await fetch(`/api/queue/${queueId}/edit`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ draft }),
+    body: JSON.stringify({ draft, to_address: toAddress, cc_address: ccAddress }),
   });
-  await loadDashboard($("#memorySearch").value || "");
+  const payload = await response.json();
+  if (!payload.ok) {
+    alert(payload.error || "Failed to save draft.");
+    return false;
+  }
+
+  if (reload) {
+    await loadDashboard($("#memorySearch").value || "");
+  }
+  return true;
 }
 
 async function approveDraft(queueId, dryRun = false) {
+  const saved = await persistQueueItem(queueId, false);
+  if (!saved) return;
+
   await fetch(`/api/queue/${queueId}/approve`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -348,7 +412,7 @@ function renderMessages(items) {
 function renderTasks(tasks) {
   $("#pendingTasks").innerHTML = tasks.pending?.length
     ? tasks.pending.map((task) => renderTaskCard(task, false)).join("")
-    : emptyState("No pending tasks.");
+    : "";
 
   $("#overdueTasks").innerHTML = tasks.overdue?.length
     ? tasks.overdue.map((task) => renderTaskCard(task, true)).join("")
@@ -358,15 +422,26 @@ function renderTasks(tasks) {
 }
 
 function renderTaskCard(task, isOverdue) {
-  return `
-    <article class="task-card">
-      <p class="eyebrow">${isOverdue ? "Overdue" : "Pending"}</p>
-      <h4>${escapeHtml(task.description)}</h4>
-      <p class="microcopy">${escapeHtml(task.contact_name || "No linked contact")} • due ${escapeHtml(task.due_at)}</p>
+  const isEmailOverdue = task.source === "email_overdue";
+  const label = isEmailOverdue ? `Overdue ${task.category || "Email"}` : isOverdue ? "Overdue" : "Pending";
+  const detail = isEmailOverdue
+    ? `${task.contact_name || "Unknown sender"} • received ${task.due_at || "unknown date"}`
+    : `${task.contact_name || "No linked contact"} • due ${task.due_at}`;
+  const actions = task.actionable === false
+    ? ""
+    : `
       <div class="task-actions">
         <button data-task-complete="${task.id}" class="btn btn-secondary">Complete</button>
         <button data-task-skip="${task.id}" class="btn btn-ghost">Skip</button>
       </div>
+    `;
+
+  return `
+    <article class="task-card">
+      <p class="eyebrow">${escapeHtml(label)}</p>
+      <h4>${escapeHtml(task.description)}</h4>
+      <p class="microcopy">${escapeHtml(detail)}</p>
+      ${actions}
     </article>
   `;
 }
@@ -444,9 +519,68 @@ async function generateDailyReport() {
   if (payload.ok) {
     $("#reportContent").value = payload.report;
     $("#queueReportBtn").style.display = "inline-block";
+    renderReportHistory(payload.history || []);
   } else {
     $("#reportContent").value = "Error generating report: " + payload.error;
   }
+}
+
+function renderArtifactHistories(artifacts) {
+  renderReportHistory(artifacts.daily_reports || []);
+  renderDigestHistory(artifacts.morning_digests || []);
+}
+
+function renderReportHistory(items) {
+  const container = $("#reportsHistory");
+  if (!container) return;
+
+  container.innerHTML = items.length
+    ? items.map(renderReportHistoryItem).join("")
+    : emptyState("No saved reports yet.");
+
+  items.forEach((item) => {
+    const button = document.getElementById(`report-history-${item.id}`);
+    if (!button) return;
+    button.addEventListener("click", () => {
+      $("#reportContent").value = item.content || "";
+      $("#queueReportBtn").style.display = item.content ? "inline-block" : "none";
+    });
+  });
+}
+
+function renderDigestHistory(items) {
+  const container = $("#digestsHistory");
+  if (!container) return;
+
+  container.innerHTML = items.length
+    ? items.map(renderDigestHistoryItem).join("")
+    : emptyState("No saved digests yet.");
+
+  items.forEach((item) => {
+    const button = document.getElementById(`digest-history-${item.id}`);
+    if (!button) return;
+    button.addEventListener("click", () => {
+      $("#digestPreview").textContent = item.text || "Digest preview unavailable.";
+    });
+  });
+}
+
+function renderReportHistoryItem(item) {
+  return `
+    <button id="report-history-${escapeHtml(item.id)}" class="artifact-item" type="button">
+      <h4>${escapeHtml(item.title || "Daily Report")}</h4>
+      <p class="microcopy">${escapeHtml(item.created_at || "")} • messages: ${item.selected_message_count || 0}</p>
+    </button>
+  `;
+}
+
+function renderDigestHistoryItem(item) {
+  return `
+    <button id="digest-history-${escapeHtml(item.id)}" class="artifact-item" type="button">
+      <h4>${escapeHtml(item.title || "Morning Digest")}</h4>
+      <p class="microcopy">${escapeHtml(item.created_at || "")} • source: ${escapeHtml(item.source || "current")}</p>
+    </button>
+  `;
 }
 
 async function queueDailyReport() {

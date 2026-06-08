@@ -20,6 +20,7 @@
       <div class="sidebar-panel">
         <button id="refreshLiveBtn" class="btn btn-primary">Refresh Live Inbox</button>
         <button id="refreshSampleBtn" class="btn btn-secondary">Load Demo Snapshot</button>
+        <button id="resetDemoBtn" class="btn btn-ghost">Reset Demo State</button>
         <button id="probeBtn" class="btn btn-ghost">Run Health Probe</button>
         <button id="themeBtn" class="btn btn-ghost">Toggle Theme</button>
       </div>
@@ -30,7 +31,7 @@
         <a href="#queue">Review Queue</a>
         <a href="#memory">Memory</a>
         <a href="#report-builder">Daily Report</a>
-        <a href="#tasks">Scheduler</a>
+        <a href="#tasks">Cron Job</a>
         <a href="#status">Status</a>
       </nav>
 
@@ -109,21 +110,58 @@
             <button id="generateReportBtn" class="btn btn-primary">Generate Daily Report</button>
         </div>
         <p class="microcopy">Select messages from the Message History above using the checkboxes to include their data in the daily report.</p>
-        <div class="draft-block" style="margin-top: 1rem;">
-           <textarea id="reportContent" class="draft-input" placeholder="Generated report will appear here..." style="min-height: 200px; font-family: monospace;"></textarea>
-           <div class="queue-actions" style="margin-top: 10px;">
-              <button id="queueReportBtn" class="btn btn-secondary" style="display: none;">Add to Review Queue (Prepare Email)</button>
-           </div>
+        <div class="artifact-layout">
+          <div class="draft-block">
+             <textarea id="reportContent" class="draft-input" placeholder="Generated report will appear here..." style="min-height: 200px; font-family: monospace;"></textarea>
+             <div class="queue-actions" style="margin-top: 10px;">
+                <button id="queueReportBtn" class="btn btn-secondary" style="display: none;">Add to Review Queue (Prepare Email)</button>
+             </div>
+          </div>
+          <aside class="artifact-sidebar">
+            <div class="section-header compact-header">
+              <div>
+                <p class="eyebrow">Archive</p>
+                <h3>Previous Reports</h3>
+              </div>
+            </div>
+            <div id="reportsHistory" class="artifact-history"></div>
+          </aside>
         </div>
       </section>
 
       <section id="tasks" class="triple-grid">
-        <div class="glass-panel">
+        <div class="glass-panel cron-tasks-panel">
           <div class="section-header">
             <div>
-              <p class="eyebrow">Scheduler</p>
+              <p class="eyebrow">Cron Job</p>
               <h3>Pending Tasks</h3>
             </div>
+          </div>
+          <div class="cron-rule-list">
+            <article class="cron-rule">
+              <span class="cron-time">08:00 daily</span>
+              <p>Send the Daily Digest email every morning.</p>
+            </article>
+            <article class="cron-rule">
+              <span class="cron-time">Before noon</span>
+              <p>If no field update has arrived, remind site teams to send their status update.</p>
+            </article>
+            <article class="cron-rule">
+              <span class="cron-time">16:00 daily</span>
+              <p>If no field information has arrived by 4 PM, send a follow-up reminder.</p>
+            </article>
+            <article class="cron-rule">
+              <span class="cron-time">End of day</span>
+              <p>Automatically generate the Daily Report from incoming and outgoing messages and emails.</p>
+            </article>
+            <article class="cron-rule">
+              <span class="cron-time">End of week</span>
+              <p>Create a Weekly Report by combining the daily reports from that week.</p>
+            </article>
+            <article class="cron-rule">
+              <span class="cron-time">End of month</span>
+              <p>Create a Monthly Report by combining the weekly reports from that month.</p>
+            </article>
           </div>
           <div id="pendingTasks" class="stack-list"></div>
         </div>
@@ -146,7 +184,18 @@
             </div>
             <button id="digestBtn" class="btn btn-secondary">Generate Preview</button>
           </div>
-          <div id="digestPreview" class="digest-preview">Digest preview will appear here.</div>
+          <div class="artifact-layout">
+            <div id="digestPreview" class="digest-preview">Digest preview will appear here.</div>
+            <aside class="artifact-sidebar">
+              <div class="section-header compact-header">
+                <div>
+                  <p class="eyebrow">Archive</p>
+                  <h3>Previous Digests</h3>
+                </div>
+              </div>
+              <div id="digestsHistory" class="artifact-history"></div>
+            </aside>
+          </div>
         </div>
       </section>
 

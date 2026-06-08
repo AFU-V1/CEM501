@@ -284,7 +284,11 @@ def decode_part_payload(part: email.message.Message) -> str:
     return payload.decode(charset, errors="replace")
 
 
-def extract_body_preview(message: email.message.Message, limit: int = 200) -> str:
+def extract_body_preview(
+    message: email.message.Message,
+    limit: int | None = 200,
+    preserve_line_breaks: bool = False,
+) -> str:
     plain_text_parts = []
     html_parts = []
 
@@ -315,7 +319,15 @@ def extract_body_preview(message: email.message.Message, limit: int = 200) -> st
     if not body_text and html_parts:
         body_text = html_to_text(" ".join(html_parts))
 
-    normalized = re.sub(r"\s+", " ", body_text).strip()
+    if preserve_line_breaks:
+        lines = [re.sub(r"[ \t]+", " ", line).strip() for line in body_text.splitlines()]
+        normalized = "\n".join(lines)
+        normalized = re.sub(r"\n{3,}", "\n\n", normalized).strip()
+    else:
+        normalized = re.sub(r"\s+", " ", body_text).strip()
+
+    if limit is None:
+        return normalized
     return normalized[:limit]
 
 

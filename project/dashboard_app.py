@@ -20,6 +20,8 @@ from openai import OpenAI
 from dashboard_store import (
     approve_queue_item,
     dashboard_overview,
+    daily_report_history,
+    digest_history,
     digest_snapshot,
     grouped_inbox,
     load_dashboard_state,
@@ -30,6 +32,9 @@ from dashboard_store import (
     queue_metrics,
     refresh_inbox_state,
     reject_queue_item,
+    reset_demo_state,
+    save_daily_report,
+    save_morning_digest,
     search_contacts,
     search_messages,
     tasks_snapshot,
@@ -145,6 +150,10 @@ def dashboard_payload(query: str = "") -> dict:
         "tasks": tasks_snapshot(),
         "status": passive_system_status(),
         "logs": parse_log_lines(limit=24),
+        "artifacts": {
+            "daily_reports": daily_report_history(),
+            "morning_digests": digest_history(),
+        },
     }
 
 
@@ -180,6 +189,23 @@ def refresh_inbox():
     )
 
 
+@app.post("/api/demo/reset")
+def reset_demo():
+    """Reset bundled demo inbox and review queue to a clean rehearsal state."""
+    state = reset_demo_state()
+    return jsonify(
+        {
+            "ok": True,
+            "overview": dashboard_overview(state),
+            "inbox": grouped_inbox(state.get("emails", [])),
+            "queue": {
+                "items": state.get("queue", []),
+                "metrics": queue_metrics(state.get("queue", [])),
+            },
+        }
+    )
+
+
 @app.get("/api/queue")
 def get_queue():
     """Return the current review queue."""
@@ -192,11 +218,15 @@ def edit_queue(queue_id: str):
     """Persist an edited draft from the dashboard."""
     payload = request.get_json(silent=True) or {}
     draft = (payload.get("draft") or "").strip()
+    to_address = (payload.get("to_address") or "").strip()
+    cc_address = (payload.get("cc_address") or "").strip()
     if not draft:
         return json_error("Draft body cannot be empty.", 422)
+    if not to_address:
+        return json_error("Recipient email cannot be empty.", 422)
 
     try:
-        item = update_queue_draft(queue_id, draft)
+        item = update_queue_draft(queue_id, draft, to_address=to_address, cc_address=cc_address)
     except KeyError:
         return json_error("Draft not found.", 404)
 
@@ -285,7 +315,19 @@ def digest_preview():
     source = payload.get("source")
     use_llm = bool(payload.get("use_llm", False))
     snapshot = digest_snapshot(source=source, use_llm=use_llm)
-    return jsonify({"ok": True, **snapshot})
+    item = save_morning_digest(
+        text=snapshot.get("text", ""),
+        html=snapshot.get("html", ""),
+        source=source,
+        use_llm=use_llm,
+    )
+    return jsonify({"ok": True, **snapshot, "item": item, "history": digest_history()})
+
+
+@app.get("/api/digests/history")
+def digests_history_api():
+    """Return saved morning digest previews."""
+    return jsonify({"ok": True, "items": digest_history()})
 
 
 @app.get("/api/status")
@@ -315,9 +357,16 @@ def generate_daily_report_api():
     from dashboard_store import generate_daily_report_from_messages
     try:
         report = generate_daily_report_from_messages(message_ids)
-        return jsonify({"ok": True, "report": report})
+        item = save_daily_report(report, selected_message_count=len(message_ids))
+        return jsonify({"ok": True, "report": report, "item": item, "history": daily_report_history()})
     except Exception as e:
         return json_error(str(e), 500)
+
+
+@app.get("/api/reports/history")
+def daily_reports_history_api():
+    """Return saved daily reports."""
+    return jsonify({"ok": True, "items": daily_report_history()})
 
 
 @app.post("/api/queue/synthetic")

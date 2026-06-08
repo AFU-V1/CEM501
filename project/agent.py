@@ -115,21 +115,35 @@ def _check_rate_limit() -> bool:
     return True
 
 
-def _validate_recipient(to_address: str) -> list[str]:
+def _split_recipients(*address_groups: str) -> list[str]:
+    recipients: list[str] = []
+    for group in address_groups:
+        recipients.extend(address.strip() for address in (group or "").split(",") if address.strip())
+    return recipients
+
+
+def _validate_recipient(to_address: str, cc_address: str = "") -> list[str]:
     """Guardrail 2: Recipient validation -- returns a list of warnings."""
     warnings: list[str] = []
+    recipients = _split_recipients(to_address, cc_address)
 
-    # Check if recipient is known
-    if to_address.lower() not in [c.lower() for c in KNOWN_CONTACTS]:
-        warnings.append(f"[!] Recipient '{to_address}' is NOT in your known contacts list.")
+    if not recipients:
+        warnings.append("[!] No recipient email address provided.")
+        return warnings
 
-    # Check for suspicious domain typos
-    domain = to_address.split("@")[-1].lower() if "@" in to_address else ""
-    if domain in SUSPICIOUS_DOMAINS:
-        warnings.append(f"[!] Suspicious domain detected: '{domain}' -- possible typo!")
+    known_contacts = [c.lower() for c in KNOWN_CONTACTS]
+    for recipient in recipients:
+        if "@" not in recipient:
+            warnings.append(f"[!] Recipient '{recipient}' is not a valid email address.")
+            continue
 
-    # Check for multiple recipients (if comma-separated)
-    recipients = [r.strip() for r in to_address.split(",") if r.strip()]
+        if recipient.lower() not in known_contacts:
+            warnings.append(f"[!] Recipient '{recipient}' is NOT in your known contacts list.")
+
+        domain = recipient.split("@")[-1].lower()
+        if domain in SUSPICIOUS_DOMAINS:
+            warnings.append(f"[!] Suspicious domain detected: '{domain}' -- possible typo!")
+
     if len(recipients) > 5:
         warnings.append(
             f"[!] Sending to {len(recipients)} recipients! Review carefully."
@@ -160,9 +174,9 @@ def _validate_content(subject: str, body: str) -> list[str]:
     return warnings
 
 
-def get_send_warnings(to_address: str, subject: str, body: str) -> list[str]:
+def get_send_warnings(to_address: str, subject: str, body: str, cc_address: str = "") -> list[str]:
     """Return all non-blocking warnings for a proposed outbound email."""
-    return _validate_recipient(to_address) + _validate_content(subject, body)
+    return _validate_recipient(to_address, cc_address) + _validate_content(subject, body)
 
 
 def _extract_sender_email(sender_field: str) -> str:
@@ -228,15 +242,21 @@ def fetch_emails() -> list[dict]:
             sender = decode_mime_header(message.get("From"))
             subject = decode_mime_header(message.get("Subject"))
             date_str = decode_mime_header(message.get("Date"))
-            body = extract_body_preview(message, limit=500)
-            category, keyword = triage_email(subject, sender, body)
+            display_body = extract_body_preview(
+                message,
+                limit=None,
+                preserve_line_breaks=True,
+            )
+            triage_body = extract_body_preview(message, limit=500)
+            category, keyword = triage_email(subject, sender, triage_body)
 
             emails.append({
                 "sender": sender,
                 "sender_email": _extract_sender_email(sender),
                 "subject": subject,
                 "date": date_str,
-                "body": body,
+                "body": display_body,
+                "triage_body": triage_body,
                 "category": category,
                 "keyword": keyword,
             })
@@ -434,6 +454,7 @@ def send_approved_email(
     subject: str,
     body: str,
     dry_run: bool = False,
+    cc_address: str = "",
 ) -> tuple[bool, list[str], str]:
     """
     Send an already-reviewed draft without CLI prompts.
@@ -441,10 +462,10 @@ def send_approved_email(
     This is intended for the web dashboard, where the dashboard itself is the
     human confirmation surface required by ADR 2.
     """
-    warnings = get_send_warnings(to_address, subject, body)
+    warnings = get_send_warnings(to_address, subject, body, cc_address)
 
     if dry_run:
-        logger.info("[DRY RUN] Approved dashboard draft for: %s -> %s", subject[:40], to_address)
+        logger.info("[DRY RUN] Approved dashboard draft for: %s -> %s cc=%s", subject[:40], to_address, cc_address)
         return True, warnings, "dry_run"
 
     if not _check_rate_limit():
@@ -452,11 +473,11 @@ def send_approved_email(
         logger.warning("Blocked approved send for %s: %s", to_address, warning)
         return False, warnings + [warning], "blocked"
 
-    success = _do_send(to_address, subject, body)
+    success = _do_send(to_address, subject, body, cc_address=cc_address)
     return success, warnings, "sent" if success else "error"
 
 
-def _do_send(to_address: str, subject: str, body: str) -> bool:
+def _do_send(to_address: str, subject: str, body: str, cc_address: str = "") -> bool:
     """Actually send the email via SMTP and log the result."""
     load_dotenv()
     email_address = require_env("EMAIL_ADDRESS")
@@ -468,6 +489,8 @@ def _do_send(to_address: str, subject: str, body: str) -> bool:
     msg["Subject"] = subject
     msg["From"] = email_address
     msg["To"] = to_address
+    if cc_address.strip():
+        msg["Cc"] = cc_address.strip()
 
     try:
         with smtplib.SMTP(smtp_server, smtp_port) as server:
@@ -479,7 +502,8 @@ def _do_send(to_address: str, subject: str, body: str) -> bool:
         _send_timestamps.append(time.time())
 
         # Log to sent_log.txt
-        _log_sent(to_address, subject)
+        logged_recipient = to_address if not cc_address.strip() else f"{to_address} | Cc: {cc_address.strip()}"
+        _log_sent(logged_recipient, subject)
 
         logger.info("[OK] Email sent to %s -- Subject: %s", to_address, subject)
         print("  [OK] Email sent successfully!")

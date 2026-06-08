@@ -25,3 +25,656 @@
 2026-06-08 15:15:37,868 | INFO | 127.0.0.1 - - [08/Jun/2026 15:15:37] "GET /static/app.js HTTP/1.1" 200 -
 2026-06-08 15:15:37,868 | INFO | 127.0.0.1 - - [08/Jun/2026 15:15:37] "GET /static/index.css HTTP/1.1" 200 -
 2026-06-08 15:15:37,999 | INFO | 127.0.0.1 - - [08/Jun/2026 15:15:37] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 16:39:10,567 | INFO | 127.0.0.1 - - [08/Jun/2026 16:39:10] "GET / HTTP/1.1" 200 -
+2026-06-08 16:39:10,612 | INFO | 127.0.0.1 - - [08/Jun/2026 16:39:10] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 16:39:10,614 | INFO | 127.0.0.1 - - [08/Jun/2026 16:39:10] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 16:39:10,698 | INFO | 127.0.0.1 - - [08/Jun/2026 16:39:10] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 20:30:09,967 | INFO | 127.0.0.1 - - [08/Jun/2026 20:30:09] "GET / HTTP/1.1" 200 -
+2026-06-08 20:30:10,022 | INFO | 127.0.0.1 - - [08/Jun/2026 20:30:10] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 20:30:10,025 | INFO | 127.0.0.1 - - [08/Jun/2026 20:30:10] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 20:30:10,122 | INFO | 127.0.0.1 - - [08/Jun/2026 20:30:10] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 20:34:39,710 | INFO | 127.0.0.1 - - [08/Jun/2026 20:34:39] "GET / HTTP/1.1" 200 -
+2026-06-08 20:34:39,758 | INFO | 127.0.0.1 - - [08/Jun/2026 20:34:39] "GET /static/index.css HTTP/1.1" 200 -
+2026-06-08 20:34:39,761 | INFO | 127.0.0.1 - - [08/Jun/2026 20:34:39] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 20:34:39,830 | INFO | 127.0.0.1 - - [08/Jun/2026 20:34:39] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 20:35:06,315 | INFO | 127.0.0.1 - - [08/Jun/2026 20:35:06] "GET / HTTP/1.1" 200 -
+2026-06-08 20:35:06,355 | INFO | 127.0.0.1 - - [08/Jun/2026 20:35:06] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 20:35:06,358 | INFO | 127.0.0.1 - - [08/Jun/2026 20:35:06] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 20:35:06,417 | INFO | 127.0.0.1 - - [08/Jun/2026 20:35:06] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 20:35:33,916 | INFO | 127.0.0.1 - - [08/Jun/2026 20:35:33] "GET / HTTP/1.1" 200 -
+2026-06-08 20:35:33,947 | INFO | 127.0.0.1 - - [08/Jun/2026 20:35:33] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 20:35:33,951 | INFO | 127.0.0.1 - - [08/Jun/2026 20:35:33] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 20:35:34,000 | INFO | 127.0.0.1 - - [08/Jun/2026 20:35:34] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 20:36:10,166 | INFO | 127.0.0.1 - - [08/Jun/2026 20:36:10] "GET / HTTP/1.1" 200 -
+2026-06-08 20:36:10,212 | INFO | 127.0.0.1 - - [08/Jun/2026 20:36:10] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 20:36:10,216 | INFO | 127.0.0.1 - - [08/Jun/2026 20:36:10] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 20:36:10,359 | INFO | 127.0.0.1 - - [08/Jun/2026 20:36:10] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 20:37:24,214 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:37:24,223 | INFO | 127.0.0.1 - - [08/Jun/2026 20:37:24] "POST /api/reports/daily HTTP/1.1" 200 -
+2026-06-08 20:37:32,211 | INFO | 127.0.0.1 - - [08/Jun/2026 20:37:32] "POST /api/queue/synthetic HTTP/1.1" 200 -
+2026-06-08 20:37:34,028 | INFO | 127.0.0.1 - - [08/Jun/2026 20:37:34] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 20:38:26,128 | INFO | 127.0.0.1 - - [08/Jun/2026 20:38:26] "POST /api/queue/863a4d235cea/delete HTTP/1.1" 200 -
+2026-06-08 20:38:26,210 | INFO | 127.0.0.1 - - [08/Jun/2026 20:38:26] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 20:38:28,189 | INFO | 127.0.0.1 - - [08/Jun/2026 20:38:28] "GET / HTTP/1.1" 200 -
+2026-06-08 20:38:28,224 | INFO | 127.0.0.1 - - [08/Jun/2026 20:38:28] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 20:38:28,227 | INFO | 127.0.0.1 - - [08/Jun/2026 20:38:28] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 20:38:28,279 | INFO | 127.0.0.1 - - [08/Jun/2026 20:38:28] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 20:38:36,157 | INFO | 127.0.0.1 - - [08/Jun/2026 20:38:36] "POST /api/digest/preview HTTP/1.1" 200 -
+2026-06-08 20:38:54,908 | INFO | 127.0.0.1 - - [08/Jun/2026 20:38:54] "GET / HTTP/1.1" 200 -
+2026-06-08 20:38:54,943 | INFO | 127.0.0.1 - - [08/Jun/2026 20:38:54] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 20:38:54,945 | INFO | 127.0.0.1 - - [08/Jun/2026 20:38:54] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 20:38:55,001 | INFO | 127.0.0.1 - - [08/Jun/2026 20:38:55] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 20:39:02,269 | INFO | 127.0.0.1 - - [08/Jun/2026 20:39:02] "POST /api/digest/preview HTTP/1.1" 200 -
+2026-06-08 20:39:37,731 | INFO | 127.0.0.1 - - [08/Jun/2026 20:39:37] "GET / HTTP/1.1" 200 -
+2026-06-08 20:39:37,769 | INFO | 127.0.0.1 - - [08/Jun/2026 20:39:37] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 20:39:37,772 | INFO | 127.0.0.1 - - [08/Jun/2026 20:39:37] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 20:39:37,821 | INFO | 127.0.0.1 - - [08/Jun/2026 20:39:37] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 20:40:14,276 | INFO | 127.0.0.1 - - [08/Jun/2026 20:40:14] "[33mGET /api/reports/history HTTP/1.1[0m" 404 -
+2026-06-08 20:40:51,490 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+2026-06-08 20:40:51,491 | INFO | [33mPress CTRL+C to quit[0m
+2026-06-08 20:41:03,153 | INFO | 127.0.0.1 - - [08/Jun/2026 20:41:03] "GET / HTTP/1.1" 200 -
+2026-06-08 20:41:03,306 | INFO | 127.0.0.1 - - [08/Jun/2026 20:41:03] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 20:41:03,310 | INFO | 127.0.0.1 - - [08/Jun/2026 20:41:03] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 20:41:03,381 | INFO | 127.0.0.1 - - [08/Jun/2026 20:41:03] "GET /api/reports/history HTTP/1.1" 200 -
+2026-06-08 20:41:03,403 | INFO | 127.0.0.1 - - [08/Jun/2026 20:41:03] "GET /api/digests/history HTTP/1.1" 200 -
+2026-06-08 20:41:03,425 | INFO | 127.0.0.1 - - [08/Jun/2026 20:41:03] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 20:41:12,422 | INFO | 127.0.0.1 - - [08/Jun/2026 20:41:12] "POST /api/digest/preview HTTP/1.1" 200 -
+2026-06-08 20:41:16,298 | INFO | 127.0.0.1 - - [08/Jun/2026 20:41:16] "GET /api/bootstrap HTTP/1.1" 200 -
+2026-06-08 20:41:16,635 | INFO | 127.0.0.1 - - [08/Jun/2026 20:41:16] "POST /api/digest/preview HTTP/1.1" 200 -
+2026-06-08 20:41:53,801 | INFO | 127.0.0.1 - - [08/Jun/2026 20:41:53] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 20:41:54,852 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:41:54,879 | INFO | 127.0.0.1 - - [08/Jun/2026 20:41:54] "POST /api/reports/daily HTTP/1.1" 200 -
+2026-06-08 20:45:22,611 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+2026-06-08 20:45:22,611 | INFO | [33mPress CTRL+C to quit[0m
+2026-06-08 20:45:34,584 | INFO | 127.0.0.1 - - [08/Jun/2026 20:45:34] "GET /api/bootstrap HTTP/1.1" 200 -
+2026-06-08 20:45:47,853 | INFO | 127.0.0.1 - - [08/Jun/2026 20:45:47] "GET / HTTP/1.1" 200 -
+2026-06-08 20:45:47,962 | INFO | 127.0.0.1 - - [08/Jun/2026 20:45:47] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 20:45:47,962 | INFO | 127.0.0.1 - - [08/Jun/2026 20:45:47] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 20:45:48,049 | INFO | 127.0.0.1 - - [08/Jun/2026 20:45:48] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 20:49:26,578 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+2026-06-08 20:49:26,578 | INFO | [33mPress CTRL+C to quit[0m
+2026-06-08 20:49:38,255 | INFO | 127.0.0.1 - - [08/Jun/2026 20:49:38] "GET /api/bootstrap HTTP/1.1" 200 -
+2026-06-08 20:49:38,262 | INFO | 127.0.0.1 - - [08/Jun/2026 20:49:38] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 20:50:16,418 | INFO | Connecting to IMAP server: imap.gmail.com
+2026-06-08 20:50:16,988 | INFO | Found 109 messages, processing last 20.
+2026-06-08 20:50:18,940 | INFO | Triage complete: 3 URGENT, 5 ACTION, 7 FYI, 5 ARCHIVE
+2026-06-08 20:50:23,655 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:50:23,669 | INFO | Draft generated for: Complaint: Vibration damage to my building at Moda Caddesi 4
+2026-06-08 20:50:23,676 | INFO | 127.0.0.1 - - [08/Jun/2026 20:50:23] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 20:50:23,716 | INFO | 127.0.0.1 - - [08/Jun/2026 20:50:23] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 20:50:23,724 | INFO | 127.0.0.1 - - [08/Jun/2026 20:50:23] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 20:50:23,758 | INFO | 127.0.0.1 - - [08/Jun/2026 20:50:23] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 20:52:41,761 | INFO | 127.0.0.1 - - [08/Jun/2026 20:52:41] "GET / HTTP/1.1" 200 -
+2026-06-08 20:52:41,797 | INFO | 127.0.0.1 - - [08/Jun/2026 20:52:41] "GET /static/index.css HTTP/1.1" 200 -
+2026-06-08 20:52:41,798 | INFO | 127.0.0.1 - - [08/Jun/2026 20:52:41] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 20:52:41,883 | INFO | 127.0.0.1 - - [08/Jun/2026 20:52:41] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 20:53:01,415 | INFO | Connecting to IMAP server: imap.gmail.com
+2026-06-08 20:53:02,348 | INFO | Found 109 messages, processing last 20.
+2026-06-08 20:53:10,449 | INFO | Triage complete: 3 URGENT, 5 ACTION, 7 FYI, 5 ARCHIVE
+2026-06-08 20:53:10,464 | INFO | Draft cache hit for: Complaint: Vibration damage to my building at Moda Caddesi 4
+2026-06-08 20:53:10,469 | INFO | 127.0.0.1 - - [08/Jun/2026 20:53:10] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 20:53:10,478 | INFO | 127.0.0.1 - - [08/Jun/2026 20:53:10] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 20:53:10,483 | INFO | 127.0.0.1 - - [08/Jun/2026 20:53:10] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 20:53:10,505 | INFO | 127.0.0.1 - - [08/Jun/2026 20:53:10] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 20:53:23,081 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:24,812 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:25,967 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:27,684 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:29,242 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:30,913 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:32,107 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:33,247 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:34,950 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:36,597 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:38,721 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:40,235 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:41,694 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:42,635 | INFO | Connecting to IMAP server: imap.gmail.com
+2026-06-08 20:53:43,840 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:43,946 | INFO | Found 109 messages, processing last 20.
+2026-06-08 20:53:45,031 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:45,938 | INFO | 127.0.0.1 - - [08/Jun/2026 20:53:45] "GET / HTTP/1.1" 200 -
+2026-06-08 20:53:45,978 | INFO | 127.0.0.1 - - [08/Jun/2026 20:53:45] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 20:53:45,979 | INFO | 127.0.0.1 - - [08/Jun/2026 20:53:45] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 20:53:46,036 | INFO | 127.0.0.1 - - [08/Jun/2026 20:53:46] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 20:53:46,294 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:47,467 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:48,417 | INFO | Triage complete: 3 URGENT, 5 ACTION, 7 FYI, 5 ARCHIVE
+2026-06-08 20:53:48,425 | INFO | Draft cache hit for: Complaint: Vibration damage to my building at Moda Caddesi 4
+2026-06-08 20:53:48,445 | INFO | 127.0.0.1 - - [08/Jun/2026 20:53:48] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 20:53:48,604 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:49,663 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:50,781 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:51,870 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:52,869 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:55,668 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:55,674 | INFO | Draft generated for: URGENT: Fall protection deficiency — immediate correction re
+2026-06-08 20:53:58,191 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:53:58,197 | INFO | Draft generated for: Notice of Delay — Pier 5 foundation work
+2026-06-08 20:54:01,361 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:54:01,365 | INFO | Draft generated for: RFI-047 Response: Rebar spacing at Pier 3
+2026-06-08 20:54:02,867 | INFO | HTTP Request: GET https://api.openai.com/v1/models "HTTP/1.1 200 OK"
+2026-06-08 20:54:03,063 | INFO | 127.0.0.1 - - [08/Jun/2026 20:54:03] "GET /api/status?probe=1 HTTP/1.1" 200 -
+2026-06-08 20:54:03,400 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:54:03,411 | INFO | Draft generated for: Updated delivery schedule for Week 12
+2026-06-08 20:54:05,121 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:54:05,126 | INFO | Draft generated for: Schedule review meeting — agenda items needed
+2026-06-08 20:54:05,136 | INFO | 127.0.0.1 - - [08/Jun/2026 20:54:05] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 20:55:07,889 | INFO | Connecting to IMAP server: imap.gmail.com
+2026-06-08 20:55:10,133 | INFO | Found 110 messages, processing last 20.
+2026-06-08 20:55:11,650 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:14,563 | INFO | Triage complete: 3 URGENT, 4 ACTION, 7 FYI, 6 ARCHIVE
+2026-06-08 20:55:16,115 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:16,571 | INFO | Connecting to IMAP server: imap.gmail.com
+2026-06-08 20:55:17,048 | INFO | Found 110 messages, processing last 20.
+2026-06-08 20:55:17,545 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:18,819 | INFO | Triage complete: 3 URGENT, 4 ACTION, 7 FYI, 6 ARCHIVE
+2026-06-08 20:55:20,223 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:22,013 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:22,591 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:23,625 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:24,952 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:25,155 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:26,733 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:26,872 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:28,104 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:28,436 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:30,191 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:30,243 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:31,283 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:31,914 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:32,621 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:33,465 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:33,865 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:34,609 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:35,099 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:35,677 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:36,457 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:36,798 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:37,826 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:38,011 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:39,301 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:40,120 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:41,479 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:41,525 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:42,988 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:43,160 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:44,351 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:44,611 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:46,617 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:46,966 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:48,688 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:48,739 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:51,883 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:51,894 | INFO | Draft generated for: Road closure permit — Sogutlucesme Caddesi — expiring March 
+2026-06-08 20:55:51,909 | INFO | Draft cache hit for: Complaint: Vibration damage to my building at Moda Caddesi 4
+2026-06-08 20:55:52,217 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:52,228 | INFO | Draft generated for: Road closure permit — Sogutlucesme Caddesi — expiring March 
+2026-06-08 20:55:52,236 | INFO | Draft cache hit for: Complaint: Vibration damage to my building at Moda Caddesi 4
+2026-06-08 20:55:53,583 | INFO | Connecting to IMAP server: imap.gmail.com
+2026-06-08 20:55:54,102 | INFO | Found 110 messages, processing last 20.
+2026-06-08 20:55:54,619 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:54,630 | INFO | Draft generated for: Pump failure at Well DW-03 — water level rising
+2026-06-08 20:55:54,798 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:54,806 | INFO | Draft generated for: Pump failure at Well DW-03 — water level rising
+2026-06-08 20:55:55,808 | INFO | Triage complete: 3 URGENT, 4 ACTION, 7 FYI, 6 ARCHIVE
+2026-06-08 20:55:55,831 | INFO | Draft cache hit for: Road closure permit — Sogutlucesme Caddesi — expiring March 
+2026-06-08 20:55:55,832 | INFO | Draft cache hit for: Complaint: Vibration damage to my building at Moda Caddesi 4
+2026-06-08 20:55:55,832 | INFO | Draft cache hit for: Pump failure at Well DW-03 — water level rising
+2026-06-08 20:55:57,924 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:57,935 | INFO | Draft generated for: Certificate of insurance — renewal required by April 1
+2026-06-08 20:55:57,958 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:57,962 | INFO | Draft generated for: Certificate of insurance — renewal required by April 1
+2026-06-08 20:55:58,814 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:55:58,820 | INFO | Draft generated for: Certificate of insurance — renewal required by April 1
+2026-06-08 20:56:00,778 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:56:00,784 | INFO | Draft generated for: Concrete cube test results — 28-day break — Sector 1 base sl
+2026-06-08 20:56:00,919 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:56:00,924 | INFO | Draft generated for: Concrete cube test results — 28-day break — Sector 1 base sl
+2026-06-08 20:56:02,569 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:56:02,575 | INFO | Draft generated for: Concrete cube test results — 28-day break — Sector 1 base sl
+2026-06-08 20:56:03,729 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:56:03,747 | INFO | Draft generated for: RFI-031: Waler beam connection detail at Section B-B
+2026-06-08 20:56:03,754 | INFO | 127.0.0.1 - - [08/Jun/2026 20:56:03] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 20:56:03,761 | INFO | 127.0.0.1 - - [08/Jun/2026 20:56:03] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 20:56:03,765 | INFO | 127.0.0.1 - - [08/Jun/2026 20:56:03] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 20:56:03,791 | INFO | 127.0.0.1 - - [08/Jun/2026 20:56:03] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 20:56:03,795 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:56:03,801 | INFO | Draft generated for: RFI-031: Waler beam connection detail at Section B-B
+2026-06-08 20:56:03,810 | INFO | 127.0.0.1 - - [08/Jun/2026 20:56:03] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 20:56:03,823 | INFO | 127.0.0.1 - - [08/Jun/2026 20:56:03] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 20:56:03,829 | INFO | 127.0.0.1 - - [08/Jun/2026 20:56:03] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 20:56:03,878 | INFO | 127.0.0.1 - - [08/Jun/2026 20:56:03] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 20:56:05,309 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 20:56:05,319 | INFO | Draft generated for: RFI-031: Waler beam connection detail at Section B-B
+2026-06-08 20:56:05,333 | INFO | 127.0.0.1 - - [08/Jun/2026 20:56:05] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 20:56:34,787 | INFO | 127.0.0.1 - - [08/Jun/2026 20:56:34] "GET /api/bootstrap HTTP/1.1" 200 -
+2026-06-08 20:56:57,660 | INFO | Draft cache hit for: URGENT: Fall protection deficiency — immediate correction re
+2026-06-08 20:56:57,661 | INFO | Draft cache hit for: Notice of Delay — Pier 5 foundation work
+2026-06-08 20:56:57,662 | INFO | Draft cache hit for: RFI-047 Response: Rebar spacing at Pier 3
+2026-06-08 20:56:57,663 | INFO | Draft cache hit for: Updated delivery schedule for Week 12
+2026-06-08 20:56:57,664 | INFO | Draft cache hit for: Schedule review meeting — agenda items needed
+2026-06-08 20:56:57,671 | INFO | 127.0.0.1 - - [08/Jun/2026 20:56:57] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 20:56:57,680 | INFO | 127.0.0.1 - - [08/Jun/2026 20:56:57] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 20:56:57,686 | INFO | 127.0.0.1 - - [08/Jun/2026 20:56:57] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 20:56:57,710 | INFO | 127.0.0.1 - - [08/Jun/2026 20:56:57] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 20:58:59,636 | INFO | 127.0.0.1 - - [08/Jun/2026 20:58:59] "POST /api/queue/1703e4703470/delete HTTP/1.1" 200 -
+2026-06-08 20:58:59,734 | INFO | 127.0.0.1 - - [08/Jun/2026 20:58:59] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 20:59:01,286 | INFO | Draft cache hit for: URGENT: Fall protection deficiency — immediate correction re
+2026-06-08 20:59:01,306 | INFO | 127.0.0.1 - - [08/Jun/2026 20:59:01] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 20:59:01,323 | INFO | 127.0.0.1 - - [08/Jun/2026 20:59:01] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 20:59:01,332 | INFO | 127.0.0.1 - - [08/Jun/2026 20:59:01] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 20:59:01,376 | INFO | 127.0.0.1 - - [08/Jun/2026 20:59:01] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 21:01:08,172 | INFO | [DRY RUN] Approved dashboard draft for: Re: Notice of Delay — Pier 5 foundation  -> mehmet@kayasteel.com
+2026-06-08 21:01:08,192 | INFO | 127.0.0.1 - - [08/Jun/2026 21:01:08] "POST /api/queue/7cf1b73626f8/approve HTTP/1.1" 200 -
+2026-06-08 21:01:08,236 | INFO | 127.0.0.1 - - [08/Jun/2026 21:01:08] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 21:01:16,467 | INFO | Draft cache hit for: Notice of Delay — Pier 5 foundation work
+2026-06-08 21:01:16,473 | INFO | 127.0.0.1 - - [08/Jun/2026 21:01:16] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 21:01:16,479 | INFO | 127.0.0.1 - - [08/Jun/2026 21:01:16] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 21:01:16,484 | INFO | 127.0.0.1 - - [08/Jun/2026 21:01:16] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 21:01:16,505 | INFO | 127.0.0.1 - - [08/Jun/2026 21:01:16] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 21:01:22,097 | INFO | Draft cache hit for: Notice of Delay — Pier 5 foundation work
+2026-06-08 21:01:22,101 | INFO | 127.0.0.1 - - [08/Jun/2026 21:01:22] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 21:01:22,109 | INFO | 127.0.0.1 - - [08/Jun/2026 21:01:22] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 21:01:22,114 | INFO | 127.0.0.1 - - [08/Jun/2026 21:01:22] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 21:01:22,135 | INFO | 127.0.0.1 - - [08/Jun/2026 21:01:22] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 21:02:32,587 | INFO | Draft cache hit for: Notice of Delay — Pier 5 foundation work
+2026-06-08 21:02:32,594 | INFO | 127.0.0.1 - - [08/Jun/2026 21:02:32] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 21:02:32,602 | INFO | 127.0.0.1 - - [08/Jun/2026 21:02:32] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 21:02:32,610 | INFO | 127.0.0.1 - - [08/Jun/2026 21:02:32] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 21:02:32,633 | INFO | 127.0.0.1 - - [08/Jun/2026 21:02:32] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 21:03:07,016 | INFO | 127.0.0.1 - - [08/Jun/2026 21:03:07] "GET / HTTP/1.1" 200 -
+2026-06-08 21:03:07,059 | INFO | 127.0.0.1 - - [08/Jun/2026 21:03:07] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 21:03:07,067 | INFO | 127.0.0.1 - - [08/Jun/2026 21:03:07] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 21:03:07,174 | INFO | 127.0.0.1 - - [08/Jun/2026 21:03:07] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 21:04:18,903 | INFO | Connecting to IMAP server: imap.gmail.com
+2026-06-08 21:04:19,446 | INFO | Found 110 messages, processing last 20.
+2026-06-08 21:04:21,248 | INFO | Triage complete: 3 URGENT, 4 ACTION, 7 FYI, 6 ARCHIVE
+2026-06-08 21:04:21,258 | INFO | Draft cache hit for: Road closure permit — Sogutlucesme Caddesi — expiring March 
+2026-06-08 21:04:21,259 | INFO | Draft cache hit for: Complaint: Vibration damage to my building at Moda Caddesi 4
+2026-06-08 21:04:21,259 | INFO | Draft cache hit for: Pump failure at Well DW-03 — water level rising
+2026-06-08 21:04:21,260 | INFO | Draft cache hit for: Certificate of insurance — renewal required by April 1
+2026-06-08 21:04:21,260 | INFO | Draft cache hit for: Concrete cube test results — 28-day break — Sector 1 base sl
+2026-06-08 21:04:21,261 | INFO | Draft cache hit for: RFI-031: Waler beam connection detail at Section B-B
+2026-06-08 21:04:21,266 | INFO | 127.0.0.1 - - [08/Jun/2026 21:04:21] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 21:04:21,275 | INFO | 127.0.0.1 - - [08/Jun/2026 21:04:21] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 21:04:21,280 | INFO | 127.0.0.1 - - [08/Jun/2026 21:04:21] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 21:04:21,307 | INFO | 127.0.0.1 - - [08/Jun/2026 21:04:21] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 21:05:40,154 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+2026-06-08 21:05:40,154 | INFO | [33mPress CTRL+C to quit[0m
+2026-06-08 21:05:46,178 | INFO | Connecting to IMAP server: imap.gmail.com
+2026-06-08 21:05:46,689 | INFO | Found 111 messages, processing last 20.
+2026-06-08 21:05:49,392 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 21:05:51,112 | INFO | Triage complete: 3 URGENT, 5 ACTION, 6 FYI, 6 ARCHIVE
+2026-06-08 21:05:52,872 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 21:05:52,889 | INFO | Draft cache hit for: Complaint: Vibration damage to my building at Moda Caddesi 4
+2026-06-08 21:05:53,938 | INFO | Draft cache hit for: URGENT: Fall protection deficiency — immediate correction re
+2026-06-08 21:05:53,939 | INFO | Draft cache hit for: Notice of Delay — Pier 5 foundation work
+2026-06-08 21:05:53,939 | INFO | Draft cache hit for: RFI-047 Response: Rebar spacing at Pier 3
+2026-06-08 21:05:53,940 | INFO | Draft cache hit for: Updated delivery schedule for Week 12
+2026-06-08 21:05:53,940 | INFO | Draft cache hit for: Schedule review meeting — agenda items needed
+2026-06-08 21:05:53,946 | INFO | 127.0.0.1 - - [08/Jun/2026 21:05:53] "POST /api/demo/reset HTTP/1.1" 200 -
+2026-06-08 21:05:53,980 | INFO | 127.0.0.1 - - [08/Jun/2026 21:05:53] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 21:05:56,550 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 21:05:56,554 | INFO | Draft generated for: RFI-014 - Conflict Between HVAC Duct and Fire Sprinkler Line
+2026-06-08 21:05:56,561 | INFO | 127.0.0.1 - - [08/Jun/2026 21:05:56] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 21:05:56,570 | INFO | 127.0.0.1 - - [08/Jun/2026 21:05:56] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 21:05:56,575 | INFO | 127.0.0.1 - - [08/Jun/2026 21:05:56] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 21:05:56,605 | INFO | 127.0.0.1 - - [08/Jun/2026 21:05:56] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 21:06:52,704 | INFO | 127.0.0.1 - - [08/Jun/2026 21:06:52] "GET / HTTP/1.1" 200 -
+2026-06-08 21:06:52,740 | INFO | 127.0.0.1 - - [08/Jun/2026 21:06:52] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 21:06:52,741 | INFO | 127.0.0.1 - - [08/Jun/2026 21:06:52] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 21:06:52,831 | INFO | 127.0.0.1 - - [08/Jun/2026 21:06:52] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 21:06:55,505 | INFO | Draft cache hit for: URGENT: Fall protection deficiency — immediate correction re
+2026-06-08 21:06:55,506 | INFO | Draft cache hit for: Notice of Delay — Pier 5 foundation work
+2026-06-08 21:06:55,506 | INFO | Draft cache hit for: RFI-047 Response: Rebar spacing at Pier 3
+2026-06-08 21:06:55,507 | INFO | Draft cache hit for: Updated delivery schedule for Week 12
+2026-06-08 21:06:55,507 | INFO | Draft cache hit for: Schedule review meeting — agenda items needed
+2026-06-08 21:06:55,512 | INFO | 127.0.0.1 - - [08/Jun/2026 21:06:55] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 21:06:55,519 | INFO | 127.0.0.1 - - [08/Jun/2026 21:06:55] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 21:06:55,523 | INFO | 127.0.0.1 - - [08/Jun/2026 21:06:55] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 21:06:55,543 | INFO | 127.0.0.1 - - [08/Jun/2026 21:06:55] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 21:07:06,194 | INFO | Draft cache hit for: URGENT: Fall protection deficiency — immediate correction re
+2026-06-08 21:07:06,196 | INFO | Draft cache hit for: Notice of Delay — Pier 5 foundation work
+2026-06-08 21:07:06,198 | INFO | Draft cache hit for: RFI-047 Response: Rebar spacing at Pier 3
+2026-06-08 21:07:06,200 | INFO | Draft cache hit for: Updated delivery schedule for Week 12
+2026-06-08 21:07:06,201 | INFO | Draft cache hit for: Schedule review meeting — agenda items needed
+2026-06-08 21:07:06,210 | INFO | 127.0.0.1 - - [08/Jun/2026 21:07:06] "POST /api/demo/reset HTTP/1.1" 200 -
+2026-06-08 21:07:06,225 | INFO | 127.0.0.1 - - [08/Jun/2026 21:07:06] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 21:07:06,235 | INFO | 127.0.0.1 - - [08/Jun/2026 21:07:06] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 21:07:06,269 | INFO | 127.0.0.1 - - [08/Jun/2026 21:07:06] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 21:07:21,909 | INFO | 127.0.0.1 - - [08/Jun/2026 21:07:21] "POST /api/queue/7cf1b73626f8/edit HTTP/1.1" 200 -
+2026-06-08 21:07:21,948 | INFO | 127.0.0.1 - - [08/Jun/2026 21:07:21] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 21:07:36,066 | INFO | 127.0.0.1 - - [08/Jun/2026 21:07:36] "POST /api/queue/1703e4703470/reject HTTP/1.1" 200 -
+2026-06-08 21:07:36,105 | INFO | 127.0.0.1 - - [08/Jun/2026 21:07:36] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 21:07:43,328 | INFO | 127.0.0.1 - - [08/Jun/2026 21:07:43] "POST /api/queue/1703e4703470/delete HTTP/1.1" 200 -
+2026-06-08 21:07:43,415 | INFO | 127.0.0.1 - - [08/Jun/2026 21:07:43] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 21:07:52,758 | INFO | [DRY RUN] Approved dashboard draft for: Re: RFI-047 Response: Rebar spacing at P -> arslan@archdesign.com
+2026-06-08 21:07:52,782 | INFO | 127.0.0.1 - - [08/Jun/2026 21:07:52] "POST /api/queue/fdc03c376fbc/approve HTTP/1.1" 200 -
+2026-06-08 21:07:52,819 | INFO | 127.0.0.1 - - [08/Jun/2026 21:07:52] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 21:08:01,642 | INFO | 127.0.0.1 - - [08/Jun/2026 21:08:01] "POST /api/queue/bcd116e45e28/reject HTTP/1.1" 200 -
+2026-06-08 21:08:01,677 | INFO | 127.0.0.1 - - [08/Jun/2026 21:08:01] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 21:08:57,467 | INFO | 127.0.0.1 - - [08/Jun/2026 21:08:57] "GET / HTTP/1.1" 200 -
+2026-06-08 21:08:57,512 | INFO | 127.0.0.1 - - [08/Jun/2026 21:08:57] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 21:08:57,515 | INFO | 127.0.0.1 - - [08/Jun/2026 21:08:57] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 21:08:57,589 | INFO | 127.0.0.1 - - [08/Jun/2026 21:08:57] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 21:09:02,860 | INFO | Draft cache hit for: URGENT: Fall protection deficiency — immediate correction re
+2026-06-08 21:09:02,861 | INFO | Draft cache hit for: Notice of Delay — Pier 5 foundation work
+2026-06-08 21:09:02,863 | INFO | Draft cache hit for: RFI-047 Response: Rebar spacing at Pier 3
+2026-06-08 21:09:02,865 | INFO | Draft cache hit for: Updated delivery schedule for Week 12
+2026-06-08 21:09:02,867 | INFO | Draft cache hit for: Schedule review meeting — agenda items needed
+2026-06-08 21:09:02,880 | INFO | 127.0.0.1 - - [08/Jun/2026 21:09:02] "POST /api/demo/reset HTTP/1.1" 200 -
+2026-06-08 21:09:02,896 | INFO | 127.0.0.1 - - [08/Jun/2026 21:09:02] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 21:09:02,911 | INFO | 127.0.0.1 - - [08/Jun/2026 21:09:02] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 21:09:02,952 | INFO | 127.0.0.1 - - [08/Jun/2026 21:09:02] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 21:09:37,494 | INFO | [DRY RUN] Approved dashboard draft for: Re: URGENT: Fall protection deficiency — -> inspector@osha.gov
+2026-06-08 21:09:37,521 | INFO | 127.0.0.1 - - [08/Jun/2026 21:09:37] "POST /api/queue/1703e4703470/approve HTTP/1.1" 200 -
+2026-06-08 21:09:37,581 | INFO | 127.0.0.1 - - [08/Jun/2026 21:09:37] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 21:10:01,055 | INFO | Connecting to IMAP server: imap.gmail.com
+2026-06-08 21:10:02,108 | INFO | Found 111 messages, processing last 20.
+2026-06-08 21:10:07,449 | INFO | Triage complete: 3 URGENT, 5 ACTION, 6 FYI, 6 ARCHIVE
+2026-06-08 21:10:07,462 | INFO | Draft cache hit for: Road closure permit — Sogutlucesme Caddesi — expiring March 
+2026-06-08 21:10:07,463 | INFO | Draft cache hit for: Complaint: Vibration damage to my building at Moda Caddesi 4
+2026-06-08 21:10:07,464 | INFO | Draft cache hit for: Pump failure at Well DW-03 — water level rising
+2026-06-08 21:10:07,465 | INFO | Draft cache hit for: RFI-014 - Conflict Between HVAC Duct and Fire Sprinkler Line
+2026-06-08 21:10:10,021 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 21:10:10,028 | INFO | Draft generated for: Delay notice — formwork materials for Sector 3
+2026-06-08 21:10:10,049 | INFO | Draft cache hit for: Certificate of insurance — renewal required by April 1
+2026-06-08 21:10:10,050 | INFO | Draft cache hit for: Concrete cube test results — 28-day break — Sector 1 base sl
+2026-06-08 21:10:10,050 | INFO | Draft cache hit for: RFI-031: Waler beam connection detail at Section B-B
+2026-06-08 21:10:10,057 | INFO | 127.0.0.1 - - [08/Jun/2026 21:10:10] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 21:10:10,068 | INFO | 127.0.0.1 - - [08/Jun/2026 21:10:10] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 21:10:10,072 | INFO | 127.0.0.1 - - [08/Jun/2026 21:10:10] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 21:10:10,100 | INFO | 127.0.0.1 - - [08/Jun/2026 21:10:10] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 21:12:06,955 | INFO | [DRY RUN] Approved dashboard draft for: Subject -> to@example.com cc=cc@example.com
+2026-06-08 21:12:06,991 | INFO | [DRY RUN] Approved dashboard draft for: Re: RFI -> new@example.com cc=cc@example.com
+2026-06-08 21:14:05,633 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+2026-06-08 21:14:05,633 | INFO | [33mPress CTRL+C to quit[0m
+2026-06-08 21:14:14,943 | INFO | 127.0.0.1 - - [08/Jun/2026 21:14:14] "[33mGET /api/dashboard HTTP/1.1[0m" 404 -
+2026-06-08 21:14:26,854 | INFO | 127.0.0.1 - - [08/Jun/2026 21:14:26] "GET / HTTP/1.1" 200 -
+2026-06-08 21:14:36,011 | INFO | 127.0.0.1 - - [08/Jun/2026 21:14:36] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 21:48:47,450 | INFO | 127.0.0.1 - - [08/Jun/2026 21:48:47] "GET / HTTP/1.1" 200 -
+2026-06-08 21:48:47,508 | INFO | 127.0.0.1 - - [08/Jun/2026 21:48:47] "GET /static/index.css HTTP/1.1" 200 -
+2026-06-08 21:48:47,510 | INFO | 127.0.0.1 - - [08/Jun/2026 21:48:47] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 21:48:47,652 | INFO | 127.0.0.1 - - [08/Jun/2026 21:48:47] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 21:49:22,928 | INFO | Draft cache hit for: URGENT: Fall protection deficiency — immediate correction re
+2026-06-08 21:49:22,929 | INFO | Draft cache hit for: Notice of Delay — Pier 5 foundation work
+2026-06-08 21:49:22,929 | INFO | Draft cache hit for: RFI-047 Response: Rebar spacing at Pier 3
+2026-06-08 21:49:22,929 | INFO | Draft cache hit for: Updated delivery schedule for Week 12
+2026-06-08 21:49:22,930 | INFO | Draft cache hit for: Schedule review meeting — agenda items needed
+2026-06-08 21:49:22,935 | INFO | 127.0.0.1 - - [08/Jun/2026 21:49:22] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 21:49:22,943 | INFO | 127.0.0.1 - - [08/Jun/2026 21:49:22] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 21:49:22,948 | INFO | 127.0.0.1 - - [08/Jun/2026 21:49:22] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 21:49:22,969 | INFO | 127.0.0.1 - - [08/Jun/2026 21:49:22] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 21:49:38,605 | INFO | Draft cache hit for: URGENT: Fall protection deficiency — immediate correction re
+2026-06-08 21:49:38,610 | INFO | 127.0.0.1 - - [08/Jun/2026 21:49:38] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 21:49:38,616 | INFO | 127.0.0.1 - - [08/Jun/2026 21:49:38] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 21:49:38,621 | INFO | 127.0.0.1 - - [08/Jun/2026 21:49:38] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 21:49:38,639 | INFO | 127.0.0.1 - - [08/Jun/2026 21:49:38] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 21:49:39,771 | INFO | Connecting to IMAP server: imap.gmail.com
+2026-06-08 21:49:40,346 | INFO | Found 111 messages, processing last 20.
+2026-06-08 21:49:42,380 | INFO | Triage complete: 3 URGENT, 5 ACTION, 6 FYI, 6 ARCHIVE
+2026-06-08 21:49:42,393 | INFO | Draft cache hit for: Road closure permit — Sogutlucesme Caddesi — expiring March 
+2026-06-08 21:49:42,394 | INFO | Draft cache hit for: Complaint: Vibration damage to my building at Moda Caddesi 4
+2026-06-08 21:49:42,396 | INFO | Draft cache hit for: Pump failure at Well DW-03 — water level rising
+2026-06-08 21:49:42,398 | INFO | Draft cache hit for: RFI-014 - Conflict Between HVAC Duct and Fire Sprinkler Line
+2026-06-08 21:49:42,399 | INFO | Draft cache hit for: Delay notice — formwork materials for Sector 3
+2026-06-08 21:49:42,402 | INFO | Draft cache hit for: Certificate of insurance — renewal required by April 1
+2026-06-08 21:49:42,403 | INFO | Draft cache hit for: Concrete cube test results — 28-day break — Sector 1 base sl
+2026-06-08 21:49:42,405 | INFO | Draft cache hit for: RFI-031: Waler beam connection detail at Section B-B
+2026-06-08 21:49:42,425 | INFO | 127.0.0.1 - - [08/Jun/2026 21:49:42] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 21:49:42,444 | INFO | 127.0.0.1 - - [08/Jun/2026 21:49:42] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 21:49:42,451 | INFO | 127.0.0.1 - - [08/Jun/2026 21:49:42] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 21:49:42,488 | INFO | 127.0.0.1 - - [08/Jun/2026 21:49:42] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 21:49:44,813 | INFO | 127.0.0.1 - - [08/Jun/2026 21:49:44] "GET / HTTP/1.1" 200 -
+2026-06-08 21:49:44,853 | INFO | 127.0.0.1 - - [08/Jun/2026 21:49:44] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 21:49:44,855 | INFO | 127.0.0.1 - - [08/Jun/2026 21:49:44] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 21:49:44,952 | INFO | 127.0.0.1 - - [08/Jun/2026 21:49:44] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 21:50:40,089 | INFO | Connecting to IMAP server: imap.gmail.com
+2026-06-08 21:50:40,679 | INFO | Found 111 messages, processing last 20.
+2026-06-08 21:50:43,128 | INFO | Triage complete: 3 URGENT, 5 ACTION, 6 FYI, 6 ARCHIVE
+2026-06-08 21:50:43,160 | INFO | 127.0.0.1 - - [08/Jun/2026 21:50:43] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 21:50:43,179 | INFO | 127.0.0.1 - - [08/Jun/2026 21:50:43] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 21:50:43,187 | INFO | 127.0.0.1 - - [08/Jun/2026 21:50:43] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 21:50:43,217 | INFO | 127.0.0.1 - - [08/Jun/2026 21:50:43] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 21:52:59,756 | INFO | Draft cache hit for: URGENT: Fall protection deficiency — immediate correction re
+2026-06-08 21:52:59,757 | INFO | Draft cache hit for: Notice of Delay — Pier 5 foundation work
+2026-06-08 21:52:59,758 | INFO | Draft cache hit for: RFI-047 Response: Rebar spacing at Pier 3
+2026-06-08 21:52:59,758 | INFO | Draft cache hit for: Updated delivery schedule for Week 12
+2026-06-08 21:52:59,758 | INFO | Draft cache hit for: Schedule review meeting — agenda items needed
+2026-06-08 21:52:59,764 | INFO | 127.0.0.1 - - [08/Jun/2026 21:52:59] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 21:52:59,771 | INFO | 127.0.0.1 - - [08/Jun/2026 21:52:59] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 21:52:59,776 | INFO | 127.0.0.1 - - [08/Jun/2026 21:52:59] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 21:52:59,803 | INFO | 127.0.0.1 - - [08/Jun/2026 21:52:59] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 21:53:07,630 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:07] "POST /api/queue/1703e4703470/delete HTTP/1.1" 200 -
+2026-06-08 21:53:07,753 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:07] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 21:53:14,208 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:14] "POST /api/queue/7cf1b73626f8/delete HTTP/1.1" 200 -
+2026-06-08 21:53:14,359 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:14] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 21:53:17,568 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:17] "GET / HTTP/1.1" 200 -
+2026-06-08 21:53:17,616 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:17] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 21:53:17,620 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:17] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 21:53:17,740 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:17] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 21:53:20,090 | INFO | Draft cache hit for: URGENT: Fall protection deficiency — immediate correction re
+2026-06-08 21:53:20,092 | INFO | Draft cache hit for: Notice of Delay — Pier 5 foundation work
+2026-06-08 21:53:20,099 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:20] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 21:53:20,108 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:20] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 21:53:20,115 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:20] "GET /api/contacts?q= HTTP/1.1" 200 -
+2026-06-08 21:53:20,117 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:20] "GET /api/messages?q= HTTP/1.1" 200 -
+2026-06-08 21:53:20,118 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:20] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 21:53:20,149 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:20] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 21:53:26,064 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:26] "POST /api/queue/1703e4703470/delete HTTP/1.1" 200 -
+2026-06-08 21:53:26,189 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:26] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 21:53:28,203 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:28] "POST /api/queue/7cf1b73626f8/delete HTTP/1.1" 200 -
+2026-06-08 21:53:28,331 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:28] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 21:53:31,006 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:31] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 21:53:32,750 | INFO | Draft cache hit for: URGENT: Fall protection deficiency — immediate correction re
+2026-06-08 21:53:32,751 | INFO | Draft cache hit for: Notice of Delay — Pier 5 foundation work
+2026-06-08 21:53:32,757 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:32] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 21:53:32,766 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:32] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 21:53:32,774 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:32] "GET /api/contacts?q= HTTP/1.1" 200 -
+2026-06-08 21:53:32,775 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:32] "GET /api/messages?q= HTTP/1.1" 200 -
+2026-06-08 21:53:32,775 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:32] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 21:53:32,807 | INFO | 127.0.0.1 - - [08/Jun/2026 21:53:32] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 21:54:01,925 | INFO | 127.0.0.1 - - [08/Jun/2026 21:54:01] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 21:54:06,904 | INFO | Connecting to IMAP server: imap.gmail.com
+2026-06-08 21:54:07,448 | INFO | Found 111 messages, processing last 20.
+2026-06-08 21:54:09,348 | INFO | Triage complete: 3 URGENT, 5 ACTION, 6 FYI, 6 ARCHIVE
+2026-06-08 21:54:09,356 | INFO | Draft cache hit for: Road closure permit — Sogutlucesme Caddesi — expiring March 
+2026-06-08 21:54:09,356 | INFO | Draft cache hit for: Complaint: Vibration damage to my building at Moda Caddesi 4
+2026-06-08 21:54:09,357 | INFO | Draft cache hit for: Pump failure at Well DW-03 — water level rising
+2026-06-08 21:54:09,357 | INFO | Draft cache hit for: RFI-014 - Conflict Between HVAC Duct and Fire Sprinkler Line
+2026-06-08 21:54:09,357 | INFO | Draft cache hit for: Delay notice — formwork materials for Sector 3
+2026-06-08 21:54:09,358 | INFO | Draft cache hit for: Certificate of insurance — renewal required by April 1
+2026-06-08 21:54:09,359 | INFO | Draft cache hit for: Concrete cube test results — 28-day break — Sector 1 base sl
+2026-06-08 21:54:09,361 | INFO | Draft cache hit for: RFI-031: Waler beam connection detail at Section B-B
+2026-06-08 21:54:09,368 | INFO | 127.0.0.1 - - [08/Jun/2026 21:54:09] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 21:54:09,379 | INFO | 127.0.0.1 - - [08/Jun/2026 21:54:09] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 21:54:09,386 | INFO | 127.0.0.1 - - [08/Jun/2026 21:54:09] "GET /api/contacts?q= HTTP/1.1" 200 -
+2026-06-08 21:54:09,388 | INFO | 127.0.0.1 - - [08/Jun/2026 21:54:09] "GET /api/messages?q= HTTP/1.1" 200 -
+2026-06-08 21:54:09,389 | INFO | 127.0.0.1 - - [08/Jun/2026 21:54:09] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 21:54:09,418 | INFO | 127.0.0.1 - - [08/Jun/2026 21:54:09] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 21:55:03,460 | INFO | Connecting to IMAP server: imap.gmail.com
+2026-06-08 21:55:04,862 | INFO | Found 111 messages, processing last 20.
+2026-06-08 21:55:08,248 | INFO | Triage complete: 3 URGENT, 5 ACTION, 6 FYI, 6 ARCHIVE
+2026-06-08 21:55:08,263 | INFO | 127.0.0.1 - - [08/Jun/2026 21:55:08] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 21:55:08,282 | INFO | 127.0.0.1 - - [08/Jun/2026 21:55:08] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 21:55:08,293 | INFO | 127.0.0.1 - - [08/Jun/2026 21:55:08] "GET /api/contacts?q= HTTP/1.1" 200 -
+2026-06-08 21:55:08,296 | INFO | 127.0.0.1 - - [08/Jun/2026 21:55:08] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 21:55:08,299 | INFO | 127.0.0.1 - - [08/Jun/2026 21:55:08] "GET /api/messages?q= HTTP/1.1" 200 -
+2026-06-08 21:55:08,339 | INFO | 127.0.0.1 - - [08/Jun/2026 21:55:08] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 21:55:25,706 | INFO | 127.0.0.1 - - [08/Jun/2026 21:55:25] "GET / HTTP/1.1" 200 -
+2026-06-08 21:55:25,749 | INFO | 127.0.0.1 - - [08/Jun/2026 21:55:25] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 21:55:25,752 | INFO | 127.0.0.1 - - [08/Jun/2026 21:55:25] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 21:55:25,844 | INFO | 127.0.0.1 - - [08/Jun/2026 21:55:25] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 21:56:13,598 | INFO | 127.0.0.1 - - [08/Jun/2026 21:56:13] "GET /api/messages?limit=80 HTTP/1.1" 200 -
+2026-06-08 21:56:36,957 | INFO | 127.0.0.1 - - [08/Jun/2026 21:56:36] "GET /api/bootstrap HTTP/1.1" 200 -
+2026-06-08 21:59:03,048 | INFO | Connecting to IMAP server: imap.gmail.com
+2026-06-08 21:59:03,617 | INFO | Found 111 messages, processing last 20.
+2026-06-08 21:59:05,553 | INFO | Triage complete: 3 URGENT, 5 ACTION, 6 FYI, 6 ARCHIVE
+2026-06-08 21:59:05,571 | INFO | 127.0.0.1 - - [08/Jun/2026 21:59:05] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 21:59:05,580 | INFO | 127.0.0.1 - - [08/Jun/2026 21:59:05] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 21:59:05,584 | INFO | 127.0.0.1 - - [08/Jun/2026 21:59:05] "GET /api/contacts?q= HTTP/1.1" 200 -
+2026-06-08 21:59:05,586 | INFO | 127.0.0.1 - - [08/Jun/2026 21:59:05] "GET /api/messages?q= HTTP/1.1" 200 -
+2026-06-08 21:59:05,587 | INFO | 127.0.0.1 - - [08/Jun/2026 21:59:05] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 21:59:05,608 | INFO | 127.0.0.1 - - [08/Jun/2026 21:59:05] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 22:07:15,744 | INFO | 127.0.0.1 - - [08/Jun/2026 22:07:15] "GET / HTTP/1.1" 200 -
+2026-06-08 22:07:15,757 | INFO | 127.0.0.1 - - [08/Jun/2026 22:07:15] "GET /static/index.css HTTP/1.1" 200 -
+2026-06-08 22:07:38,377 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+2026-06-08 22:07:38,377 | INFO | [33mPress CTRL+C to quit[0m
+2026-06-08 22:07:50,025 | INFO | 127.0.0.1 - - [08/Jun/2026 22:07:50] "GET /static/index.css HTTP/1.1" 200 -
+2026-06-08 22:07:50,977 | INFO | 127.0.0.1 - - [08/Jun/2026 22:07:50] "GET / HTTP/1.1" 200 -
+2026-06-08 22:08:07,042 | INFO | 127.0.0.1 - - [08/Jun/2026 22:08:07] "GET / HTTP/1.1" 200 -
+2026-06-08 22:08:07,080 | INFO | 127.0.0.1 - - [08/Jun/2026 22:08:07] "GET /static/index.css HTTP/1.1" 200 -
+2026-06-08 22:08:07,087 | INFO | 127.0.0.1 - - [08/Jun/2026 22:08:07] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 22:08:07,173 | INFO | 127.0.0.1 - - [08/Jun/2026 22:08:07] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 22:09:59,006 | INFO | 127.0.0.1 - - [08/Jun/2026 22:09:59] "GET / HTTP/1.1" 200 -
+2026-06-08 22:09:59,018 | INFO | 127.0.0.1 - - [08/Jun/2026 22:09:59] "GET /static/index.css HTTP/1.1" 200 -
+2026-06-08 22:10:24,307 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+2026-06-08 22:10:24,307 | INFO | [33mPress CTRL+C to quit[0m
+2026-06-08 22:10:37,730 | INFO | 127.0.0.1 - - [08/Jun/2026 22:10:37] "GET /static/index.css HTTP/1.1" 200 -
+2026-06-08 22:10:38,758 | INFO | 127.0.0.1 - - [08/Jun/2026 22:10:38] "GET / HTTP/1.1" 200 -
+2026-06-08 22:13:05,754 | INFO | 127.0.0.1 - - [08/Jun/2026 22:13:05] "GET / HTTP/1.1" 200 -
+2026-06-08 22:13:05,789 | INFO | 127.0.0.1 - - [08/Jun/2026 22:13:05] "GET /static/index.css HTTP/1.1" 200 -
+2026-06-08 22:13:05,792 | INFO | 127.0.0.1 - - [08/Jun/2026 22:13:05] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 22:13:05,855 | INFO | 127.0.0.1 - - [08/Jun/2026 22:13:05] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 22:13:08,685 | INFO | 127.0.0.1 - - [08/Jun/2026 22:13:08] "GET / HTTP/1.1" 200 -
+2026-06-08 22:13:08,724 | INFO | 127.0.0.1 - - [08/Jun/2026 22:13:08] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 22:13:08,727 | INFO | 127.0.0.1 - - [08/Jun/2026 22:13:08] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 22:13:08,803 | INFO | 127.0.0.1 - - [08/Jun/2026 22:13:08] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 22:15:00,817 | INFO | 127.0.0.1 - - [08/Jun/2026 22:15:00] "GET /static/index.css HTTP/1.1" 200 -
+2026-06-08 22:22:56,214 | INFO | 127.0.0.1 - - [08/Jun/2026 22:22:56] "GET / HTTP/1.1" 200 -
+2026-06-08 22:22:56,264 | INFO | 127.0.0.1 - - [08/Jun/2026 22:22:56] "GET /static/index.css HTTP/1.1" 200 -
+2026-06-08 22:22:56,329 | INFO | 127.0.0.1 - - [08/Jun/2026 22:22:56] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 22:22:56,403 | INFO | 127.0.0.1 - - [08/Jun/2026 22:22:56] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 22:24:13,314 | INFO | 127.0.0.1 - - [08/Jun/2026 22:24:13] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 22:24:45,062 | INFO | 127.0.0.1 - - [08/Jun/2026 22:24:45] "GET /api/contacts?q=kaya HTTP/1.1" 200 -
+2026-06-08 22:24:45,074 | INFO | 127.0.0.1 - - [08/Jun/2026 22:24:45] "GET /api/messages?q=kaya HTTP/1.1" 200 -
+2026-06-08 22:24:47,506 | INFO | 127.0.0.1 - - [08/Jun/2026 22:24:47] "GET /api/contacts?q= HTTP/1.1" 200 -
+2026-06-08 22:24:47,508 | INFO | 127.0.0.1 - - [08/Jun/2026 22:24:47] "GET /api/messages?q= HTTP/1.1" 200 -
+2026-06-08 22:24:49,200 | INFO | 127.0.0.1 - - [08/Jun/2026 22:24:49] "GET /api/contacts?q=furkan HTTP/1.1" 200 -
+2026-06-08 22:24:49,212 | INFO | 127.0.0.1 - - [08/Jun/2026 22:24:49] "GET /api/messages?q=furkan HTTP/1.1" 200 -
+2026-06-08 22:24:51,150 | INFO | 127.0.0.1 - - [08/Jun/2026 22:24:51] "GET /api/contacts?q= HTTP/1.1" 200 -
+2026-06-08 22:24:51,151 | INFO | 127.0.0.1 - - [08/Jun/2026 22:24:51] "GET /api/messages?q= HTTP/1.1" 200 -
+2026-06-08 22:24:53,386 | INFO | 127.0.0.1 - - [08/Jun/2026 22:24:53] "GET /api/contacts?q=eyu HTTP/1.1" 200 -
+2026-06-08 22:24:53,388 | INFO | 127.0.0.1 - - [08/Jun/2026 22:24:53] "GET /api/messages?q=eyu HTTP/1.1" 200 -
+2026-06-08 22:24:55,783 | INFO | 127.0.0.1 - - [08/Jun/2026 22:24:55] "GET /api/contacts?q=ey HTTP/1.1" 200 -
+2026-06-08 22:24:55,784 | INFO | 127.0.0.1 - - [08/Jun/2026 22:24:55] "GET /api/messages?q=ey HTTP/1.1" 200 -
+2026-06-08 22:24:57,562 | INFO | 127.0.0.1 - - [08/Jun/2026 22:24:57] "GET /api/contacts?q=e HTTP/1.1" 200 -
+2026-06-08 22:24:57,565 | INFO | 127.0.0.1 - - [08/Jun/2026 22:24:57] "GET /api/messages?q=e HTTP/1.1" 200 -
+2026-06-08 22:24:58,526 | INFO | 127.0.0.1 - - [08/Jun/2026 22:24:58] "GET /api/contacts?q= HTTP/1.1" 200 -
+2026-06-08 22:24:58,527 | INFO | 127.0.0.1 - - [08/Jun/2026 22:24:58] "GET /api/messages?q= HTTP/1.1" 200 -
+2026-06-08 22:25:03,321 | INFO | 127.0.0.1 - - [08/Jun/2026 22:25:03] "GET /api/contacts?q=trans HTTP/1.1" 200 -
+2026-06-08 22:25:03,321 | INFO | 127.0.0.1 - - [08/Jun/2026 22:25:03] "GET /api/messages?q=trans HTTP/1.1" 200 -
+2026-06-08 22:25:03,598 | INFO | 127.0.0.1 - - [08/Jun/2026 22:25:03] "GET /api/contacts?q=transc HTTP/1.1" 200 -
+2026-06-08 22:25:03,599 | INFO | 127.0.0.1 - - [08/Jun/2026 22:25:03] "GET /api/messages?q=transc HTTP/1.1" 200 -
+2026-06-08 22:25:04,890 | INFO | 127.0.0.1 - - [08/Jun/2026 22:25:04] "GET /api/contacts?q=trans HTTP/1.1" 200 -
+2026-06-08 22:25:04,893 | INFO | 127.0.0.1 - - [08/Jun/2026 22:25:04] "GET /api/messages?q=trans HTTP/1.1" 200 -
+2026-06-08 22:25:05,515 | INFO | 127.0.0.1 - - [08/Jun/2026 22:25:05] "GET /api/contacts?q= HTTP/1.1" 200 -
+2026-06-08 22:25:05,516 | INFO | 127.0.0.1 - - [08/Jun/2026 22:25:05] "GET /api/messages?q= HTTP/1.1" 200 -
+2026-06-08 22:25:08,507 | INFO | 127.0.0.1 - - [08/Jun/2026 22:25:08] "GET /api/contacts?q=deneme HTTP/1.1" 200 -
+2026-06-08 22:25:08,510 | INFO | 127.0.0.1 - - [08/Jun/2026 22:25:08] "GET /api/messages?q=deneme HTTP/1.1" 200 -
+2026-06-08 22:25:10,258 | INFO | 127.0.0.1 - - [08/Jun/2026 22:25:10] "GET /api/contacts?q=denem HTTP/1.1" 200 -
+2026-06-08 22:25:10,260 | INFO | 127.0.0.1 - - [08/Jun/2026 22:25:10] "GET /api/messages?q=denem HTTP/1.1" 200 -
+2026-06-08 22:25:10,887 | INFO | 127.0.0.1 - - [08/Jun/2026 22:25:10] "GET /api/contacts?q= HTTP/1.1" 200 -
+2026-06-08 22:25:10,890 | INFO | 127.0.0.1 - - [08/Jun/2026 22:25:10] "GET /api/messages?q= HTTP/1.1" 200 -
+2026-06-08 22:25:17,622 | INFO | 127.0.0.1 - - [08/Jun/2026 22:25:17] "GET /api/contacts?q=furkan.cem HTTP/1.1" 200 -
+2026-06-08 22:25:17,623 | INFO | 127.0.0.1 - - [08/Jun/2026 22:25:17] "GET /api/messages?q=furkan.cem HTTP/1.1" 200 -
+2026-06-08 22:25:21,506 | INFO | 127.0.0.1 - - [08/Jun/2026 22:25:21] "GET /api/contacts?q= HTTP/1.1" 200 -
+2026-06-08 22:25:21,507 | INFO | 127.0.0.1 - - [08/Jun/2026 22:25:21] "GET /api/messages?q= HTTP/1.1" 200 -
+2026-06-08 22:26:45,483 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 22:26:45,538 | INFO | 127.0.0.1 - - [08/Jun/2026 22:26:45] "POST /api/reports/daily HTTP/1.1" 200 -
+2026-06-08 22:27:09,281 | INFO | 127.0.0.1 - - [08/Jun/2026 22:27:09] "GET / HTTP/1.1" 200 -
+2026-06-08 22:27:09,326 | INFO | 127.0.0.1 - - [08/Jun/2026 22:27:09] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 22:27:09,330 | INFO | 127.0.0.1 - - [08/Jun/2026 22:27:09] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 22:27:09,410 | INFO | 127.0.0.1 - - [08/Jun/2026 22:27:09] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 22:28:33,159 | INFO | 127.0.0.1 - - [08/Jun/2026 22:28:33] "GET /static/index.css HTTP/1.1" 200 -
+2026-06-08 22:28:47,262 | INFO | 127.0.0.1 - - [08/Jun/2026 22:28:47] "GET / HTTP/1.1" 200 -
+2026-06-08 22:28:47,308 | INFO | 127.0.0.1 - - [08/Jun/2026 22:28:47] "GET /static/index.css HTTP/1.1" 200 -
+2026-06-08 22:28:47,310 | INFO | 127.0.0.1 - - [08/Jun/2026 22:28:47] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 22:28:47,394 | INFO | 127.0.0.1 - - [08/Jun/2026 22:28:47] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 22:36:39,478 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+2026-06-08 22:36:39,479 | INFO | [33mPress CTRL+C to quit[0m
+2026-06-08 22:36:51,577 | INFO | 127.0.0.1 - - [08/Jun/2026 22:36:51] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 22:36:52,641 | INFO | 127.0.0.1 - - [08/Jun/2026 22:36:52] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 22:43:20,278 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:20] "GET / HTTP/1.1" 200 -
+2026-06-08 22:43:20,310 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:20] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 22:43:20,313 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:20] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 22:43:20,390 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:20] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 22:43:41,265 | INFO | Draft cache hit for: URGENT: Fall protection deficiency — immediate correction re
+2026-06-08 22:43:41,265 | INFO | Draft cache hit for: Notice of Delay — Pier 5 foundation work
+2026-06-08 22:43:41,266 | INFO | Draft cache hit for: RFI-047 Response: Rebar spacing at Pier 3
+2026-06-08 22:43:41,266 | INFO | Draft cache hit for: Updated delivery schedule for Week 12
+2026-06-08 22:43:41,266 | INFO | Draft cache hit for: Schedule review meeting — agenda items needed
+2026-06-08 22:43:41,271 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:41] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 22:43:41,280 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:41] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 22:43:41,283 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:41] "GET /api/contacts?q= HTTP/1.1" 200 -
+2026-06-08 22:43:41,285 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:41] "GET /api/messages?q= HTTP/1.1" 200 -
+2026-06-08 22:43:41,301 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:41] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 22:43:41,308 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:41] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 22:43:47,234 | INFO | Draft cache hit for: URGENT: Fall protection deficiency — immediate correction re
+2026-06-08 22:43:47,237 | INFO | Draft cache hit for: Notice of Delay — Pier 5 foundation work
+2026-06-08 22:43:47,239 | INFO | Draft cache hit for: RFI-047 Response: Rebar spacing at Pier 3
+2026-06-08 22:43:47,240 | INFO | Draft cache hit for: Updated delivery schedule for Week 12
+2026-06-08 22:43:47,240 | INFO | Draft cache hit for: Schedule review meeting — agenda items needed
+2026-06-08 22:43:47,249 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:47] "POST /api/demo/reset HTTP/1.1" 200 -
+2026-06-08 22:43:47,274 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:47] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 22:43:47,289 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:47] "GET /api/contacts?q= HTTP/1.1" 200 -
+2026-06-08 22:43:47,291 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:47] "GET /api/messages?q= HTTP/1.1" 200 -
+2026-06-08 22:43:47,328 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:47] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 22:43:47,344 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:47] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 22:43:52,873 | INFO | Connecting to IMAP server: imap.gmail.com
+2026-06-08 22:43:53,461 | INFO | Found 111 messages, processing last 20.
+2026-06-08 22:43:55,868 | INFO | Triage complete: 3 URGENT, 5 ACTION, 6 FYI, 6 ARCHIVE
+2026-06-08 22:43:55,895 | INFO | Draft cache hit for: Road closure permit — Sogutlucesme Caddesi — expiring March 
+2026-06-08 22:43:55,896 | INFO | Draft cache hit for: Complaint: Vibration damage to my building at Moda Caddesi 4
+2026-06-08 22:43:55,897 | INFO | Draft cache hit for: Pump failure at Well DW-03 — water level rising
+2026-06-08 22:43:55,899 | INFO | Draft cache hit for: RFI-014 - Conflict Between HVAC Duct and Fire Sprinkler Line
+2026-06-08 22:43:55,901 | INFO | Draft cache hit for: Delay notice — formwork materials for Sector 3
+2026-06-08 22:43:55,902 | INFO | Draft cache hit for: Certificate of insurance — renewal required by April 1
+2026-06-08 22:43:55,904 | INFO | Draft cache hit for: Concrete cube test results — 28-day break — Sector 1 base sl
+2026-06-08 22:43:55,906 | INFO | Draft cache hit for: RFI-031: Waler beam connection detail at Section B-B
+2026-06-08 22:43:55,921 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:55] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 22:43:55,943 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:55] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 22:43:55,976 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:55] "GET /api/contacts?q= HTTP/1.1" 200 -
+2026-06-08 22:43:55,978 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:55] "GET /api/messages?q= HTTP/1.1" 200 -
+2026-06-08 22:43:56,010 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:56] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 22:43:56,014 | INFO | 127.0.0.1 - - [08/Jun/2026 22:43:56] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 22:45:44,388 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+2026-06-08 22:45:44,388 | INFO | [33mPress CTRL+C to quit[0m
+2026-06-08 22:45:52,773 | INFO | 127.0.0.1 - - [08/Jun/2026 22:45:52] "POST /api/queue/synthetic HTTP/1.1" 200 -
+2026-06-08 22:45:54,261 | INFO | 127.0.0.1 - - [08/Jun/2026 22:45:54] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 22:45:59,772 | INFO | 127.0.0.1 - - [08/Jun/2026 22:45:59] "GET /api/bootstrap HTTP/1.1" 200 -
+2026-06-08 22:45:59,795 | INFO | 127.0.0.1 - - [08/Jun/2026 22:45:59] "POST /api/digest/preview HTTP/1.1" 200 -
+2026-06-08 22:46:15,270 | INFO | 127.0.0.1 - - [08/Jun/2026 22:46:15] "POST /api/queue/089017a3bf82/edit HTTP/1.1" 200 -
+2026-06-08 22:46:16,494 | INFO | [OK] Email sent to furkan.cem501@gmail.com -- Subject: Daily Construction Report
+2026-06-08 22:46:16,530 | INFO | 127.0.0.1 - - [08/Jun/2026 22:46:16] "POST /api/queue/089017a3bf82/approve HTTP/1.1" 200 -
+2026-06-08 22:46:16,583 | INFO | 127.0.0.1 - - [08/Jun/2026 22:46:16] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 22:47:29,128 | INFO | 127.0.0.1 - - [08/Jun/2026 22:47:29] "POST /api/queue/089017a3bf82/edit HTTP/1.1" 200 -
+2026-06-08 22:47:29,147 | INFO | [DRY RUN] Approved dashboard draft for: Daily Construction Report -> furkan.cem501@gmail.com cc=
+2026-06-08 22:47:29,156 | INFO | 127.0.0.1 - - [08/Jun/2026 22:47:29] "POST /api/queue/089017a3bf82/approve HTTP/1.1" 200 -
+2026-06-08 22:47:29,201 | INFO | 127.0.0.1 - - [08/Jun/2026 22:47:29] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 22:47:47,442 | INFO | 127.0.0.1 - - [08/Jun/2026 22:47:47] "POST /api/queue/089017a3bf82/delete HTTP/1.1" 200 -
+2026-06-08 22:47:47,597 | INFO | 127.0.0.1 - - [08/Jun/2026 22:47:47] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 22:47:58,888 | INFO | 127.0.0.1 - - [08/Jun/2026 22:47:58] "GET / HTTP/1.1" 200 -
+2026-06-08 22:47:59,022 | INFO | 127.0.0.1 - - [08/Jun/2026 22:47:59] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 22:47:59,023 | INFO | 127.0.0.1 - - [08/Jun/2026 22:47:59] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 22:47:59,142 | INFO | 127.0.0.1 - - [08/Jun/2026 22:47:59] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 22:48:05,321 | INFO | 127.0.0.1 - - [08/Jun/2026 22:48:05] "POST /api/digest/preview HTTP/1.1" 200 -
+2026-06-08 22:49:14,068 | INFO | Connecting to IMAP server: imap.gmail.com
+2026-06-08 22:49:14,835 | INFO | Found 111 messages, processing last 20.
+2026-06-08 22:49:17,034 | INFO | Triage complete: 3 URGENT, 5 ACTION, 6 FYI, 6 ARCHIVE
+2026-06-08 22:49:17,051 | INFO | 127.0.0.1 - - [08/Jun/2026 22:49:17] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 22:49:17,060 | INFO | 127.0.0.1 - - [08/Jun/2026 22:49:17] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 22:49:17,065 | INFO | 127.0.0.1 - - [08/Jun/2026 22:49:17] "GET /api/contacts?q= HTTP/1.1" 200 -
+2026-06-08 22:49:17,066 | INFO | 127.0.0.1 - - [08/Jun/2026 22:49:17] "GET /api/messages?q= HTTP/1.1" 200 -
+2026-06-08 22:49:17,085 | INFO | 127.0.0.1 - - [08/Jun/2026 22:49:17] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 22:49:17,098 | INFO | 127.0.0.1 - - [08/Jun/2026 22:49:17] "GET /api/logs HTTP/1.1" 200 -

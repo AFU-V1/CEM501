@@ -192,9 +192,9 @@ General Remarks
 
 Prepare a Daily Construction Report using the following information.
 
-Project Name: {{project_name}}
+Project Name: Bogazici Library Project
 
-Contract Number: {{contract_number}}
+Contract Number: B-2026-1234
 
 Report Number: {{report_number}}
 
@@ -202,13 +202,13 @@ Date: {{date}}
 
 Day: {{day}}
 
-Prepared By: {{prepared_by}}
+Prepared By: A. Furkan Ustundag
 
-Site Work Hours: {{work_hours}}
+Site Work Hours: 08:00 - 18:00
 
-Shift: {{shift}}
+Shift: Day Shift
 
-Location: {{location}}
+Location: Besiktas/Istanbul
 
 Weather Conditions: {{weather}}
 

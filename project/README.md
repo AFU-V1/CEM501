@@ -14,7 +14,7 @@
 
 ## Description
 
-An AI-powered communication agent for construction project managers that automates email triage, drafts professional replies, and sends them with human-in-the-loop safety guardrails. The agent reads incoming project emails via IMAP, classifies them semantically by urgency (URGENT/ACTION/FYI/ARCHIVE) using OpenAI (gpt-4o-mini), generates context-aware draft responses, and supports multi-channel communication through both Email and Telegram. Built with a modular architecture that enables independent testing and incremental improvement.
+An AI-powered communication agent for construction project managers that automates email triage, drafts professional replies, and sends them with human-in-the-loop safety guardrails. The agent reads incoming project emails via IMAP, classifies them semantically by urgency (URGENT/ACTION/FYI/ARCHIVE) using OpenAI (gpt-4o-mini), generates context-aware draft responses, and supports silent Telegram text/voice triage into message history. Built with a modular architecture that enables independent testing and incremental improvement.
 
 ---
 
@@ -85,7 +85,7 @@ py digest.py
 # Run the daily digest with live inbox data
 py digest.py --live
 
-# Run the Telegram bot
+# Run the Telegram bot (silent text/voice triage into Message History)
 py run_telegram_bot.py
 
 # Run the scheduler (single check)
@@ -124,7 +124,8 @@ py dashboard_app.py
 
 | Tool / Model | How It Was Used |
 |--------------|-----------------|
-| OpenAI (gpt-4o-mini) | Semantic email triage, email draft generation, daily digest summarization, Telegram response drafting |
+| OpenAI (gpt-4o-mini) | Semantic email/Telegram triage, email draft generation, daily digest summarization |
+| OpenAI (gpt-4o-mini-transcribe) | Telegram voice-message transcription |
 | Gemini CLI / Antigravity | Building and debugging the agent pipeline, generating architecture documentation |
 | Cursor | Primary IDE for development and code review |
 

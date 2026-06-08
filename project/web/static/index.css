@@ -332,6 +332,58 @@ textarea {
   height: clamp(420px, 58vh, 680px);
 }
 
+#tasks > .cron-tasks-panel {
+  height: clamp(420px, 58vh, 680px);
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.cron-rule-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 6px;
+  scrollbar-gutter: stable;
+}
+
+.cron-rule {
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--surface-strong);
+}
+
+.cron-time {
+  display: inline-flex;
+  width: fit-content;
+  margin-bottom: 6px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  color: var(--headline);
+  font-size: 0.7rem;
+  background: rgba(101, 209, 255, 0.12);
+  border: 1px solid rgba(101, 209, 255, 0.18);
+}
+
+.cron-rule p {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
+
+.cron-tasks-panel #pendingTasks:empty {
+  display: none;
+}
+
+.cron-tasks-panel #pendingTasks:not(:empty) {
+  max-height: 140px;
+  margin-top: 10px;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
 #status > .glass-panel {
   height: clamp(360px, 48vh, 560px);
 }
@@ -463,6 +515,32 @@ textarea {
   border: 1px solid var(--surface-strong);
 }
 
+.original-email-body {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.recipient-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.recipient-grid label {
+  display: grid;
+  gap: 6px;
+}
+
+.recipient-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--surface-border);
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+}
+
 .draft-input {
   width: 100%;
   min-height: 190px;
@@ -474,6 +552,7 @@ textarea {
   border-radius: 16px;
 }
 
+.recipient-input:focus,
 .draft-input:focus,
 .search-input:focus {
   outline: none;
@@ -538,6 +617,10 @@ textarea {
   padding: 22px;
 }
 
+.digest-panel {
+  grid-column: 1 / -1;
+}
+
 .digest-preview {
   min-height: 340px;
   padding: 18px;
@@ -547,6 +630,74 @@ textarea {
   border: 1px solid var(--surface-strong);
   white-space: pre-wrap;
   color: var(--text);
+}
+
+.artifact-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.42fr);
+  gap: 18px;
+  min-height: 0;
+  margin-top: 1rem;
+}
+
+.artifact-layout > .draft-block,
+.artifact-layout > .digest-preview,
+.artifact-sidebar {
+  min-height: 0;
+}
+
+.artifact-sidebar {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  max-height: 420px;
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--surface-strong);
+  overflow: hidden;
+}
+
+.compact-header {
+  margin-bottom: 12px;
+}
+
+.artifact-history {
+  display: grid;
+  gap: 10px;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 6px;
+  scrollbar-gutter: stable;
+  align-content: start;
+}
+
+.artifact-item {
+  width: 100%;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--surface-strong);
+  border-radius: var(--radius-md);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.04);
+  transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
+}
+
+.artifact-item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(101, 209, 255, 0.32);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.artifact-item h4 {
+  margin: 0 0 6px;
+  color: var(--headline);
+  font-size: 0.95rem;
+}
+
+.artifact-item p {
+  margin: 0;
 }
 
 .log-feed {
@@ -619,6 +770,9 @@ textarea {
 
   .hero,
   .queue-item-grid,
+  .recipient-grid,
+  .artifact-layout,
+  .cron-rule-list,
   .metric-grid,
   .inbox-columns,
   .dual-grid,

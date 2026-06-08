@@ -225,6 +225,23 @@ def summarize_email(body: str) -> str:
         return summary
 
 
+def digest_summary(msg: dict, use_llm: bool = True) -> str:
+    """
+    Return the summary text for digest output.
+
+    Dashboard-generated digests pass the Triage Inbox preview as `summary`, so
+    the Morning Digest can reuse the exact same text without another LLM call.
+    """
+    ready_summary = (msg.get("summary") or msg.get("preview") or "").strip()
+    if ready_summary:
+        return ready_summary
+
+    body = msg.get("body", "") or ""
+    if use_llm:
+        return summarize_email(body)
+    return body[:120] + ("..." if len(body) > 120 else "")
+
+
 def format_text_digest(groups: dict[str, list[dict]], use_llm: bool = True) -> str:
     """
     Formats grouped emails into a readable text digest.
@@ -249,10 +266,7 @@ def format_text_digest(groups: dict[str, list[dict]], use_llm: bool = True) -> s
         for i, msg in enumerate(urgent, 1):
             lines.append(f"[{i}] From: {msg['sender']}")
             lines.append(f"    Subject: {msg['subject']}")
-            if use_llm:
-                summary = summarize_email(msg["body"])
-            else:
-                summary = msg["body"][:120] + ("..." if len(msg["body"]) > 120 else "")
+            summary = digest_summary(msg, use_llm=use_llm)
             lines.append(f"    Summary: {summary}")
             lines.append("")
     else:
@@ -266,10 +280,7 @@ def format_text_digest(groups: dict[str, list[dict]], use_llm: bool = True) -> s
         for i, msg in enumerate(action, counter + 1):
             lines.append(f"[{i}] From: {msg['sender']}")
             lines.append(f"    Subject: {msg['subject']}")
-            if use_llm:
-                summary = summarize_email(msg["body"])
-            else:
-                summary = msg["body"][:120] + ("..." if len(msg["body"]) > 120 else "")
+            summary = digest_summary(msg, use_llm=use_llm)
             lines.append(f"    Summary: {summary}")
             lines.append("")
     else:
@@ -329,7 +340,7 @@ def format_html_digest(groups: dict[str, list[dict]], use_llm: bool = True) -> s
     urgent = groups["URGENT"]
     html.append(f"<h2 class='urgent'>URGENT ({len(urgent)})</h2>")
     for msg in urgent:
-        summary = summarize_email(msg["body"]) if use_llm else msg["body"][:120]
+        summary = digest_summary(msg, use_llm=use_llm)
         html.append(f"<div class='email-item urgent'>")
         html.append(f"  <strong>{msg['subject']}</strong><br>")
         html.append(f"  <span class='meta'>From: {msg['sender']}</span>")
@@ -339,7 +350,7 @@ def format_html_digest(groups: dict[str, list[dict]], use_llm: bool = True) -> s
     action = groups["ACTION"]
     html.append(f"<h2 class='action'>ACTION ({len(action)})</h2>")
     for msg in action:
-        summary = summarize_email(msg["body"]) if use_llm else msg["body"][:120]
+        summary = digest_summary(msg, use_llm=use_llm)
         html.append(f"<div class='email-item action'>")
         html.append(f"  <strong>{msg['subject']}</strong><br>")
         html.append(f"  <span class='meta'>From: {msg['sender']}</span>")

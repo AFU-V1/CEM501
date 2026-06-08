@@ -7,7 +7,7 @@
 
 ## System Overview
 
-This system is a personal AI communication agent designed for construction project managers. It reads incoming emails via IMAP, classifies them by urgency using OpenAI semantic triage, drafts professional replies using OpenAI LLMs, and sends approved drafts via SMTP -- all with mandatory human-in-the-loop confirmation. The agent also integrates with Telegram for real-time messaging and uses SQLite for persistent memory across sessions. The design philosophy is **modular and incremental**: each component does one job, can be tested independently, and was built in the order prescribed by the course milestones (M0-M9).
+This system is a personal AI communication agent designed for construction project managers. It reads incoming emails via IMAP, classifies them by urgency using OpenAI semantic triage, drafts professional replies using OpenAI LLMs, and sends approved drafts via SMTP -- all with mandatory human-in-the-loop confirmation. The agent also integrates with Telegram for silent text/voice triage into SQLite message history. The design philosophy is **modular and incremental**: each component does one job, can be tested independently, and was built in the order prescribed by the course milestones (M0-M9).
 
 ### Architecture Diagram
 
@@ -45,7 +45,7 @@ This system is a personal AI communication agent designed for construction proje
                                                   +------------+   +------------+
 ```
 
-**Data flow:** The Reader connects to IMAP and fetches recent project emails. The Classifier (embedded in Reader via `triage_email()`) first checks the local semantic triage cache; if the same sender, subject, and body were already classified, it reuses that result. Only new or changed messages are sent to OpenAI for semantic classification as URGENT, ACTION, FYI, or ARCHIVE. Inbox preview summaries and generated review drafts are cached the same way, so repeated dashboard refreshes do not resend unchanged emails to the LLM. Actionable messages are placed into the Web Dashboard review queue. A user can edit, reject, approve as a demo dry run, or approve for SMTP sending. Approved activity is logged to SQLite memory. Scheduler, digest generation, and Telegram use the same memory and triage foundations.
+**Data flow:** The Reader connects to IMAP and fetches recent project emails. The Classifier (embedded in Reader via `triage_email()`) first checks the local semantic triage cache; if the same sender, subject, and body were already classified, it reuses that result. Only new or changed messages are sent to OpenAI for semantic classification as URGENT, ACTION, FYI, or ARCHIVE. Inbox preview summaries and generated review drafts are cached the same way, so repeated dashboard refreshes do not resend unchanged emails to the LLM. Actionable messages are placed into the Web Dashboard review queue. A user can edit, reject, approve as a demo dry run, or approve for SMTP sending. Approved activity is logged to SQLite memory. Scheduler, digest generation, and Telegram use the same memory and triage foundations; Telegram voice messages are first transcribed, then stored in Message History with their category.
 
 ---
 
@@ -96,11 +96,11 @@ This system is a personal AI communication agent designed for construction proje
 - **Key dependencies:** `schedule` library
 
 ### Telegram Channel
-- **Responsibility:** Receives messages via the Telegram Bot API, classifies them using the triage engine, drafts responses via OpenAI, and replies in real-time.
-- **Input:** Telegram messages (Bot API polling)
-- **Output:** Telegram replies with classification + drafted response
+- **Responsibility:** Receives Telegram text and voice messages, transcribes voice using OpenAI audio transcription, classifies each message using the triage engine, and logs it silently to SQLite memory.
+- **Input:** Telegram text or voice messages (Bot API polling)
+- **Output:** Message History rows such as `Telegram Text (ACTION)` or `Telegram Voice (URGENT)`; no automatic reply for normal messages
 - **File:** `channels/telegram_channel.py`
-- **Key dependencies:** `python-telegram-bot`
+- **Key dependencies:** `python-telegram-bot`, `openai`
 
 ### Email Channel
 - **Responsibility:** Wraps the IMAP/SMTP logic into a Channel abstraction for uniform multi-channel handling.
@@ -135,7 +135,7 @@ This system is a personal AI communication agent designed for construction proje
 6. **Sender** displays the draft for human review with all warnings, then sends via SMTP after explicit `y` confirmation.
 7. **Memory** logs the sent message for future reference.
 8. **Web Dashboard** exposes the review queue, health status, memory, daily report builder, and demo-safe dry-run approval path.
-9. **Telegram Channel** runs a parallel pipeline: incoming messages are classified, drafted with OpenAI, replied to in real-time, and logged to memory.
+9. **Telegram Channel** runs a parallel silent pipeline: incoming text messages are classified and logged to memory; incoming voice messages are transcribed with OpenAI, classified, and logged to memory.
 
 ---
 

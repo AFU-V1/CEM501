@@ -14,7 +14,7 @@ import hashlib
 import json
 import os
 from datetime import datetime
-from email.utils import parseaddr
+from email.utils import parsedate_to_datetime, parseaddr
 
 from agent import draft_reply, fetch_emails, get_send_warnings, send_approved_email
 from digest import SAMPLE_EMAILS, format_html_digest, format_text_digest, group_by_category, summarize_email
@@ -37,6 +37,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_DIR = os.path.join(BASE_DIR, "logs")
 STATE_PATH = os.path.join(LOG_DIR, "dashboard_state.json")
 AGENT_LOG_PATH = os.path.join(LOG_DIR, "agent.log")
+MAX_ARTIFACT_HISTORY = 20
 
 
 def now_iso() -> str:
@@ -52,7 +53,18 @@ def default_state() -> dict:
         "status_message": "No inbox snapshot loaded yet.",
         "emails": [],
         "queue": [],
+        "daily_reports": [],
+        "morning_digests": [],
     }
+
+
+def _ensure_state_defaults(state: dict) -> bool:
+    changed = False
+    for key, default_value in default_state().items():
+        if key not in state:
+            state[key] = default_value
+            changed = True
+    return changed
 
 
 def _sanitize_state_reasons(state: dict) -> bool:
@@ -79,7 +91,9 @@ def load_dashboard_state() -> dict:
     with open(STATE_PATH, "r", encoding="utf-8") as handle:
         state = json.load(handle)
 
-    if _sanitize_state_reasons(state):
+    changed = _ensure_state_defaults(state)
+    changed = _sanitize_state_reasons(state) or changed
+    if changed:
         save_dashboard_state(state)
     return state
 
@@ -96,7 +110,7 @@ def _queue_key(email_item: dict) -> str:
         [
             email_item.get("sender_email", ""),
             email_item.get("subject", ""),
-            email_item.get("body", ""),
+            email_item.get("triage_body") or email_item.get("body", ""),
         ]
     )
     return hashlib.sha1(source.encode("utf-8")).hexdigest()[:12]
@@ -126,6 +140,7 @@ def _normalize_email(email_item: dict, fallback_date: str, previous_emails: dict
         "subject": email_item.get("subject", "(no subject)"),
         "date": email_item.get("date", fallback_date),
         "body": email_item.get("body") or email_item.get("preview") or "",
+        "triage_body": email_item.get("triage_body") or email_item.get("body") or email_item.get("preview") or "",
         "category": email_item.get("category", "ARCHIVE"),
         "keyword": clean_triage_reason(email_item.get("keyword", "review manually")),
     }
@@ -177,7 +192,11 @@ def _build_queue_item(email_item: dict, existing_item: dict | None = None) -> di
         draft = draft_reply(email_item)
 
     reply_subject = f"Re: {email_item['subject']}"
-    warnings = get_send_warnings(email_item["sender_email"], reply_subject, draft)
+    to_address = existing_item.get("to_address") if existing_item else None
+    cc_address = existing_item.get("cc_address") if existing_item else None
+    to_address = to_address or email_item["sender_email"]
+    cc_address = cc_address or ""
+    warnings = get_send_warnings(to_address, reply_subject, draft, cc_address)
     updated_at = now_iso()
 
     return {
@@ -188,6 +207,8 @@ def _build_queue_item(email_item: dict, existing_item: dict | None = None) -> di
         "sender": email_item["sender"],
         "sender_name": email_item["sender_name"],
         "sender_email": email_item["sender_email"],
+        "to_address": to_address,
+        "cc_address": cc_address,
         "subject": email_item["subject"],
         "reply_subject": reply_subject,
         "date": email_item["date"],
@@ -249,6 +270,31 @@ def refresh_inbox_state(source: str = "live") -> dict:
     return state
 
 
+def reset_demo_state() -> dict:
+    """
+    Rebuild the demo inbox and review queue from bundled sample messages.
+
+    This clears demo queue edits/statuses for a fresh rehearsal while keeping
+    unrelated dashboard artifacts such as saved reports and digest history.
+    """
+    state = load_dashboard_state()
+    normalized_emails = sample_inbox_snapshot(previous_emails=None)
+    actionable = [item for item in normalized_emails if item["category"] in ("URGENT", "ACTION")]
+    fresh_queue = [_build_queue_item(item, existing_item=None) for item in actionable]
+
+    state.update(
+        {
+            "last_refresh": now_iso(),
+            "source": "sample",
+            "status_message": "Demo snapshot reset to its original sample state.",
+            "emails": normalized_emails,
+            "queue": fresh_queue,
+        }
+    )
+    save_dashboard_state(state)
+    return state
+
+
 def grouped_inbox(emails: list[dict]) -> dict[str, list[dict]]:
     """Group inbox items by triage category for the UI."""
     grouped = {"URGENT": [], "ACTION": [], "FYI": [], "ARCHIVE": []}
@@ -269,12 +315,78 @@ def queue_metrics(queue_items: list[dict]) -> dict:
     }
 
 
+def _parse_email_date(value: str | None) -> datetime | None:
+    """Parse dashboard/IMAP date strings without failing the task view."""
+    if not value:
+        return None
+
+    text = str(value).strip()
+    parsers = [
+        lambda candidate: parsedate_to_datetime(candidate),
+        lambda candidate: datetime.fromisoformat(candidate),
+        lambda candidate: datetime.strptime(candidate, "%Y-%m-%d %H:%M:%S"),
+        lambda candidate: datetime.strptime(candidate, "%Y-%m-%d"),
+    ]
+    for parser in parsers:
+        try:
+            return parser(text)
+        except (TypeError, ValueError, IndexError, OverflowError):
+            continue
+    return None
+
+
+def _unanswered_overdue_email_tasks(state: dict) -> list[dict]:
+    """
+    Project overdue email follow-ups into the scheduler view.
+
+    URGENT/ACTION emails from before today become overdue tasks until the
+    matching review queue item is approved.
+    """
+    today = datetime.now().date()
+    queue_by_id = {item.get("id"): item for item in state.get("queue", [])}
+    tasks = []
+
+    for email_item in state.get("emails", []):
+        if email_item.get("category") not in {"URGENT", "ACTION"}:
+            continue
+
+        email_id = email_item.get("id")
+        queue_item = queue_by_id.get(email_id, {})
+        if queue_item.get("status") == "approved":
+            continue
+
+        received_at = _parse_email_date(email_item.get("date"))
+        if not received_at or received_at.date() >= today:
+            continue
+
+        sender = (
+            email_item.get("sender_name")
+            or email_item.get("sender_email")
+            or email_item.get("sender")
+            or "Unknown sender"
+        )
+        tasks.append(
+            {
+                "id": f"email-overdue-{email_id}",
+                "description": email_item.get("subject") or "(no subject)",
+                "due_at": email_item.get("date") or "",
+                "contact_name": sender,
+                "source": "email_overdue",
+                "category": email_item.get("category"),
+                "status": "pending",
+                "actionable": False,
+            }
+        )
+
+    return tasks
+
+
 def dashboard_overview(state: dict) -> dict:
     """Top-level counts for the hero metrics."""
     emails = state.get("emails", [])
     queue_items = state.get("queue", [])
     tasks = get_pending_tasks()
-    overdue = get_overdue_tasks()
+    overdue = get_overdue_tasks() + _unanswered_overdue_email_tasks(state)
     contacts = list_contacts()
     messages = get_recent_messages(limit=50)
 
@@ -308,13 +420,27 @@ def find_queue_item(queue_id: str) -> tuple[dict, dict, int]:
     raise KeyError(queue_id)
 
 
-def update_queue_draft(queue_id: str, draft: str) -> dict:
-    """Update a draft body and recompute dashboard warnings."""
+def update_queue_draft(
+    queue_id: str,
+    draft: str,
+    to_address: str | None = None,
+    cc_address: str | None = None,
+) -> dict:
+    """Update a draft body/recipients and recompute dashboard warnings."""
     state, item, index = find_queue_item(queue_id)
     item["draft"] = draft.strip()
+    if to_address is not None:
+        item["to_address"] = to_address.strip()
+    if cc_address is not None:
+        item["cc_address"] = cc_address.strip()
     item["edited"] = True
     item["updated_at"] = now_iso()
-    item["warnings"] = get_send_warnings(item["sender_email"], item["reply_subject"], item["draft"])
+    item["warnings"] = get_send_warnings(
+        item.get("to_address") or item["sender_email"],
+        item["reply_subject"],
+        item["draft"],
+        item.get("cc_address", ""),
+    )
     item["error"] = None
     state["queue"][index] = item
     save_dashboard_state(state)
@@ -359,11 +485,14 @@ def _ensure_contact(sender_name: str, sender_email: str) -> int | None:
 def approve_queue_item(queue_id: str, dry_run: bool = False) -> dict:
     """Approve a draft and send it through the agent SMTP path."""
     state, item, index = find_queue_item(queue_id)
+    to_address = item.get("to_address") or item["sender_email"]
+    cc_address = item.get("cc_address", "")
     success, warnings, mode = send_approved_email(
-        to_address=item["sender_email"],
+        to_address=to_address,
         subject=item["reply_subject"],
         body=item["draft"],
         dry_run=dry_run,
+        cc_address=cc_address,
     )
 
     item["warnings"] = warnings
@@ -371,7 +500,7 @@ def approve_queue_item(queue_id: str, dry_run: bool = False) -> dict:
     item["send_mode"] = mode
 
     if success:
-        contact_id = _ensure_contact(item["sender_name"], item["sender_email"])
+        contact_id = _ensure_contact(item["sender_name"], to_address.split(",")[0].strip())
         log_message(
             contact_id=contact_id,
             direction="sent",
@@ -442,9 +571,10 @@ def memory_snapshot(query: str = "") -> dict:
 
 def tasks_snapshot() -> dict:
     """Return pending and overdue tasks for the scheduler panel."""
+    state = load_dashboard_state()
     return {
         "pending": get_pending_tasks(),
-        "overdue": get_overdue_tasks(),
+        "overdue": get_overdue_tasks() + _unanswered_overdue_email_tasks(state),
     }
 
 
@@ -474,6 +604,7 @@ def digest_snapshot(source: str | None = None, use_llm: bool = False) -> dict:
             "subject": item["subject"],
             "sender": item["sender"],
             "body": item["body"],
+            "summary": item.get("preview") or item.get("body", ""),
             "triage_category": item["category"],
         }
         for item in emails
@@ -484,6 +615,57 @@ def digest_snapshot(source: str | None = None, use_llm: bool = False) -> dict:
         "text": format_text_digest(groups, use_llm=use_llm),
         "html": format_html_digest(groups, use_llm=use_llm),
     }
+
+
+def _artifact_id(kind: str, content: str, created_at: str) -> str:
+    payload = f"{kind}|{created_at}|{content}"
+    return hashlib.sha1(payload.encode("utf-8")).hexdigest()[:12]
+
+
+def _save_artifact(collection_name: str, item: dict) -> dict:
+    state = load_dashboard_state()
+    collection = state.setdefault(collection_name, [])
+    collection.insert(0, item)
+    state[collection_name] = collection[:MAX_ARTIFACT_HISTORY]
+    save_dashboard_state(state)
+    return item
+
+
+def daily_report_history() -> list[dict]:
+    state = load_dashboard_state()
+    return state.get("daily_reports", [])[:MAX_ARTIFACT_HISTORY]
+
+
+def digest_history() -> list[dict]:
+    state = load_dashboard_state()
+    return state.get("morning_digests", [])[:MAX_ARTIFACT_HISTORY]
+
+
+def save_daily_report(content: str, selected_message_count: int) -> dict:
+    created_at = now_iso()
+    item = {
+        "id": _artifact_id("daily_report", content, created_at),
+        "title": f"Daily Report - {created_at}",
+        "created_at": created_at,
+        "selected_message_count": selected_message_count,
+        "content": content,
+    }
+    return _save_artifact("daily_reports", item)
+
+
+def save_morning_digest(text: str, html: str, source: str | None, use_llm: bool) -> dict:
+    created_at = now_iso()
+    source_label = source or "current"
+    item = {
+        "id": _artifact_id("morning_digest", text, created_at),
+        "title": f"Morning Digest - {source_label} - {created_at}",
+        "created_at": created_at,
+        "source": source_label,
+        "use_llm": use_llm,
+        "text": text,
+        "html": html,
+    }
+    return _save_artifact("morning_digests", item)
 
 
 def parse_log_lines(limit: int = 20) -> list[dict]:
@@ -536,6 +718,8 @@ def generate_daily_report_from_messages(message_ids: list[int]) -> str:
         messages_text += f"- Message {direction} {m.get('contact_name', 'Unknown')} (Subject: {m.get('subject', '')}):\n  {m.get('body', '')}\n\n"
         
     from dotenv import load_dotenv
+    from datetime import datetime
+    import re
     load_dotenv()
     template_path = os.path.join(BASE_DIR, "templates", "daily_report.md")
     if os.path.exists(template_path):
@@ -544,11 +728,30 @@ def generate_daily_report_from_messages(message_ids: list[int]) -> str:
     else:
         template_content = "DAILY CONSTRUCTION REPORT TEMPLATE"
 
+    current_date = datetime.now().strftime("%B %d, %Y")
+    current_day = datetime.now().strftime("%A")
+
+    state = load_dashboard_state()
+    reports = state.get("daily_reports", [])
+    next_report_no = "DR-001"
+    if reports:
+        last_report_content = reports[0].get("content", "")
+        match = re.search(r"Report Number:\s*DR-(\d+)", last_report_content)
+        if not match:
+            match = re.search(r"Report No\.?\s*\|\s*DR-(\d+)", last_report_content)
+        if match:
+            last_num = int(match.group(1))
+            next_report_no = f"DR-{last_num + 1:03d}"
+
     prompt = (
         "You are an AI assistant generating a Daily Construction Report.\n"
         "Use the following template rules and structure.\n"
         "Extract information ONLY from the provided messages below.\n"
-        "If information required by the template is missing, write '[Not Provided]'.\n\n"
+        "IMPORTANT: You MUST use the following specific values for this report (replace placeholders):\n"
+        f"- Report Number: {next_report_no}\n"
+        f"- Date: {current_date}\n"
+        f"- Day: {current_day}\n"
+        "If other information required by the template is missing, write '[Not Provided]'.\n\n"
         "--- TEMPLATE START ---\n"
         f"{template_content}\n"
         "--- TEMPLATE END ---\n\n"
@@ -581,6 +784,8 @@ def queue_synthetic_draft(subject: str, body: str, draft: str, sender_email: str
         "sender": "System <system@local>",
         "sender_name": "System",
         "sender_email": sender_email,
+        "to_address": sender_email,
+        "cc_address": "",
         "subject": subject,
         "reply_subject": subject,
         "date": now_iso(),
