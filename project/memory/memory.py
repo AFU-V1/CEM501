@@ -13,7 +13,8 @@ Uses SQLite for zero-configuration, file-based persistence.
 
 import os
 import sqlite3
-from datetime import datetime
+
+from time_utils import sqlite_utc_to_tr_string, tr_now_string
 
 # ---------------------------------------------------------------------------
 # Database path
@@ -60,6 +61,11 @@ CREATE TABLE IF NOT EXISTS scheduled_tasks (
     status      TEXT DEFAULT 'pending' CHECK(status IN ('pending', 'done', 'skipped')),
     created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS schema_meta (
+    key         TEXT PRIMARY KEY,
+    value       TEXT NOT NULL
+);
 """
 
 
@@ -69,7 +75,29 @@ def get_connection() -> sqlite3.Connection:
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON")
     conn.executescript(SCHEMA_SQL)
+    _run_migrations(conn)
     return conn
+
+
+def _run_migrations(conn: sqlite3.Connection) -> None:
+    """Apply one-time data migrations for existing local demo databases."""
+    migration_key = "message_history_sent_at_trt_v1"
+    row = conn.execute("SELECT value FROM schema_meta WHERE key = ?", (migration_key,)).fetchone()
+    if row:
+        return
+
+    rows = conn.execute("SELECT id, sent_at FROM message_history").fetchall()
+    for item in rows:
+        conn.execute(
+            "UPDATE message_history SET sent_at = ? WHERE id = ?",
+            (sqlite_utc_to_tr_string(item["sent_at"]), item["id"]),
+        )
+
+    conn.execute(
+        "INSERT OR REPLACE INTO schema_meta (key, value) VALUES (?, ?)",
+        (migration_key, tr_now_string()),
+    )
+    conn.commit()
 
 
 # ---------------------------------------------------------------------------
@@ -88,9 +116,9 @@ def add_contact(
     conn = get_connection()
     try:
         cursor = conn.execute(
-            "INSERT INTO contacts (name, email, phone, role, company, notes) "
-            "VALUES (?, ?, ?, ?, ?, ?)",
-            (name, email, phone, role, company, notes),
+            "INSERT INTO contacts (name, email, phone, role, company, notes, created_at) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?)",
+            (name, email, phone, role, company, notes, tr_now_string()),
         )
         conn.commit()
         return cursor.lastrowid
@@ -161,9 +189,9 @@ def log_message(
     conn = get_connection()
     try:
         cursor = conn.execute(
-            "INSERT INTO message_history (contact_id, direction, subject, body, channel) "
-            "VALUES (?, ?, ?, ?, ?)",
-            (contact_id, direction, subject, body, channel),
+            "INSERT INTO message_history (contact_id, direction, subject, body, channel, sent_at) "
+            "VALUES (?, ?, ?, ?, ?, ?)",
+            (contact_id, direction, subject, body, channel, tr_now_string()),
         )
         conn.commit()
         return cursor.lastrowid
@@ -224,9 +252,9 @@ def add_task(
     conn = get_connection()
     try:
         cursor = conn.execute(
-            "INSERT INTO scheduled_tasks (description, due_at, contact_id) "
-            "VALUES (?, ?, ?)",
-            (description, due_at, contact_id),
+            "INSERT INTO scheduled_tasks (description, due_at, contact_id, created_at) "
+            "VALUES (?, ?, ?, ?)",
+            (description, due_at, contact_id, tr_now_string()),
         )
         conn.commit()
         return cursor.lastrowid
@@ -252,7 +280,7 @@ def get_pending_tasks() -> list[dict]:
 
 def get_overdue_tasks() -> list[dict]:
     """Return all pending tasks that are past due."""
-    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    now = tr_now_string()
     conn = get_connection()
     try:
         rows = conn.execute(
@@ -332,9 +360,9 @@ def seed_database() -> None:
         contact_ids = []
         for name, email_addr, phone, role, company, notes in contacts:
             cursor = conn.execute(
-                "INSERT INTO contacts (name, email, phone, role, company, notes) "
-                "VALUES (?, ?, ?, ?, ?, ?)",
-                (name, email_addr, phone, role, company, notes),
+                "INSERT INTO contacts (name, email, phone, role, company, notes, created_at) "
+                "VALUES (?, ?, ?, ?, ?, ?, ?)",
+                (name, email_addr, phone, role, company, notes, tr_now_string()),
             )
             contact_ids.append(cursor.lastrowid)
 
@@ -356,9 +384,9 @@ def seed_database() -> None:
 
         for contact_id, direction, subject, body, channel in messages:
             conn.execute(
-                "INSERT INTO message_history (contact_id, direction, subject, body, channel) "
-                "VALUES (?, ?, ?, ?, ?)",
-                (contact_id, direction, subject, body, channel),
+                "INSERT INTO message_history (contact_id, direction, subject, body, channel, sent_at) "
+                "VALUES (?, ?, ?, ?, ?, ?)",
+                (contact_id, direction, subject, body, channel, tr_now_string()),
             )
 
         # --- 5 sample scheduled tasks ---
@@ -372,9 +400,9 @@ def seed_database() -> None:
 
         for description, due_at, contact_id in tasks:
             conn.execute(
-                "INSERT INTO scheduled_tasks (description, due_at, contact_id) "
-                "VALUES (?, ?, ?)",
-                (description, due_at, contact_id),
+                "INSERT INTO scheduled_tasks (description, due_at, contact_id, created_at) "
+                "VALUES (?, ?, ?, ?)",
+                (description, due_at, contact_id, tr_now_string()),
             )
 
         conn.commit()

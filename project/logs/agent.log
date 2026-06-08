@@ -678,3 +678,319 @@
 2026-06-08 22:49:17,066 | INFO | 127.0.0.1 - - [08/Jun/2026 22:49:17] "GET /api/messages?q= HTTP/1.1" 200 -
 2026-06-08 22:49:17,085 | INFO | 127.0.0.1 - - [08/Jun/2026 22:49:17] "GET /api/tasks HTTP/1.1" 200 -
 2026-06-08 22:49:17,098 | INFO | 127.0.0.1 - - [08/Jun/2026 22:49:17] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 23:04:04,540 | INFO | [DRY RUN] Approved dashboard draft for: Attachment dry run test -> test@example.com cc= attachments=site_photo.jpg
+2026-06-08 23:04:38,262 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+2026-06-08 23:04:38,262 | INFO | [33mPress CTRL+C to quit[0m
+2026-06-08 23:04:57,733 | INFO | 127.0.0.1 - - [08/Jun/2026 23:04:57] "GET / HTTP/1.1" 200 -
+2026-06-08 23:05:10,063 | INFO | 127.0.0.1 - - [08/Jun/2026 23:05:10] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 23:05:10,106 | INFO | 127.0.0.1 - - [08/Jun/2026 23:05:10] "GET /static/index.css HTTP/1.1" 200 -
+2026-06-08 23:12:47,296 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:12:54,241 | INFO | 127.0.0.1 - - [08/Jun/2026 23:12:54] "GET / HTTP/1.1" 200 -
+2026-06-08 23:12:54,292 | INFO | 127.0.0.1 - - [08/Jun/2026 23:12:54] "GET /static/index.css HTTP/1.1" 200 -
+2026-06-08 23:12:54,292 | INFO | 127.0.0.1 - - [08/Jun/2026 23:12:54] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 23:12:54,435 | INFO | 127.0.0.1 - - [08/Jun/2026 23:12:54] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 23:12:57,370 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:13:07,451 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:13:17,524 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:13:27,599 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:13:37,685 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:13:47,765 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:13:57,838 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:14:07,921 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:14:15,012 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+2026-06-08 23:14:15,012 | INFO | [33mPress CTRL+C to quit[0m
+2026-06-08 23:14:17,984 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:14:28,071 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:14:29,311 | INFO | 127.0.0.1 - - [08/Jun/2026 23:14:29] "GET /api/reports/history HTTP/1.1" 200 -
+2026-06-08 23:14:30,366 | INFO | 127.0.0.1 - - [08/Jun/2026 23:14:30] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 23:14:38,154 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:14:48,217 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:14:58,292 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:15:08,348 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:15:18,415 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:15:28,495 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:15:38,566 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:15:48,641 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:15:58,734 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:16:08,794 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:16:18,857 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:16:28,918 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:16:38,977 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:16:49,051 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:16:59,114 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:17:09,188 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:17:19,252 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:17:29,316 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:17:31,608 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:17:31,816 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getFile "HTTP/1.1 200 OK"
+2026-06-08 23:17:31,873 | INFO | HTTP Request: GET https://api.telegram.org/file/bot8533615813%3AAAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/photos/file_6.jpg "HTTP/1.1 200 OK"
+2026-06-08 23:17:34,427 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 23:17:35,950 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 23:17:41,673 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:17:42,665 | INFO | 127.0.0.1 - - [08/Jun/2026 23:17:42] "GET / HTTP/1.1" 200 -
+2026-06-08 23:17:42,696 | INFO | 127.0.0.1 - - [08/Jun/2026 23:17:42] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 23:17:42,698 | INFO | 127.0.0.1 - - [08/Jun/2026 23:17:42] "GET /static/app.js HTTP/1.1" 200 -
+2026-06-08 23:17:42,844 | INFO | 127.0.0.1 - - [08/Jun/2026 23:17:42] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 23:17:51,743 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:18:01,812 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:18:07,212 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 23:18:07,233 | INFO | 127.0.0.1 - - [08/Jun/2026 23:18:07] "POST /api/reports/daily HTTP/1.1" 200 -
+2026-06-08 23:18:11,886 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:18:12,561 | INFO | 127.0.0.1 - - [08/Jun/2026 23:18:12] "POST /api/queue/synthetic HTTP/1.1" 200 -
+2026-06-08 23:18:13,925 | INFO | 127.0.0.1 - - [08/Jun/2026 23:18:13] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 23:18:21,970 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:18:32,033 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:18:35,568 | INFO | 127.0.0.1 - - [08/Jun/2026 23:18:35] "POST /api/queue/6e0663302a62/edit HTTP/1.1" 200 -
+2026-06-08 23:18:37,789 | INFO | [OK] Email sent to furkan.cem501@gmail.com -- Subject: Daily Construction Report
+2026-06-08 23:18:37,801 | INFO | 127.0.0.1 - - [08/Jun/2026 23:18:37] "POST /api/queue/6e0663302a62/approve HTTP/1.1" 200 -
+2026-06-08 23:18:37,871 | INFO | 127.0.0.1 - - [08/Jun/2026 23:18:37] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 23:18:42,107 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:18:52,184 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:19:01,556 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:01] "GET / HTTP/1.1" 200 -
+2026-06-08 23:19:01,599 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:01] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 23:19:01,601 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:01] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 23:19:01,689 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:01] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 23:19:02,255 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:19:03,498 | INFO | Draft cache hit for: URGENT: Fall protection deficiency — immediate correction re
+2026-06-08 23:19:03,498 | INFO | Draft cache hit for: Notice of Delay — Pier 5 foundation work
+2026-06-08 23:19:03,499 | INFO | Draft cache hit for: RFI-047 Response: Rebar spacing at Pier 3
+2026-06-08 23:19:03,499 | INFO | Draft cache hit for: Updated delivery schedule for Week 12
+2026-06-08 23:19:03,500 | INFO | Draft cache hit for: Schedule review meeting — agenda items needed
+2026-06-08 23:19:03,504 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:03] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 23:19:03,511 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:03] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 23:19:03,517 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:03] "GET /api/contacts?q= HTTP/1.1" 200 -
+2026-06-08 23:19:03,518 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:03] "GET /api/messages?q= HTTP/1.1" 200 -
+2026-06-08 23:19:03,534 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:03] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 23:19:03,546 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:03] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 23:19:05,508 | INFO | Connecting to IMAP server: imap.gmail.com
+2026-06-08 23:19:09,133 | INFO | Connecting to IMAP server: imap.gmail.com
+2026-06-08 23:19:09,480 | INFO | Found 112 messages, processing last 20.
+2026-06-08 23:19:09,655 | INFO | Found 112 messages, processing last 20.
+2026-06-08 23:19:11,500 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 23:19:11,561 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 23:19:12,331 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:19:13,148 | INFO | Triage complete: 3 URGENT, 4 ACTION, 7 FYI, 6 ARCHIVE
+2026-06-08 23:19:14,619 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 23:19:14,665 | INFO | Draft cache hit for: Road closure permit — Sogutlucesme Caddesi — expiring March 
+2026-06-08 23:19:14,666 | INFO | Draft cache hit for: Complaint: Vibration damage to my building at Moda Caddesi 4
+2026-06-08 23:19:14,667 | INFO | Draft cache hit for: Pump failure at Well DW-03 — water level rising
+2026-06-08 23:19:14,669 | INFO | Draft cache hit for: RFI-014 - Conflict Between HVAC Duct and Fire Sprinkler Line
+2026-06-08 23:19:14,670 | INFO | Draft cache hit for: Delay notice — formwork materials for Sector 3
+2026-06-08 23:19:14,672 | INFO | Draft cache hit for: Certificate of insurance — renewal required by April 1
+2026-06-08 23:19:14,673 | INFO | Draft cache hit for: Concrete cube test results — 28-day break — Sector 1 base sl
+2026-06-08 23:19:14,683 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:14] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 23:19:14,702 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:14] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 23:19:14,711 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:14] "GET /api/contacts?q= HTTP/1.1" 200 -
+2026-06-08 23:19:14,716 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:14] "GET /api/messages?q= HTTP/1.1" 200 -
+2026-06-08 23:19:14,748 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:14] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 23:19:14,763 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:14] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 23:19:17,099 | INFO | Triage complete: 3 URGENT, 4 ACTION, 7 FYI, 6 ARCHIVE
+2026-06-08 23:19:17,110 | INFO | Draft cache hit for: Road closure permit — Sogutlucesme Caddesi — expiring March 
+2026-06-08 23:19:17,112 | INFO | Draft cache hit for: Complaint: Vibration damage to my building at Moda Caddesi 4
+2026-06-08 23:19:17,114 | INFO | Draft cache hit for: Pump failure at Well DW-03 — water level rising
+2026-06-08 23:19:17,116 | INFO | Draft cache hit for: RFI-014 - Conflict Between HVAC Duct and Fire Sprinkler Line
+2026-06-08 23:19:17,118 | INFO | Draft cache hit for: Delay notice — formwork materials for Sector 3
+2026-06-08 23:19:17,120 | INFO | Draft cache hit for: Certificate of insurance — renewal required by April 1
+2026-06-08 23:19:17,120 | INFO | Draft cache hit for: Concrete cube test results — 28-day break — Sector 1 base sl
+2026-06-08 23:19:17,134 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:17] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 23:19:17,153 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:17] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 23:19:17,173 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:17] "GET /api/contacts?q= HTTP/1.1" 200 -
+2026-06-08 23:19:17,177 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:17] "GET /api/messages?q= HTTP/1.1" 200 -
+2026-06-08 23:19:17,204 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:17] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 23:19:17,214 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:17] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 23:19:22,403 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:19:32,478 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:19:42,554 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:19:52,624 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:19:53,190 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:53] "GET / HTTP/1.1" 200 -
+2026-06-08 23:19:53,231 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:53] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 23:19:53,234 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:53] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 23:19:53,325 | INFO | 127.0.0.1 - - [08/Jun/2026 23:19:53] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 23:20:02,696 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:20:12,769 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:20:22,841 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:20:32,923 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:20:42,995 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:20:53,067 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:21:03,149 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:21:13,209 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:21:23,272 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:21:33,334 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:21:43,401 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:21:53,477 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:22:03,543 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:22:13,626 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:22:23,708 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:22:33,790 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:22:43,865 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:22:53,951 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:23:04,015 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:23:14,084 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:23:24,165 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:23:34,236 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:23:44,312 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:23:54,392 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:24:04,457 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:24:14,528 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:24:24,695 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:24:34,771 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:24:44,831 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:24:54,901 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:25:04,977 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:25:15,048 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:25:25,106 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:25:35,181 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:25:45,257 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:25:55,362 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:26:05,436 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:26:15,502 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:26:25,564 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:26:35,625 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:26:45,682 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:26:55,745 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:27:05,806 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:27:15,864 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:27:25,935 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:27:36,008 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:27:46,088 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:27:56,152 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:28:06,218 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:28:16,294 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:28:26,364 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:28:36,422 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:28:46,482 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:28:56,579 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:29:06,658 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:29:16,750 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:29:26,821 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:29:36,894 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:29:46,952 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:29:57,029 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:30:07,111 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:30:17,182 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:30:27,251 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:30:37,323 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:30:47,398 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:30:57,502 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:31:07,604 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:31:17,668 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:31:27,747 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:31:37,822 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:31:47,881 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:31:57,959 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:32:08,037 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:32:18,143 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:32:28,208 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:32:38,285 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:32:48,380 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:32:58,449 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:33:08,515 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:33:18,592 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:33:28,662 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:33:38,741 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:33:48,810 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:33:58,884 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:34:08,964 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:34:19,043 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:34:29,121 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:34:39,224 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:34:49,307 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:34:59,379 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:35:09,483 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:35:19,545 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:35:29,633 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:35:39,738 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:35:49,808 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:35:59,879 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:36:09,953 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:36:20,030 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:36:30,108 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:36:40,257 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:36:50,326 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:37:00,406 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:37:10,512 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:37:20,586 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:37:30,660 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:37:40,730 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:37:50,806 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:38:00,881 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:38:10,940 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:38:21,006 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:38:31,081 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:38:41,154 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:38:51,228 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:39:01,293 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:39:11,361 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:39:21,434 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:39:31,495 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:39:41,555 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:39:51,615 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:40:01,679 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:40:11,746 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:40:21,807 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:40:31,872 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:40:41,946 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:40:52,018 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:41:02,091 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:41:12,157 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:41:22,239 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:41:32,303 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:41:42,363 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:41:52,422 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:42:02,487 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:42:12,544 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:42:22,602 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:42:32,664 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:42:42,722 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:42:52,781 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:43:02,852 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:43:12,923 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:43:22,995 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:43:33,073 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:43:43,145 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:43:53,212 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:44:03,275 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:44:13,343 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:44:23,418 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:44:33,479 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:44:43,542 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:44:53,607 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:45:03,678 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:45:13,743 | INFO | HTTP Request: POST https://api.telegram.org/bot8533615813:AAGDmBFXaW-RaPVjttCL8uz_Wsypefy896I/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 23:45:28,673 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+2026-06-08 23:45:28,673 | INFO | [33mPress CTRL+C to quit[0m
+2026-06-08 23:45:48,874 | INFO | 127.0.0.1 - - [08/Jun/2026 23:45:48] "GET /api/bootstrap HTTP/1.1" 200 -
+2026-06-08 23:46:19,117 | INFO | 127.0.0.1 - - [08/Jun/2026 23:46:19] "GET / HTTP/1.1" 200 -
+2026-06-08 23:46:19,216 | INFO | 127.0.0.1 - - [08/Jun/2026 23:46:19] "[36mGET /static/index.css HTTP/1.1[0m" 304 -
+2026-06-08 23:46:19,217 | INFO | 127.0.0.1 - - [08/Jun/2026 23:46:19] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-06-08 23:46:19,307 | INFO | 127.0.0.1 - - [08/Jun/2026 23:46:19] "GET /api/bootstrap?q= HTTP/1.1" 200 -
+2026-06-08 23:49:47,972 | INFO | Draft cache hit for: URGENT: Fall protection deficiency — immediate correction re
+2026-06-08 23:49:47,973 | INFO | Draft cache hit for: Notice of Delay — Pier 5 foundation work
+2026-06-08 23:49:47,973 | INFO | Draft cache hit for: RFI-047 Response: Rebar spacing at Pier 3
+2026-06-08 23:49:47,974 | INFO | Draft cache hit for: Updated delivery schedule for Week 12
+2026-06-08 23:49:47,974 | INFO | Draft cache hit for: Schedule review meeting — agenda items needed
+2026-06-08 23:49:47,980 | INFO | 127.0.0.1 - - [08/Jun/2026 23:49:47] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 23:49:47,988 | INFO | 127.0.0.1 - - [08/Jun/2026 23:49:47] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 23:49:47,993 | INFO | 127.0.0.1 - - [08/Jun/2026 23:49:47] "GET /api/contacts?q= HTTP/1.1" 200 -
+2026-06-08 23:49:47,994 | INFO | 127.0.0.1 - - [08/Jun/2026 23:49:47] "GET /api/messages?q= HTTP/1.1" 200 -
+2026-06-08 23:49:48,020 | INFO | 127.0.0.1 - - [08/Jun/2026 23:49:48] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 23:49:48,035 | INFO | 127.0.0.1 - - [08/Jun/2026 23:49:48] "GET /api/logs HTTP/1.1" 200 -
+2026-06-08 23:49:53,043 | INFO | Connecting to IMAP server: imap.gmail.com
+2026-06-08 23:49:53,718 | INFO | Found 112 messages, processing last 20.
+2026-06-08 23:49:56,520 | INFO | Triage complete: 3 URGENT, 4 ACTION, 7 FYI, 6 ARCHIVE
+2026-06-08 23:49:56,536 | INFO | Draft cache hit for: Road closure permit — Sogutlucesme Caddesi — expiring March 
+2026-06-08 23:49:56,537 | INFO | Draft cache hit for: Complaint: Vibration damage to my building at Moda Caddesi 4
+2026-06-08 23:49:56,537 | INFO | Draft cache hit for: Pump failure at Well DW-03 — water level rising
+2026-06-08 23:49:56,538 | INFO | Draft cache hit for: RFI-014 - Conflict Between HVAC Duct and Fire Sprinkler Line
+2026-06-08 23:49:56,538 | INFO | Draft cache hit for: Delay notice — formwork materials for Sector 3
+2026-06-08 23:49:56,539 | INFO | Draft cache hit for: Certificate of insurance — renewal required by April 1
+2026-06-08 23:49:56,539 | INFO | Draft cache hit for: Concrete cube test results — 28-day break — Sector 1 base sl
+2026-06-08 23:49:56,544 | INFO | 127.0.0.1 - - [08/Jun/2026 23:49:56] "POST /api/inbox/refresh HTTP/1.1" 200 -
+2026-06-08 23:49:56,553 | INFO | 127.0.0.1 - - [08/Jun/2026 23:49:56] "GET /api/status HTTP/1.1" 200 -
+2026-06-08 23:49:56,558 | INFO | 127.0.0.1 - - [08/Jun/2026 23:49:56] "GET /api/contacts?q= HTTP/1.1" 200 -
+2026-06-08 23:49:56,560 | INFO | 127.0.0.1 - - [08/Jun/2026 23:49:56] "GET /api/messages?q= HTTP/1.1" 200 -
+2026-06-08 23:49:56,580 | INFO | 127.0.0.1 - - [08/Jun/2026 23:49:56] "GET /api/tasks HTTP/1.1" 200 -
+2026-06-08 23:49:56,585 | INFO | 127.0.0.1 - - [08/Jun/2026 23:49:56] "GET /api/logs HTTP/1.1" 200 -

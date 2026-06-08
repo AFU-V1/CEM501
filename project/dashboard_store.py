@@ -12,9 +12,11 @@ from __future__ import annotations
 
 import hashlib
 import json
+import mimetypes
 import os
+import re
 from datetime import datetime
-from email.utils import parsedate_to_datetime, parseaddr
+from email.utils import parseaddr
 
 from agent import draft_reply, fetch_emails, get_send_warnings, send_approved_email
 from digest import SAMPLE_EMAILS, format_html_digest, format_text_digest, group_by_category, summarize_email
@@ -31,18 +33,20 @@ from memory.memory import (
     skip_task,
 )
 from reader import clean_triage_reason, triage_email
+from time_utils import format_tr_datetime, parse_to_tr_datetime, tr_now, tr_now_string
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_DIR = os.path.join(BASE_DIR, "logs")
 STATE_PATH = os.path.join(LOG_DIR, "dashboard_state.json")
 AGENT_LOG_PATH = os.path.join(LOG_DIR, "agent.log")
+TELEGRAM_MEDIA_DIR = os.path.join(LOG_DIR, "telegram_media")
 MAX_ARTIFACT_HISTORY = 20
 
 
 def now_iso() -> str:
     """Return a consistent local timestamp for dashboard state."""
-    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    return tr_now_string()
 
 
 def default_state() -> dict:
@@ -80,6 +84,22 @@ def _sanitize_state_reasons(state: dict) -> bool:
     return changed
 
 
+def _sanitize_state_dates(state: dict) -> bool:
+    changed = False
+    for collection_name in ("emails", "queue"):
+        for item in state.get(collection_name, []):
+            if not isinstance(item, dict):
+                continue
+            current_date = item.get("date")
+            if current_date and not item.get("date_raw"):
+                item["date_raw"] = current_date
+                converted = format_tr_datetime(current_date)
+                if converted and converted != current_date:
+                    item["date"] = converted
+                changed = True
+    return changed
+
+
 def load_dashboard_state() -> dict:
     """Load the cached dashboard state from disk."""
     os.makedirs(LOG_DIR, exist_ok=True)
@@ -93,6 +113,7 @@ def load_dashboard_state() -> dict:
 
     changed = _ensure_state_defaults(state)
     changed = _sanitize_state_reasons(state) or changed
+    changed = _sanitize_state_dates(state) or changed
     if changed:
         save_dashboard_state(state)
     return state
@@ -133,12 +154,14 @@ def _normalize_email(email_item: dict, fallback_date: str, previous_emails: dict
     if not sender_email:
         sender_email = email_item.get("sender_email", "")
 
+    raw_date = email_item.get("date", fallback_date)
     normalized = {
         "sender": sender,
         "sender_name": _display_name(sender, sender_email),
         "sender_email": sender_email,
         "subject": email_item.get("subject", "(no subject)"),
-        "date": email_item.get("date", fallback_date),
+        "date": format_tr_datetime(raw_date),
+        "date_raw": raw_date,
         "body": email_item.get("body") or email_item.get("preview") or "",
         "triage_body": email_item.get("triage_body") or email_item.get("body") or email_item.get("preview") or "",
         "category": email_item.get("category", "ARCHIVE"),
@@ -196,6 +219,11 @@ def _build_queue_item(email_item: dict, existing_item: dict | None = None) -> di
     cc_address = existing_item.get("cc_address") if existing_item else None
     to_address = to_address or email_item["sender_email"]
     cc_address = cc_address or ""
+    attachments = (
+        existing_item.get("attachments")
+        if existing_item and "attachments" in existing_item
+        else email_item.get("attachments", [])
+    )
     warnings = get_send_warnings(to_address, reply_subject, draft, cc_address)
     updated_at = now_iso()
 
@@ -214,6 +242,7 @@ def _build_queue_item(email_item: dict, existing_item: dict | None = None) -> di
         "date": email_item["date"],
         "body": email_item["body"],
         "draft": draft,
+        "attachments": attachments or [],
         "warnings": warnings,
         "edited": existing_item.get("edited", False) if existing_item else False,
         "created_at": existing_item.get("created_at", updated_at) if existing_item else updated_at,
@@ -317,22 +346,7 @@ def queue_metrics(queue_items: list[dict]) -> dict:
 
 def _parse_email_date(value: str | None) -> datetime | None:
     """Parse dashboard/IMAP date strings without failing the task view."""
-    if not value:
-        return None
-
-    text = str(value).strip()
-    parsers = [
-        lambda candidate: parsedate_to_datetime(candidate),
-        lambda candidate: datetime.fromisoformat(candidate),
-        lambda candidate: datetime.strptime(candidate, "%Y-%m-%d %H:%M:%S"),
-        lambda candidate: datetime.strptime(candidate, "%Y-%m-%d"),
-    ]
-    for parser in parsers:
-        try:
-            return parser(text)
-        except (TypeError, ValueError, IndexError, OverflowError):
-            continue
-    return None
+    return parse_to_tr_datetime(value)
 
 
 def _unanswered_overdue_email_tasks(state: dict) -> list[dict]:
@@ -342,7 +356,7 @@ def _unanswered_overdue_email_tasks(state: dict) -> list[dict]:
     URGENT/ACTION emails from before today become overdue tasks until the
     matching review queue item is approved.
     """
-    today = datetime.now().date()
+    today = tr_now().date()
     queue_by_id = {item.get("id"): item for item in state.get("queue", [])}
     tasks = []
 
@@ -355,7 +369,7 @@ def _unanswered_overdue_email_tasks(state: dict) -> list[dict]:
         if queue_item.get("status") == "approved":
             continue
 
-        received_at = _parse_email_date(email_item.get("date"))
+        received_at = _parse_email_date(email_item.get("date_raw") or email_item.get("date"))
         if not received_at or received_at.date() >= today:
             continue
 
@@ -482,6 +496,17 @@ def _ensure_contact(sender_name: str, sender_email: str) -> int | None:
     return add_contact(name=sender_name or sender_email, email=sender_email)
 
 
+def _message_body_with_attachments(body: str, attachments: list[dict] | None) -> str:
+    attachment_names = [
+        str(item.get("filename") or os.path.basename(str(item.get("path", ""))))
+        for item in attachments or []
+        if isinstance(item, dict) and (item.get("filename") or item.get("path"))
+    ]
+    if not attachment_names:
+        return body
+    return f"{body}\n\nAttachments: {', '.join(attachment_names)}"
+
+
 def approve_queue_item(queue_id: str, dry_run: bool = False) -> dict:
     """Approve a draft and send it through the agent SMTP path."""
     state, item, index = find_queue_item(queue_id)
@@ -493,6 +518,7 @@ def approve_queue_item(queue_id: str, dry_run: bool = False) -> dict:
         body=item["draft"],
         dry_run=dry_run,
         cc_address=cc_address,
+        attachments=item.get("attachments", []),
     )
 
     item["warnings"] = warnings
@@ -505,7 +531,7 @@ def approve_queue_item(queue_id: str, dry_run: bool = False) -> dict:
             contact_id=contact_id,
             direction="sent",
             subject=item["reply_subject"],
-            body=item["draft"],
+            body=_message_body_with_attachments(item["draft"], item.get("attachments", [])),
             channel="email",
         )
         item["status"] = "approved"
@@ -641,7 +667,55 @@ def digest_history() -> list[dict]:
     return state.get("morning_digests", [])[:MAX_ARTIFACT_HISTORY]
 
 
-def save_daily_report(content: str, selected_message_count: int) -> dict:
+def daily_report_attachments(message_ids: list[int]) -> list[dict]:
+    """Find Telegram photo attachments referenced by selected message rows."""
+    if not message_ids:
+        return []
+
+    from memory.memory import get_connection
+
+    safe_ids = [int(message_id) for message_id in message_ids]
+    placeholders = ",".join("?" for _ in safe_ids)
+    conn = get_connection()
+    try:
+        rows = conn.execute(
+            f"SELECT id, subject, body, channel FROM message_history WHERE id IN ({placeholders})",
+            safe_ids,
+        ).fetchall()
+    finally:
+        conn.close()
+
+    attachments: list[dict] = []
+    seen_paths: set[str] = set()
+    for row in rows:
+        body = row["body"] or ""
+        subject = row["subject"] or ""
+        channel = row["channel"] or ""
+        if channel != "telegram" and "Telegram Photo" not in subject:
+            continue
+
+        for match in re.finditer(r"^Attached photo:\s*(.+)$", body, flags=re.IGNORECASE | re.MULTILINE):
+            filename = os.path.basename(match.group(1).strip())
+            if not filename:
+                continue
+            path = os.path.join(TELEGRAM_MEDIA_DIR, filename)
+            if path in seen_paths or not os.path.exists(path):
+                continue
+            seen_paths.add(path)
+            attachments.append(
+                {
+                    "path": path,
+                    "filename": filename,
+                    "content_type": mimetypes.guess_type(path)[0] or "image/jpeg",
+                    "source": "daily_report_telegram_photo",
+                    "message_id": row["id"],
+                }
+            )
+
+    return attachments
+
+
+def save_daily_report(content: str, selected_message_count: int, attachments: list[dict] | None = None) -> dict:
     created_at = now_iso()
     item = {
         "id": _artifact_id("daily_report", content, created_at),
@@ -649,6 +723,7 @@ def save_daily_report(content: str, selected_message_count: int) -> dict:
         "created_at": created_at,
         "selected_message_count": selected_message_count,
         "content": content,
+        "attachments": attachments or [],
     }
     return _save_artifact("daily_reports", item)
 
@@ -718,8 +793,6 @@ def generate_daily_report_from_messages(message_ids: list[int]) -> str:
         messages_text += f"- Message {direction} {m.get('contact_name', 'Unknown')} (Subject: {m.get('subject', '')}):\n  {m.get('body', '')}\n\n"
         
     from dotenv import load_dotenv
-    from datetime import datetime
-    import re
     load_dotenv()
     template_path = os.path.join(BASE_DIR, "templates", "daily_report.md")
     if os.path.exists(template_path):
@@ -728,8 +801,8 @@ def generate_daily_report_from_messages(message_ids: list[int]) -> str:
     else:
         template_content = "DAILY CONSTRUCTION REPORT TEMPLATE"
 
-    current_date = datetime.now().strftime("%B %d, %Y")
-    current_day = datetime.now().strftime("%A")
+    current_date = tr_now().strftime("%B %d, %Y")
+    current_day = tr_now().strftime("%A")
 
     state = load_dashboard_state()
     reports = state.get("daily_reports", [])
@@ -770,7 +843,16 @@ def generate_daily_report_from_messages(message_ids: list[int]) -> str:
     return response.choices[0].message.content.strip()
 
 
-def queue_synthetic_draft(subject: str, body: str, draft: str, sender_email: str = "project@example.com") -> dict:
+def queue_synthetic_draft(
+    subject: str,
+    body: str,
+    draft: str,
+    sender_email: str = "project@example.com",
+    category: str = "ACTION",
+    keyword: str = "report",
+    sender_name: str = "System",
+    attachments: list[dict] | None = None,
+) -> dict:
     state = load_dashboard_state()
     import hashlib
     
@@ -779,10 +861,10 @@ def queue_synthetic_draft(subject: str, body: str, draft: str, sender_email: str
     new_item = {
         "id": item_id,
         "status": "pending",
-        "category": "ACTION",
-        "keyword": "report",
-        "sender": "System <system@local>",
-        "sender_name": "System",
+        "category": category,
+        "keyword": keyword,
+        "sender": f"{sender_name} <system@local>",
+        "sender_name": sender_name,
         "sender_email": sender_email,
         "to_address": sender_email,
         "cc_address": "",
@@ -791,6 +873,7 @@ def queue_synthetic_draft(subject: str, body: str, draft: str, sender_email: str
         "date": now_iso(),
         "body": body,
         "draft": draft,
+        "attachments": attachments or [],
         "warnings": get_send_warnings(sender_email, subject, draft),
         "edited": False,
         "created_at": now_iso(),

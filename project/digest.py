@@ -19,12 +19,12 @@ import email
 import hashlib
 import imaplib
 import json
-from datetime import datetime
 from email.header import decode_header
 
 import os
 from openai import OpenAI
 from dotenv import load_dotenv
+from time_utils import tr_now
 
 load_dotenv()
 
@@ -249,7 +249,7 @@ def format_text_digest(groups: dict[str, list[dict]], use_llm: bool = True) -> s
     FYI items show subject lines only.
     ARCHIVE items are counted but not shown.
     """
-    now = datetime.now()
+    now = tr_now()
     total = sum(len(v) for v in groups.values())
 
     lines = []
@@ -315,7 +315,7 @@ def format_html_digest(groups: dict[str, list[dict]], use_llm: bool = True) -> s
     Formats grouped emails into an HTML digest suitable for email distribution.
     Stretch goal: --format html flag.
     """
-    now = datetime.now()
+    now = tr_now()
     total = sum(len(v) for v in groups.values())
 
     html = []

@@ -1,6 +1,7 @@
 const state = {
   source: "live",
   theme: localStorage.getItem("cem501-theme") || "dark",
+  reportAttachments: [],
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -276,6 +277,7 @@ function renderQueueCard(item) {
           <p class="eyebrow">Original Email</p>
           <p><strong>${escapeHtml(item.subject)}</strong></p>
           <p class="original-email-body">${escapeHtml(item.body)}</p>
+          ${renderAttachments(item.attachments || [])}
         </div>
 
         <div class="draft-block">
@@ -302,6 +304,25 @@ function renderQueueCard(item) {
         </div>
       </div>
     </article>
+  `;
+}
+
+function renderAttachments(attachments) {
+  if (!attachments.length) return "";
+  return `
+    <div class="attachment-list">
+      <p class="eyebrow">Attachments</p>
+      ${attachments
+        .map(
+          (attachment) => `
+            <div class="attachment-chip">
+              <span>${escapeHtml(attachment.filename || "attachment")}</span>
+              <span class="microcopy">${escapeHtml(attachment.content_type || "file")}</span>
+            </div>
+          `
+        )
+        .join("")}
+    </div>
   `;
 }
 
@@ -518,9 +539,11 @@ async function generateDailyReport() {
   
   if (payload.ok) {
     $("#reportContent").value = payload.report;
+    state.reportAttachments = payload.attachments || [];
     $("#queueReportBtn").style.display = "inline-block";
     renderReportHistory(payload.history || []);
   } else {
+    state.reportAttachments = [];
     $("#reportContent").value = "Error generating report: " + payload.error;
   }
 }
@@ -543,6 +566,7 @@ function renderReportHistory(items) {
     if (!button) return;
     button.addEventListener("click", () => {
       $("#reportContent").value = item.content || "";
+      state.reportAttachments = item.attachments || [];
       $("#queueReportBtn").style.display = item.content ? "inline-block" : "none";
     });
   });
@@ -566,10 +590,12 @@ function renderDigestHistory(items) {
 }
 
 function renderReportHistoryItem(item) {
+  const attachmentCount = (item.attachments || []).length;
+  const attachmentLabel = attachmentCount ? ` - attachments: ${attachmentCount}` : "";
   return `
     <button id="report-history-${escapeHtml(item.id)}" class="artifact-item" type="button">
       <h4>${escapeHtml(item.title || "Daily Report")}</h4>
-      <p class="microcopy">${escapeHtml(item.created_at || "")} • messages: ${item.selected_message_count || 0}</p>
+      <p class="microcopy">${escapeHtml(item.created_at || "")} - messages: ${item.selected_message_count || 0}${escapeHtml(attachmentLabel)}</p>
     </button>
   `;
 }
@@ -592,12 +618,14 @@ async function queueDailyReport() {
   const response = await fetch("/api/queue/synthetic", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ draft }),
+    body: JSON.stringify({ draft, attachments: state.reportAttachments || [] }),
   });
   
   const payload = await response.json();
   if (payload.ok) {
-    alert("Daily report added to Review Queue! You can now review it and send it as an email.");
+    const attachmentCount = (state.reportAttachments || []).length;
+    const attachmentText = attachmentCount ? ` ${attachmentCount} photo attachment(s) included.` : "";
+    alert(`Daily report added to Review Queue!${attachmentText} You can now review it and send it as an email.`);
     loadDashboard();
     $("#queueReportBtn").textContent = "Add to Review Queue (Prepare Email)";
   } else {

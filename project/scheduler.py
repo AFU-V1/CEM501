@@ -20,7 +20,6 @@ import os
 import random
 import sys
 import time
-from datetime import datetime
 
 import schedule as schedule_lib
 
@@ -36,6 +35,7 @@ from memory.memory import (
     list_contacts,
     DB_PATH,
 )
+from time_utils import tr_now, tr_now_string
 
 # ---------------------------------------------------------------------------
 # Logging setup
@@ -152,7 +152,7 @@ def check_pending_tasks() -> None:
     print("-" * 50)
     for task in pending:
         contact = task.get("contact_name", "N/A")
-        status_marker = "[!]" if task["due_at"] <= datetime.now().strftime("%Y-%m-%d %H:%M:%S") else "[ ]"
+        status_marker = "[!]" if task["due_at"] <= tr_now_string() else "[ ]"
         print(f"  {status_marker} {task['description']}")
         print(f"      Due: {task['due_at']} | Contact: {contact}")
     print("-" * 50)
@@ -168,7 +168,7 @@ def generate_morning_summary() -> None:
     print("\n" + "=" * 50)
     print("  MORNING SUMMARY")
     print("=" * 50)
-    print(f"  Date: {datetime.now().strftime('%B %d, %Y at %H:%M')}")
+    print(f"  Date: {tr_now().strftime('%B %d, %Y at %H:%M')}")
     print(f"  Active contacts: {len(contacts)}")
 
     if messages:

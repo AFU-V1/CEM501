@@ -21,6 +21,7 @@ from dashboard_store import (
     approve_queue_item,
     dashboard_overview,
     daily_report_history,
+    daily_report_attachments,
     digest_history,
     digest_snapshot,
     grouped_inbox,
@@ -357,8 +358,21 @@ def generate_daily_report_api():
     from dashboard_store import generate_daily_report_from_messages
     try:
         report = generate_daily_report_from_messages(message_ids)
-        item = save_daily_report(report, selected_message_count=len(message_ids))
-        return jsonify({"ok": True, "report": report, "item": item, "history": daily_report_history()})
+        attachments = daily_report_attachments(message_ids)
+        item = save_daily_report(
+            report,
+            selected_message_count=len(message_ids),
+            attachments=attachments,
+        )
+        return jsonify(
+            {
+                "ok": True,
+                "report": report,
+                "attachments": attachments,
+                "item": item,
+                "history": daily_report_history(),
+            }
+        )
     except Exception as e:
         return json_error(str(e), 500)
 
@@ -373,11 +387,18 @@ def daily_reports_history_api():
 def create_synthetic_queue_item():
     payload = request.get_json(silent=True) or {}
     draft = payload.get("draft", "")
+    attachments = payload.get("attachments", [])
     if not draft:
         return json_error("Draft is empty.", 400)
     
     from dashboard_store import queue_synthetic_draft
-    item = queue_synthetic_draft("Daily Construction Report", "Generated from selected messages.", draft, "eyuphan.koc@gmail.com")
+    item = queue_synthetic_draft(
+        "Daily Construction Report",
+        "Generated from selected messages.",
+        draft,
+        "eyuphan.koc@gmail.com",
+        attachments=attachments if isinstance(attachments, list) else [],
+    )
     return jsonify({"ok": True, "item": item})
 
 

@@ -520,6 +520,22 @@ textarea {
   overflow-wrap: anywhere;
 }
 
+.attachment-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.attachment-chip {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(101, 209, 255, 0.08);
+  border: 1px solid rgba(101, 209, 255, 0.16);
+}
+
 .recipient-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

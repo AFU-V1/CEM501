@@ -21,17 +21,18 @@ import hashlib
 import imaplib
 import json
 import logging
+import mimetypes
 import os
 import re
 import smtplib
 import sys
 import time
-from datetime import datetime
+from email.message import EmailMessage
 from email.header import decode_header
-from email.mime.text import MIMEText
 
 from dotenv import load_dotenv
 from openai import OpenAI
+from time_utils import tr_now_string
 
 # ---------------------------------------------------------------------------
 # Import triage helpers from reader.py (same project directory)
@@ -177,6 +178,46 @@ def _validate_content(subject: str, body: str) -> list[str]:
 def get_send_warnings(to_address: str, subject: str, body: str, cc_address: str = "") -> list[str]:
     """Return all non-blocking warnings for a proposed outbound email."""
     return _validate_recipient(to_address, cc_address) + _validate_content(subject, body)
+
+
+def _normalize_attachments(attachments: list[dict] | None) -> list[dict]:
+    normalized: list[dict] = []
+    for attachment in attachments or []:
+        if not isinstance(attachment, dict):
+            continue
+        path = str(attachment.get("path", "")).strip()
+        if not path:
+            continue
+        filename = str(attachment.get("filename") or os.path.basename(path)).strip()
+        content_type = str(attachment.get("content_type") or mimetypes.guess_type(path)[0] or "application/octet-stream")
+        normalized.append(
+            {
+                "path": path,
+                "filename": filename or os.path.basename(path),
+                "content_type": content_type,
+            }
+        )
+    return normalized
+
+
+def _validate_attachments(attachments: list[dict] | None) -> tuple[list[str], bool]:
+    """Return attachment warnings and whether missing files should block sending."""
+    warnings: list[str] = []
+    block_send = False
+
+    for attachment in _normalize_attachments(attachments):
+        path = attachment["path"]
+        filename = attachment["filename"]
+        if not os.path.exists(path):
+            warnings.append(f"[!] Attachment '{filename}' is missing and will not be sent.")
+            block_send = True
+            continue
+
+        size_mb = os.path.getsize(path) / (1024 * 1024)
+        if size_mb > 20:
+            warnings.append(f"[!] Attachment '{filename}' is {size_mb:.1f} MB; email delivery may fail.")
+
+    return warnings, block_send
 
 
 def _extract_sender_email(sender_field: str) -> str:
@@ -455,6 +496,7 @@ def send_approved_email(
     body: str,
     dry_run: bool = False,
     cc_address: str = "",
+    attachments: list[dict] | None = None,
 ) -> tuple[bool, list[str], str]:
     """
     Send an already-reviewed draft without CLI prompts.
@@ -462,22 +504,40 @@ def send_approved_email(
     This is intended for the web dashboard, where the dashboard itself is the
     human confirmation surface required by ADR 2.
     """
-    warnings = get_send_warnings(to_address, subject, body, cc_address)
+    attachment_warnings, block_send = _validate_attachments(attachments)
+    warnings = get_send_warnings(to_address, subject, body, cc_address) + attachment_warnings
 
     if dry_run:
-        logger.info("[DRY RUN] Approved dashboard draft for: %s -> %s cc=%s", subject[:40], to_address, cc_address)
+        attachment_names = [item["filename"] for item in _normalize_attachments(attachments)]
+        logger.info(
+            "[DRY RUN] Approved dashboard draft for: %s -> %s cc=%s attachments=%s",
+            subject[:40],
+            to_address,
+            cc_address,
+            ", ".join(attachment_names) if attachment_names else "none",
+        )
         return True, warnings, "dry_run"
+
+    if block_send:
+        logger.warning("Blocked approved send for %s: attachment missing.", to_address)
+        return False, warnings, "blocked"
 
     if not _check_rate_limit():
         warning = "Rate limit exceeded. Try again later."
         logger.warning("Blocked approved send for %s: %s", to_address, warning)
         return False, warnings + [warning], "blocked"
 
-    success = _do_send(to_address, subject, body, cc_address=cc_address)
+    success = _do_send(to_address, subject, body, cc_address=cc_address, attachments=attachments)
     return success, warnings, "sent" if success else "error"
 
 
-def _do_send(to_address: str, subject: str, body: str, cc_address: str = "") -> bool:
+def _do_send(
+    to_address: str,
+    subject: str,
+    body: str,
+    cc_address: str = "",
+    attachments: list[dict] | None = None,
+) -> bool:
     """Actually send the email via SMTP and log the result."""
     load_dotenv()
     email_address = require_env("EMAIL_ADDRESS")
@@ -485,12 +545,31 @@ def _do_send(to_address: str, subject: str, body: str, cc_address: str = "") -> 
     smtp_server = os.getenv("SMTP_SERVER", "smtp.gmail.com").strip() or "smtp.gmail.com"
     smtp_port = int(os.getenv("SMTP_PORT", "587").strip() or "587")
 
-    msg = MIMEText(body)
+    msg = EmailMessage()
     msg["Subject"] = subject
     msg["From"] = email_address
     msg["To"] = to_address
     if cc_address.strip():
         msg["Cc"] = cc_address.strip()
+    msg.set_content(body)
+
+    for attachment in _normalize_attachments(attachments):
+        path = attachment["path"]
+        filename = attachment["filename"]
+        content_type = attachment["content_type"]
+        if not os.path.exists(path):
+            logger.error("Attachment missing: %s", path)
+            print(f"  [X] Attachment missing: {filename}")
+            return False
+
+        maintype, subtype = content_type.split("/", 1) if "/" in content_type else ("application", "octet-stream")
+        with open(path, "rb") as handle:
+            msg.add_attachment(
+                handle.read(),
+                maintype=maintype,
+                subtype=subtype,
+                filename=filename,
+            )
 
     try:
         with smtplib.SMTP(smtp_server, smtp_port) as server:
@@ -526,7 +605,7 @@ def _do_send(to_address: str, subject: str, body: str, cc_address: str = "") -> 
 def _log_sent(to_address: str, subject: str) -> None:
     """Append an entry to sent_log.txt with timestamp, recipient, and subject."""
     os.makedirs(os.path.dirname(SENT_LOG), exist_ok=True)
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    timestamp = tr_now_string()
     entry = f"{timestamp} | To: {to_address} | Subject: {subject}\n"
     with open(SENT_LOG, "a", encoding="utf-8") as f:
         f.write(entry)
