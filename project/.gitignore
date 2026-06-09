@@ -6,3 +6,5 @@ logs/draft_cache.json
 logs/telegram_media/
 logs/telegram_bot.stdout.log
 logs/telegram_bot.stderr.log
+
+DEMO_PRESENTATION.md
