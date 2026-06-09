@@ -18,20 +18,20 @@ The main design principle is controlled automation. The agent can classify, summ
 | IMAP Inbox  |----->| Email Reader |----->| Shared Triage    |
 | Gmail       |      | reader.py    |      | Gate + Cache     |
 +-------------+      +--------------+      +----+--------+----+
-                                             |        |
-                                  cache hit  |        | cache miss
-                                             |        v
-                                             |  +------------------+
-                                             |  | OpenAI APIs      |
-                                             |  | triage/drafting  |
-                                             |  | transcription    |
-                                             |  | photo vision     |
-                                             |  +--------+---------+
-                                             |           |
-+------------------+      text/voice/photo   |           | category/reason
-| Telegram Bot API |----------------->       v           v
-| Telegram Adapter |                 +-------------------------+
-+------------------+                 | Classified Message      |
+                        ^                    |        |
+                        |          cache hit |        | cache miss
+                        |                    |        v
+                        |                    |   +------------------+
+                        |                    |   | OpenAI APIs      |
+                        |                    |   | triage/drafting  |
++------------------+  text/voice/photo       |   | transcription    |
+| Telegram Bot API |    |                    |   | photo vision     |
+| text / voice /   | ---+                    |   +--------+---------+
+| photo messages   |                         |           |
++------------------+                         |           | category/reason
+                                             v           v
+                                     +-------------------------+
+                                     | Classified Message      |
                                      | sender/subject/body     |
                                      | category/reason/summary |
                                      +-----------+-------------+
@@ -56,7 +56,7 @@ The main design principle is controlled automation. The agent can classify, summ
                                            | approve     | selected rows
                                            v             v
                                      +-----------+   +------------------+
-                                     | SMTP      |   | Daily Report /   |
+                                     | SMTP      |<--| Daily Report /   |
                                      | Sender    |   | Morning Digest   |
                                      +-----+-----+   +--------+---------+
                                            |                  |
